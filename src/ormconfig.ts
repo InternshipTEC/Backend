@@ -1,12 +1,24 @@
 import 'reflect-metadata'
 import { ConnectionOptions } from 'typeorm'
 
-import { DATABASE_LOGGING, DATABASE_URL, DATABASE_URL_TEST, IS_TEST, IS_PRODUCTION } from './config'
+import {
+  DATABASE_LOGGING,
+  DATABASE_HOST,
+  DATABASE_PORT,
+  DATABASE_USERNAME,
+  IS_PRODUCTION,
+  DATABASE_PASSWORD, DATABASE_NAME
+} from './config'
 
 const baseConfig: ConnectionOptions = {
-  type: 'postgres',
-  url: IS_TEST ? DATABASE_URL_TEST : DATABASE_URL,
+  type: 'mysql',
+  host: DATABASE_HOST,
+  port: Number(DATABASE_PORT),
+  username: DATABASE_USERNAME,
+  password: DATABASE_PASSWORD,
+  database: DATABASE_NAME,
   logging: DATABASE_LOGGING,
+
 }
 
 const config: ConnectionOptions[] = [
