@@ -18,8 +18,6 @@ describe('/v1/request/sample', () => {
       .set('Accept', 'application/json')
       .expect(200)
       .end(async (err, res) => {
-
-
         expect(res.body).toEqual({
           success: true,
           data: {

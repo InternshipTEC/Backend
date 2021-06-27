@@ -8,7 +8,7 @@ import {
   DATABASE_USERNAME,
   IS_PRODUCTION,
   DATABASE_PASSWORD, DATABASE_NAME
-} from './config'
+} from './src/config'
 
 const baseConfig: ConnectionOptions = {
   type: 'mysql',
@@ -24,11 +24,12 @@ const baseConfig: ConnectionOptions = {
 const config: ConnectionOptions[] = [
   {
     ...baseConfig,
-    entities: [`${__dirname}/**/entities/**/*{.ts,.js}`],
-    migrations: ['migrations/**/*{.ts,.js}'],
-    synchronize: !IS_PRODUCTION,
+    entities: [`src/models/**/*.ts`],
+    migrations: ['src/migration/**/*{.ts,.js}'],
+    synchronize: IS_PRODUCTION,
     cli: {
-      migrationsDir: 'migrations',
+      entitiesDir:'src/models',
+      migrationsDir: 'src/migrations',
     },
   },
   {

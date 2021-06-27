@@ -7,3 +7,4 @@ const router = express.Router()
 router.use(sampleRoutes)
 
 export default router
+
