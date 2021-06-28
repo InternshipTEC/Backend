@@ -1,9 +1,10 @@
 import * as userRepository from '../repositories/userRepository'
 import * as bcrypt from 'bcrypt'
 import { User } from '../models/User'
+import { DeleteResult } from 'typeorm'
 
-const getUserByEmail = async (email:string) => {
-	try{
+const getUserByEmail = async (email:string) : Promise<User> => {
+	try {
 		const user = await userRepository.getUserByEmail(email)
 		return user;
 	} catch (err) {
@@ -11,8 +12,8 @@ const getUserByEmail = async (email:string) => {
 	}
 }
 
-const getUserById = async (id:string) => {
-	try{
+const getUserById = async (id:string) : Promise<User> => {
+	try {
 		const user = await userRepository.getUserById(id)
 		return user;
 	} catch (err) {
@@ -20,8 +21,8 @@ const getUserById = async (id:string) => {
 	}
 }
 
-const getAllUser = async () => {
-	try{
+const getAllUser = async () : Promise<User[]> => {
+	try {
 		const users = await userRepository.getAllUser()
 		return users
 	} catch (err) {
@@ -29,7 +30,7 @@ const getAllUser = async () => {
 	}
 }
 
-const createUser = async (reqBody:any) => {
+const createUser = async (reqBody:any) : Promise<User> => {
 	const { name, password, email } = reqBody
 	try {
 		const salt = await bcrypt.genSalt(10)
@@ -45,7 +46,7 @@ const createUser = async (reqBody:any) => {
 	}
 }
 
-const updateUser = async (id:string,reqBody:any) => {
+const updateUser = async (id:string,reqBody:any) : Promise<User> => {
 	try {
 		const salt = await bcrypt.genSalt(10)
 		const hashedPassword = await bcrypt.hash(reqBody.password, salt)
@@ -61,7 +62,7 @@ const updateUser = async (id:string,reqBody:any) => {
 	}
 }
 
-const deleteUser = async (id:string) => {
+const deleteUser = async (id:string) : Promise<DeleteResult> => {
 	try {
 		const result = await userRepository.deleteUser(id);
 		return result

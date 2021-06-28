@@ -1,5 +1,6 @@
 import * as bcrypt from 'bcrypt'
 import * as jwt from 'jsonwebtoken'
+import { User } from '../models/User'
 
 const checkPassword = async (userPassword:string, reqPassword:string) : Promise<Boolean> => {
 	try{
@@ -10,8 +11,8 @@ const checkPassword = async (userPassword:string, reqPassword:string) : Promise<
 	}
 }
 
-const generateAccessToken = (userId: String|any) => {
-  return jwt.sign({userId}, process.env.JWT_SECRET, { expiresIn: "1h" })
+const generateAccessToken = (user:User) : String => {
+	return jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "1h" })
 }
 
 export {checkPassword, generateAccessToken}

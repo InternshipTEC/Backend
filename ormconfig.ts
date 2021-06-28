@@ -18,7 +18,7 @@ const config: ConnectionOptions[] = [
     ...baseConfig,
     entities: [`src/models/*.{ts,.js}`],
     migrations: [`src/migrations/*{.ts,.js}`],
-    synchronize: false,
+    synchronize: !IS_PRODUCTION,
     cli: {
       entitiesDir: 'src/models',
       migrationsDir: 'src/migrations',

@@ -12,6 +12,7 @@ const login = async (req: Request, res: Response) => {
 
   try {
     passwordEncrypted = await authService.checkPassword(req.body.password, user.password.toString())
+    const accessToken = authService.generateAccessToken(user);
     return res.status(200).json(user)
   } catch (err) {
     return res.status(400).json(err);
@@ -21,7 +22,7 @@ const login = async (req: Request, res: Response) => {
 const signup = async (req: Request, res: Response) => {
   try {
     const user = await userService.createUser(req.body);
-    const accessToken = authService.generateAccessToken(user.id);
+    const accessToken = authService.generateAccessToken(user);
     return res.status(200).json({user, accessToken});
   } catch (err) {
     return res.status(400).json(err);

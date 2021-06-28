@@ -7,8 +7,7 @@ const getUserById = async (id: String): Promise<User> => {
     const user = await getRepository(User).findOne({ id })
     return user
   } catch (err) {
-    console.log(err)
-    return null
+    throw TypeError(err)
   }
 }
 
