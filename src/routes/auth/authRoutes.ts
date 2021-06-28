@@ -1,17 +1,21 @@
-import express, { Request, Response } from 'express'
-import { check } from 'express-validator'
+import express from 'express'
+import { body } from 'express-validator'
 import authController from '../../controllers/authController'
+import {requestValidator} from '../../middleware/validation'
 
 const router = express.Router()
 
-router.post('/signup', authController.signup)
+router.post('/signup', 
+  body('name').notEmpty(),
+  body('email').isEmail(),
+  body('password').exists(),
+  requestValidator,
+  authController.signup)
 
-router.post('/login',[
-    check('name').notEmpty(),
-    check('password').notEmpty(),
-], authController.login)
-
-router.get('/test', (req,res)=>{return res.json({msg:"hello"})})
+router.post('/login', 
+  body('email').isEmail(),
+  body('password').exists(),
+  requestValidator,
+  authController.login)
 
 export { router }
-

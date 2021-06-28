@@ -1,25 +1,23 @@
-import express, { Request, Response } from 'express'
-import { check } from 'express-validator'
+import express  from 'express'
+import { body } from 'express-validator'
+import { requestValidator } from '../../middleware/validation'
 import userController from '../../controllers/userController'
 
 const router = express.Router()
 
-router.get('/:id',[
-], userController.getUser)
-
 router.get('/all', userController.getAllUser)
 
-// router.post('/', [
-//     check('name').notEmpty(),
-//     check('password').notEmpty(),
-//     check('email').isEmail().notEmpty(),
-// ], userController.createUser)
+router.get('/:id', userController.getUser)
 
-// router.put('/:id', userController.updateUser)
+router.post('/', 
+  body('name').notEmpty(),
+  body('email').isEmail(),
+  body('password').exists(),
+  requestValidator,
+  userController.createUser)
 
-// router.delete('/:id', [
-//     check('id').notEmpty(),
-// ], userController.deleteUser)
+router.put('/:id', userController.updateUser)
+
+router.delete('/:id', userController.deleteUser)
 
 export { router }
-

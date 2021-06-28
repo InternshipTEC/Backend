@@ -1,39 +1,49 @@
-import {Request, Response} from 'express'
-import {validationResult} from 'express-validator'
-import * as userRepository from '../repositories/userRepository'
-import * as bcrypt from 'bcrypt'
-import * as jwt from "jsonwebtoken" 
-import { User } from '../models/User'
+import { Request, Response } from 'express'
+import * as userService from '../service/userService'
 
-const getUser = async (req:Request, res:Response) => {
-    if(!inputValidator(req)) return res.status(400);
-    return res.json(await userRepository.getUserById(req.params.id));
+const getUser = async (req: Request, res: Response) => {
+  try {
+    const user = await userService.getUserById(req.params.id);
+    return res.status(200).json(user);
+  } catch(err) {
+    return res.status(400).json(err);
+  }
 }
 
-const getAllUser = async (req:Request, res:Response) => {
-    if(!inputValidator(req)) return res.status(400);
-    return res.json(await userRepository.getAllUser());
+const getAllUser = async (req: Request, res: Response) => {
+  try {
+    const users = await userService.getAllUser();
+    return res.status(200).json(users);
+  } catch (err) {
+    return res.status(400).json(err);
+  }
 }
 
-const createUser = async (req:Request, res:Response) => {
-    if(!inputValidator(req)) return res.status(400);
-    const {name, password, email} = req.body;
-    try {
-        const salt = await bcrypt.genSalt(10); 
-        const hashedPassword = await bcrypt.hash(password, salt);
-        const user = new User();
-        user.name = name;
-        user.password = hashedPassword;
-        user.email = email;
-        userRepository.createUser(user);
-        res.json(user);
-    } catch(err){
-        return res.sendStatus(400).json(err);
-    }
+const createUser = async (req: Request, res: Response) => {
+  try {
+    const user = await userService.createUser(req.body);
+    return res.status(200).json(user);
+  } catch(err) {
+    return res.status(400).json(err);
+  }
 }
 
-const inputValidator = (req:Request) => {
-    const errors = validationResult(req);
-    return (errors.isEmpty() ? true : false)
+const updateUser = async (req:Request, res:Response) => {
+  try {
+    const user = await userService.updateUser(req.params.id,req.body);
+    return res.status(200).json(user);
+  } catch (err) {
+    return res.status(400).json(err);
+  }
 }
-export default {getUser, createUser, getAllUser}
+
+const deleteUser = async (req:Request, res:Response) => {
+  try {
+    const user = await userService.deleteUser(req.params.id);
+    return res.status(200).json(user);
+  } catch (err) {
+    return res.status(400).json(err);
+  }
+}
+
+export default { getUser, createUser, getAllUser, updateUser, deleteUser }

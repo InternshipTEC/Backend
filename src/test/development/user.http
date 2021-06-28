@@ -1,0 +1,24 @@
+### Get spesific user by ID
+GET http://localhost:3000/user/633355f1-4d6d-4ead-9566-57cceab87677 HTTP/1.1
+
+### Get all user
+GET http://localhost:3000/user/all HTTP/1.1
+
+### Valid create user request 
+POST http://localhost:3000/user HTTP/1.1
+content-type: application/json
+
+{
+	"name" : "Jhonson",
+	"email": "Test@mail.com",
+	"password": "JonnyJack"
+}
+### Valid update user request
+PUT http://localhost:3000/user/037b6d4e-0703-4783-be2b-de99c9b1e220 HTTP/1.1
+content-type: application/json
+
+{
+	"password": "newpassword"
+}
+### Delete Request
+DELETE http://localhost:3000/user/037b6d4e-0703-4783-be2b-de99c9b1e220 HTTP/1.1

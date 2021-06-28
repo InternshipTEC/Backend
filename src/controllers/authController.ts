@@ -1,57 +1,31 @@
-import {Request, Response} from 'express'
-import {validationResult} from 'express-validator'
-import * as userRepository from '../repositories/userRepository'
-import * as bcrypt from 'bcrypt'
-import * as jwt from "jsonwebtoken" 
-import { User } from '../models/User'
+import { Request, Response } from 'express'
+import * as userService from '../service/userService'
+import * as authService from '../service/authService'
 
-const login = async (req:Request,res:Response) => {
-    if(!inputValidator(req)) return res.status(400);
+const login = async (req: Request, res: Response) => {
+  let user, passwordEncrypted;
+  try {
+    user = await userService.getUserById(req.params.id);
+  } catch (err) {
+    return res.status(400).json(err);
+  }
 
-    let user, encrypt_result;
-    // rollback and commit research
-    try {
-        user = await userRepository.getUserByEmail(req.body.email); 
-        encrypt_result = await bcrypt.compare(req.body.password, user.password.toString());
-    } catch (err) {
-        return res.sendStatus(400).send(err);
-    }
-
-    if(user && encrypt_result){
-        const accessToken = generateAccessToken(user.id);
-        return res.json({accessToken});
-    } else {
-        return res.sendStatus(400).send("User not found");
-    }
+  try {
+    passwordEncrypted = await authService.checkPassword(req.body.password, user.password.toString())
+    return res.status(200).json(user)
+  } catch (err) {
+    return res.status(400).json(err);
+  }
 }
 
-const signup = async (req:Request,res:Response) => {
-    if(!inputValidator(req)) return res.status(400);
-    const {name, password, email} = req.body;
-    try {
-        const salt = await bcrypt.genSalt(10); 
-        const hashedPassword = await bcrypt.hash(password, salt);
-        const user = new User();
-        user.name = name;
-        user.password = hashedPassword;
-        user.email = email;
-        userRepository.createUser(user);
-        res.json(user);
-
-    } catch(err){
-        return res.sendStatus(400).json(err);
-    }
+const signup = async (req: Request, res: Response) => {
+  try {
+    const user = await userService.createUser(req.body);
+    const accessToken = authService.generateAccessToken(user.id);
+    return res.status(200).json({user, accessToken});
+  } catch (err) {
+    return res.status(400).json(err);
+  }
 }
 
-// research for expire time
-const generateAccessToken = (userId:String) => {
-    return jwt.sign(userId, 'secret', {expiresIn: "30m"})
-}
-
-// if valid, return true 
-const inputValidator = (req:Request) => {
-    const errors = validationResult(req);
-    return (errors.isEmpty() ? true : false)
-}
-
-export default {login, signup}
+export default { login, signup }
