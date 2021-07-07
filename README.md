@@ -27,6 +27,7 @@ npm start
 
 ### Clone this repository
 ---
+
 ### Create new branch
 From **master** branch, rename it using this format: `{version}-{feature-name}`
 
@@ -49,6 +50,22 @@ We use .env for react and node projects [https://www.npmjs.com/package/dotenv](h
 npm install
 ```
 
+### Migrate the database
+
+```bash
+npm run migrate:generate -- -n [migration_file_name]
+npm run migrate:run
+```
+
+---
+
+### Run in development
+
+```bash
+npm run dev
+```
+
+---
 
 ### Start coding
 This is where you do amazing things, implement features and functionalities.
