@@ -1,0 +1,81 @@
+components:
+  requestBodies:
+    loginRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email: 
+                type: string
+              password:
+                type: string
+            example:
+              email: jhonson@mail.com
+              password: jhonson1212
+    signupRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email: 
+                type: string
+              name:
+                type: string
+              password:
+                type: string
+            example:
+              email: jhonson@mail.com
+              name: jhonson anderson
+              password: jhonson1212
+      
+
+tags:
+  name: Auth
+  description: The authentication service API
+  
+
+paths:
+  /auth/login:
+    post:
+      summary: Login as a user
+      tags: [Auth]
+      requestBody:
+        $ref: '#/components/requestBodies/loginRequestBody'
+      responses:
+        200:
+          description: Successfully logged in 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+                  accessToken:
+                    type: string
+        400:
+          $ref: '#/components/responses/400Error'
+  /auth/signup:
+    post:
+      summary: Create a user and sign up
+      tags: [Auth]
+      requestBody:
+        $ref: '#/components/requestBodies/createUserRequestBody'
+      responses:
+        200:
+          description: Successfully signed up
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+                  accessToken:
+                    type: string
+        400:
+          $ref: '#/components/responses/400Error' 

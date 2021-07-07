@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import { Request, Response, Router } from 'express'
 import * as authService from '../service/authService'
 
 const login = async (req: Request, res: Response) => {

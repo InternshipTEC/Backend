@@ -16,8 +16,7 @@ const getAllUser = async (): Promise<User[]> => {
     const allUser = await getRepository(User).find()
     return allUser
   } catch (err) {
-    console.log(err)
-    return null
+    throw TypeError(err)
   }
 }
 
@@ -29,7 +28,7 @@ const getUserByEmail = async (email: String): Promise<User> => {
       .getOne()
     return user
   } catch (err) {
-    return err
+    throw TypeError(err)
   }
 }
 
@@ -45,8 +44,7 @@ const createUser = async (props: User): Promise<User> => {
     }
     return user
   } catch (err) {
-    console.log(err)
-    return null
+    throw TypeError(err)
   }
 }
 
@@ -60,7 +58,7 @@ const updateUser = async (id: String, props: User): Promise<any> => {
     .execute()
     return new_user
   } catch (err) {
-    return null
+    throw TypeError(err)
   }
 }
 
@@ -74,7 +72,7 @@ const deleteUser = async (id: String) => {
     .execute(); 
     return user;
   } catch(err) {
-    return null  
+    throw TypeError(err)
   } 
 }
 

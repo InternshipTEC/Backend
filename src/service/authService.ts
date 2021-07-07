@@ -2,32 +2,31 @@ import * as bcrypt from 'bcrypt'
 import { Request } from 'express';
 import * as jwt from 'jsonwebtoken'
 import * as userService from '../service/userService'
-import { User } from '../models/User'
 
 const handleLogin = async (req:Request) => {
 	let user, passwordEncrypted;
 	try {
-		user = await userService.getUserById(req.params.id);
+		user = await userService.getUserByEmail(req.body.email);
 	} catch (err) {
-		return err;
+		throw TypeError(err);
 	}
 
 	try {
 		passwordEncrypted = await checkPassword(req.body.password, user.password.toString())
-		const accessToken = generateAccessToken(user);
+		const accessToken = generateAccessToken(user.id);
 		return {user, accessToken};
 	} catch (err) {
-		return err;
+		throw TypeError(err);
 	}
 }
 
 const handleSignup = async (req:Request) => {
 	try {
 		const user = await userService.createUser(req.body);
-		const accessToken = generateAccessToken(user);
+		const accessToken = generateAccessToken(user.id);
 		return {user, accessToken}
 	} catch (err) {
-		return err
+		throw TypeError(err);
 	}
 }
 
@@ -40,8 +39,8 @@ const checkPassword = async (userPassword:string, reqPassword:string) : Promise<
 	}
 }
 
-const generateAccessToken = (user:User) : String => {
-	return jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "1h" })
+const generateAccessToken = (userId:String) : String => {
+	return jwt.sign(userId, process.env.JWT_SECRET)
 }
 
 export {handleLogin, handleSignup, checkPassword, generateAccessToken}

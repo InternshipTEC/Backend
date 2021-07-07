@@ -10,11 +10,11 @@ content-type: application/json
 
 {
 	"name" : "Jhonson",
-	"email": "Test@mail.com",
+	"email": "anotherTest@mail.com",
 	"password": "JonnyJack"
 }
 ### Valid update user request
-PUT http://localhost:3000/user/037b6d4e-0703-4783-be2b-de99c9b1e220 HTTP/1.1
+PUT http://localhost:3000/user/86a9ebc4-3eb8-465d-a9a7-2d47ff43cd4e HTTP/1.1
 content-type: application/json
 
 {
