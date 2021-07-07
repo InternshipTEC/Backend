@@ -2,7 +2,7 @@ import { getConnection, getManager, getRepository } from 'typeorm'
 import { User } from '../models/User'
 import { validate } from 'class-validator'
 
-const getUserById = async (id: String): Promise<User> => {
+const getUserById = async (id: string): Promise<User> => {
   try {
     const user = await getRepository(User).findOne({ id })
     return user
@@ -20,11 +20,11 @@ const getAllUser = async (): Promise<User[]> => {
   }
 }
 
-const getUserByEmail = async (email: String): Promise<User> => {
+const getUserByEmail = async (email: string): Promise<User> => {
   try {
     const user = await getRepository(User)
       .createQueryBuilder('user')
-      .where('email = :email', { email:email.toString() })
+      .where('email = :email', { email: email.toString() })
       .getOne()
     return user
   } catch (err) {
@@ -48,32 +48,32 @@ const createUser = async (props: User): Promise<User> => {
   }
 }
 
-const updateUser = async (id: String, props: User): Promise<any> => {
+const updateUser = async (id: string, props: User): Promise<any> => {
   try {
-    const new_user =  await getConnection()
-    .createQueryBuilder()
-    .update(User)
-    .set(props)
-    .where("id = :id", {id})
-    .execute()
-    return new_user
+    const newUser = await getConnection()
+      .createQueryBuilder()
+      .update(User)
+      .set(props)
+      .where('id = :id', { id })
+      .execute()
+    return newUser
   } catch (err) {
     throw TypeError(err)
   }
 }
 
-const deleteUser = async (id: String) => {
-  try{
+const deleteUser = async (id: string) => {
+  try {
     const user = await getConnection()
-    .createQueryBuilder()
-    .delete()
-    .from(User)
-    .where("id = :id", {id})
-    .execute(); 
-    return user;
-  } catch(err) {
+      .createQueryBuilder()
+      .delete()
+      .from(User)
+      .where('id = :id', { id })
+      .execute()
+    return user
+  } catch (err) {
     throw TypeError(err)
-  } 
+  }
 }
 
 export { getUserByEmail, getUserById, getAllUser, createUser, updateUser, deleteUser }
