@@ -50,6 +50,8 @@ We use .env for react and node projects [https://www.npmjs.com/package/dotenv](h
 npm install
 ```
 
+---
+
 ### Migrate the database
 
 ```bash
@@ -69,6 +71,34 @@ npm run dev
 
 ### Start coding
 This is where you do amazing things, implement features and functionalities.
+
+---
+
+### Testing
+There is 2 kind of testing implemented in this repository: unit testing and integration testing. You can execute them using the following command.
+
+```bash
+npm run test:unit
+npm run test:integration
+```
+
+If you just want to test for both unit testing and integration testing, then use the following command.
+
+```bash
+npm run test
+```
+> Note : doing the command above will execute all test files. And you might have a compiled javascript version of the api, so the test might be compiled twice and takes time twice longer. To avoid this, specify the path of test file as argument. To do so simply add `-- [path]` after npm run test. ex: `npm run test -- src/test`.
+
+If you dont like the test driven development, then you can still debug while running the server and code. There is a `http_request` folder on the root of repository. Inside of that, is an alternative of postman. To use this files install `rest client` extension on vscode.
+
+There are some flags we can use on this command. `--watch` and `--silent` are the example which is very useful. In integration testing, you might found yourself seeing many logs in terminal (since integration testing use the database which enable logging). To disable the logging, use `--silent`. The `--watch` is useful if you want to do a test driven development. It makes the terminal execute the test everytime we hit a spesific key at the terminal (a for all test and f for error test as instance). For some configuration, it will also execute when we save file. Here is an example of full testing with silent tag and unit testing with both tags.  
+
+```bash
+npm run test -- --silent 
+npm run test:unit -- --silent --watch
+```
+
+Full documentation [here](https://jestjs.io/docs/cli).
 
 ---
 ### Commit changes

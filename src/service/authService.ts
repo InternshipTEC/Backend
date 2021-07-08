@@ -2,12 +2,13 @@ import * as bcrypt from 'bcrypt'
 import { Request } from 'express'
 import * as jwt from 'jsonwebtoken'
 import * as userService from '../service/userService'
+import * as userRepository from '../repositories/userRepository'
 
 const handleLogin = async (req: Request) => {
   let user
   let passwordEncrypted
   try {
-    user = await userService.getUserByEmail(req.body.email)
+    user = await userRepository.getUserByEmail(req.body.email)
   } catch (err) {
     throw TypeError(err)
   }
@@ -23,7 +24,7 @@ const handleLogin = async (req: Request) => {
 
 const handleSignup = async (req: Request) => {
   try {
-    const user = await userService.createUser(req.body)
+    const user = await userService.createUser(req)
     const accessToken = generateAccessToken(user.id)
     return { user, accessToken }
   } catch (err) {

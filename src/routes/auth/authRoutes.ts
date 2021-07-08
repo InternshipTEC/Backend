@@ -1,6 +1,6 @@
 import express from 'express'
 import authController from '../../controllers/authController'
-import { loginCheck, signupCheck } from './authRoutes.check'
+import { loginCheck, signupCheck } from '../../validation/authRoutesValidation'
 
 const router = express.Router()
 

@@ -1,6 +1,6 @@
 import express from 'express'
 import userController from '../../controllers/userController'
-import { postCheck } from './userRoutes.check'
+import { postCheck } from '../../validation/userRoutesValidation'
 
 const router = express.Router()
 

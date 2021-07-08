@@ -2,19 +2,20 @@ import * as userRepository from '../repositories/userRepository'
 import * as bcrypt from 'bcrypt'
 import { User } from '../models/User'
 import { DeleteResult } from 'typeorm'
+import { Request } from 'express'
 
-const getUserByEmail = async (email: string): Promise<User> => {
+const getUserByEmail = async (req:Request): Promise<User> => {
   try {
-    const user = await userRepository.getUserByEmail(email)
+    const user = await userRepository.getUserByEmail(req.body.email)
     return user
   } catch (err) {
     throw TypeError(err)
   }
 }
 
-const getUserById = async (id: string): Promise<User> => {
+const getUserById = async (req:Request): Promise<User> => {
   try {
-    const user = await userRepository.getUserById(id)
+    const user = await userRepository.getUserById(req.body.id)
     return user
   } catch (err) {
     throw TypeError(err)
@@ -30,8 +31,8 @@ const getAllUser = async (): Promise<User[]> => {
   }
 }
 
-const createUser = async (reqBody: any): Promise<User> => {
-  const { name, password, email } = reqBody
+const createUser = async (req: Request): Promise<User> => {
+  const { name, password, email } = req.body
   try {
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password, salt)
@@ -46,13 +47,13 @@ const createUser = async (reqBody: any): Promise<User> => {
   }
 }
 
-const updateUser = async (id: string, reqBody: any): Promise<User> => {
+const updateUser = async (req: Request): Promise<User> => {
   try {
     const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(reqBody.password, salt)
+    const hashedPassword = await bcrypt.hash(req.body.password, salt)
     let user
     if (hashedPassword) {
-      user = await userRepository.updateUser(id, { ...reqBody, password: hashedPassword })
+      user = await userRepository.updateUser(req.params.id, { ...req.body, password: hashedPassword })
       return user
     }
     throw TypeError("Password doesn't match!")
@@ -61,9 +62,9 @@ const updateUser = async (id: string, reqBody: any): Promise<User> => {
   }
 }
 
-const deleteUser = async (id: string): Promise<DeleteResult> => {
+const deleteUser = async (req:Request): Promise<DeleteResult> => {
   try {
-    const result = await userRepository.deleteUser(id)
+    const result = await userRepository.deleteUser(req.params.id)
     return result
   } catch (err) {
     throw TypeError(err)

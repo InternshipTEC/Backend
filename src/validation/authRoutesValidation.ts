@@ -1,5 +1,5 @@
 import { body } from 'express-validator'
-import { requestValidator } from '../../middleware/validation'
+import { requestValidator } from '../middleware/validation'
 
 export const loginCheck = [body('email').isEmail(), body('password').exists(), requestValidator]
 

@@ -7,6 +7,7 @@ module.exports = {
     "<rootDir>/dist/ormconfig.js",
     "<rootDir>/src/database/",
     "<rootDir>/src/config.ts",
-    "<rootDir>/src/ormconfig.ts"
-  ]
+    "<rootDir>/src/ormconfig.ts",
+  ],
+  setupFiles: ["<rootDir>/src/test/setup.ts"]
 }
