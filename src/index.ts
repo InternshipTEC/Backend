@@ -1,4 +1,4 @@
-import { app } from './app'
+import app from './app'
 import logger from './logger'
 import { PORT } from './config'
 import { connectDatabase } from './database'
@@ -11,3 +11,5 @@ connectDatabase()
   .catch(err => {
     console.log(err)
   })
+
+  
