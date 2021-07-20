@@ -37,7 +37,7 @@ jobs:
       run: npm install
     - name: Build Project
       run: npm build
-    - name: Run Test
+    - name: Run Unit Test
       env:
           DATABASE_HOST: localhost
           DATABASE_PORT: 3306
@@ -46,4 +46,14 @@ jobs:
           DATABASE_NAME: test_database
           JWT_SECRET: secret
           PORT: 3000
-      run: npm run test
+      run: npm run test:unit
+    - name: Run Integration Test
+      env:
+          DATABASE_HOST: localhost
+          DATABASE_PORT: 3306
+          DATABASE_USERNAME: admin
+          DATABASE_PASSWORD: rootpass
+          DATABASE_NAME: test_database
+          JWT_SECRET: secret
+          PORT: 3000
+      run: npm run test:integration
