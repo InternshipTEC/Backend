@@ -4,8 +4,8 @@ import { loginCheck, signupCheck } from '../../validation/authRoutesValidation'
 
 const router = express.Router()
 
-router.post('/signup', loginCheck, authController.signup)
+router.post('/signup', signupCheck, authController.signup)
 
-router.post('/login', signupCheck, authController.login)
+router.post('/login', loginCheck, authController.login)
 
 export { router }

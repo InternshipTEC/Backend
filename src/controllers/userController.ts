@@ -4,6 +4,11 @@ import * as userService from '../service/userService'
 const getUser = async (req: Request, res: Response) => {
   /* 	#swagger.tags = ['User']
       #swagger.description = 'Endpoint to get a specific user by id'*/
+
+  /* #swagger.responses[200] = {
+          description: "Get user response",
+          schema: { $ref: "#/definitions/getUserResponse" }
+} */
   try {
     const user = await userService.getUserById(req)
     return res.status(200).json(user)
@@ -15,6 +20,11 @@ const getUser = async (req: Request, res: Response) => {
 const getAllUser = async (req: Request, res: Response) => {
   /* 	#swagger.tags = ['User']
       #swagger.description = 'Endpoint get all user'*/
+
+  /* #swagger.responses[200] = {
+          description: "Get all user response",
+          schema: { $ref: "#/definitions/getAllUserResponse" }
+  } */
   try {
     const users = await userService.getAllUser()
     return res.status(200).json(users)
@@ -29,10 +39,10 @@ const createUser = async (req: Request, res: Response) => {
 
   /*	#swagger.parameters['obj'] = {
       in: 'body',
-      description: 'User information',
+      description: 'Create user request',
       required: true,
-      schema: { $ref: "#/definitions/User" }
-} */
+      schema: { $ref: "#/definitions/postUserRequest" }
+  } */
 
   try {
     const user = await userService.createUser(req)
@@ -48,9 +58,9 @@ const updateUser = async (req: Request, res: Response) => {
 
   /*	#swagger.parameters['obj'] = {
       in: 'body',
-      description: 'User information',
+      description: 'Update user request',
       required: true,
-      schema: { $ref: "#/definitions/User" }
+      schema: { $ref: "#/definitions/putUserRequest" }
 } */
   try {
     const user = await userService.updateUser(req)

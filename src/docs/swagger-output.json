@@ -38,16 +38,19 @@
           {
             "name": "obj",
             "in": "body",
-            "description": "User information",
+            "description": "Signup request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/signUpRequest"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Get user response",
+            "schema": {
+              "$ref": "#/definitions/signUpResponse"
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -61,10 +64,23 @@
           "Auth"
         ],
         "description": "Endpoint to log in a specific user",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Login request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/____FUNC____"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Login response",
+            "schema": {
+              "$ref": "#/definitions/____FUNC____"
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -81,7 +97,10 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Get all user response",
+            "schema": {
+              "$ref": "#/definitions/____FUNC____"
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -105,7 +124,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Get user response",
+            "schema": {
+              "$ref": "#/definitions/____FUNC____"
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -127,10 +149,10 @@
           {
             "name": "obj",
             "in": "body",
-            "description": "User information",
+            "description": "Update user request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/putUserRequest"
             }
           }
         ],
@@ -176,10 +198,10 @@
           {
             "name": "obj",
             "in": "body",
-            "description": "User information",
+            "description": "Create user request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/postUserRequest"
             }
           }
         ],
@@ -195,20 +217,285 @@
     }
   },
   "definitions": {
-    "User": {
+    "postUserRequest": {
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
-          "example": "zay"
-        },
-        "email": {
-          "type": "string",
-          "example": "zay@gmail.com"
+          "example": "Francisco McClure"
         },
         "password": {
           "type": "string",
-          "example": "zay123"
+          "example": "0ANHh2UCpbx0mQj"
+        },
+        "email": {
+          "type": "string",
+          "example": "Octavia_Mueller@gmail.com"
+        }
+      }
+    },
+    "putUserRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Lila Smitham"
+        },
+        "password": {
+          "type": "string",
+          "example": "aSt3nN16ztAuay1"
+        },
+        "email": {
+          "type": "string",
+          "example": "Amy.Bogan@hotmail.com"
+        }
+      }
+    },
+    "signUpRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Lance Lubowitz"
+        },
+        "password": {
+          "type": "string",
+          "example": "vBDEtjIvXE6SJ9j"
+        },
+        "email": {
+          "type": "string",
+          "example": "Alvis5@gmail.com"
+        }
+      }
+    },
+    "loginRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Stacy McKenzie"
+        },
+        "password": {
+          "type": "string",
+          "example": "gWmBywMm7CIj_CJ"
+        }
+      }
+    },
+    "postUserResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Francisco McClure"
+        },
+        "password": {
+          "type": "string",
+          "example": "$2b$10$9a9ze3xZNceGbJwF3NCopupwSfAZj2wH9HefD2OKiE9NML6dMDlva"
+        },
+        "email": {
+          "type": "string",
+          "example": "Octavia_Mueller@gmail.com"
+        },
+        "id": {
+          "type": "string",
+          "example": "826c6b1d-cf07-4cb6-9afe-0e4b5676d69f"
+        }
+      }
+    },
+    "putUserResponse": {
+      "type": "object",
+      "properties": {
+        "generatedMaps": {
+          "type": "array",
+          "example": [],
+          "items": {}
+        },
+        "raw": {
+          "type": "object",
+          "properties": {
+            "fieldCount": {
+              "type": "number",
+              "example": 0
+            },
+            "affectedRows": {
+              "type": "number",
+              "example": 1
+            },
+            "insertId": {
+              "type": "number",
+              "example": 0
+            },
+            "serverStatus": {
+              "type": "number",
+              "example": 2
+            },
+            "warningCount": {
+              "type": "number",
+              "example": 0
+            },
+            "message": {
+              "type": "string",
+              "example": "(Rows matched: 1  Changed: 1  Warnings: 0"
+            },
+            "protocol41": {
+              "type": "boolean",
+              "example": true
+            },
+            "changedRows": {
+              "type": "number",
+              "example": 1
+            }
+          }
+        },
+        "affected": {
+          "type": "number",
+          "example": 1
+        }
+      }
+    },
+    "getAllUserResponse": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "ecf28d30-2920-4b90-bdd2-627fc2f196c0"
+          },
+          "email": {
+            "type": "string",
+            "example": "Giles_Bartell99@gmail.com"
+          },
+          "name": {
+            "type": "string",
+            "example": "Kristopher Hessel"
+          },
+          "password": {
+            "type": "string",
+            "example": "$2b$10$I/OTw8ZiJ4lXGmcd4RdnO.J3vkHYHNbBaig5BeLzRDkQ4/ucObKui"
+          }
+        }
+      }
+    },
+    "getUserResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "826c6b1d-cf07-4cb6-9afe-0e4b5676d69f"
+        },
+        "email": {
+          "type": "string",
+          "example": "Octavia_Mueller@gmail.com"
+        },
+        "name": {
+          "type": "string",
+          "example": "Francisco McClure"
+        },
+        "password": {
+          "type": "string",
+          "example": "$2b$10$9a9ze3xZNceGbJwF3NCopupwSfAZj2wH9HefD2OKiE9NML6dMDlva"
+        }
+      }
+    },
+    "deleteUserResponse": {
+      "type": "object",
+      "properties": {
+        "raw": {
+          "type": "object",
+          "properties": {
+            "fieldCount": {
+              "type": "number",
+              "example": 0
+            },
+            "affectedRows": {
+              "type": "number",
+              "example": 1
+            },
+            "insertId": {
+              "type": "number",
+              "example": 0
+            },
+            "serverStatus": {
+              "type": "number",
+              "example": 2
+            },
+            "warningCount": {
+              "type": "number",
+              "example": 0
+            },
+            "message": {
+              "type": "string",
+              "example": ""
+            },
+            "protocol41": {
+              "type": "boolean",
+              "example": true
+            },
+            "changedRows": {
+              "type": "number",
+              "example": 0
+            }
+          }
+        },
+        "affected": {
+          "type": "number",
+          "example": 1
+        }
+      }
+    },
+    "loginResponse": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "msg": {
+                "type": "string",
+                "example": "Invalid value"
+              },
+              "param": {
+                "type": "string",
+                "example": "email"
+              },
+              "location": {
+                "type": "string",
+                "example": "body"
+              }
+            }
+          }
+        }
+      }
+    },
+    "signUpResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "Lance Lubowitz"
+            },
+            "password": {
+              "type": "string",
+              "example": "$2b$10$grji66bTcXI8N9wpPuP9Pe5s5oeW8B6do/WwzivfHu/AsfRCYMNaO"
+            },
+            "email": {
+              "type": "string",
+              "example": "Alvis5@gmail.com"
+            },
+            "id": {
+              "type": "string",
+              "example": "bc106059-9e7e-4b7b-8054-a1d19521895b"
+            }
+          }
+        },
+        "accessToken": {
+          "type": "string",
+          "example": "eyJhbGciOiJIUzI1NiJ9.YmMxMDYwNTktOWU3ZS00YjdiLTgwNTQtYTFkMTk1MjE4OTVi.oVhOXkuotnG_kRLWld06uVLiFiMbfuzCrVYu6IHYmWQ"
         }
       }
     }

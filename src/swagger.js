@@ -1,5 +1,7 @@
 const swaggerAutogen = require('swagger-autogen')
+const fs = require('fs')
 
+const requests = JSON.parse(fs.readFileSync('./src/docs/swagger-req-res-definition.json').toString())
 const doc = {
     info: {
         version: "1.0.0",
@@ -22,11 +24,7 @@ const doc = {
         },
     ],
     definitions: {
-       User: {
-            name: "zay",
-            email: "zay@gmail.com",
-            password: "zay123"
-        },
+        ...requests
     }
 }
 

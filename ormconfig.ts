@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { ConnectionOptions } from 'typeorm'
 
-import { DATABASE_LOGGING, DATABASE_HOST, DATABASE_PORT, DATABASE_USERNAME, IS_PRODUCTION, DATABASE_PASSWORD, DATABASE_NAME } from './src/config'
+import { DATABASE_LOGGING, DATABASE_HOST, DATABASE_PORT, DATABASE_USERNAME, IS_TEST, DATABASE_PASSWORD, DATABASE_NAME } from './src/config'
 
 const baseConfig: ConnectionOptions = {
   type: 'mysql',
@@ -18,12 +18,12 @@ const config: ConnectionOptions[] = [
     ...baseConfig,
     entities: [`src/models/*.{ts,.js}`],
     migrations: [`src/migrations/*{.ts,.js}`],
-    // synchronize: !IS_PRODUCTION, // this might ruin the database structure, use wisely
+    synchronize: true, 
     cli: {
       entitiesDir: 'src/models',
       migrationsDir: 'src/migrations',
     },
-  },
+  },  
   {
     ...baseConfig,
     name: 'seed',

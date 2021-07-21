@@ -15,7 +15,7 @@ const getUserByEmail = async (req:Request): Promise<User> => {
 
 const getUserById = async (req:Request): Promise<User> => {
   try {
-    const user = await userRepository.getUserById(req.body.id)
+    const user = await userRepository.getUserById(req.params.id)
     return user
   } catch (err) {
     throw TypeError(err)

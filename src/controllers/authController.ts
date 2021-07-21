@@ -5,6 +5,18 @@ import * as authService from '../service/authService'
 const login = async (req: Request, res: Response) => {
   /* 	#swagger.tags = ['Auth']
       #swagger.description = 'Endpoint to log in a specific user' */
+
+  /*	#swagger.parameters['obj'] = {
+      in: 'body',
+      description: 'Login request',
+      required: true,
+      schema: { $ref: "#/definitions/loginRequest" }
+  } */
+
+  /* #swagger.responses[200] = {
+            description: "Login response",
+            schema: { $ref: "#/definitions/loginResponse" },
+  } */
   try {
     const loginResult = await authService.handleLogin(req)
     return res.status(200).json(loginResult)
@@ -19,10 +31,15 @@ const signup = async (req: Request, res: Response) => {
 
   /*	#swagger.parameters['obj'] = {
       in: 'body',
-      description: 'User information',
+      description: 'Signup request',
       required: true,
-      schema: { $ref: "#/definitions/User" }
-} */
+      schema: { $ref: "#/definitions/signUpRequest" }
+  } */
+
+  /* #swagger.responses[200] = {
+            description: "Get user response",
+            schema: { $ref: "#/definitions/signUpResponse" }
+  } */
   try {
     const signUpResult = await authService.handleSignup(req)
     return res.status(200).json(signUpResult)
