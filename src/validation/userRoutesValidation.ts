@@ -1,4 +1,9 @@
-import { body } from 'express-validator'
-import { requestValidator } from '../middleware/validation'
+import { body } from "express-validator";
+import { requestValidator } from "../middleware/validation";
 
-export const postCheck = [body('name').notEmpty(), body('email').isEmail(), body('password').exists(), requestValidator]
+export const postCheck = [
+  body("name").notEmpty(),
+  body("email").isEmail(),
+  body("password").exists(),
+  requestValidator
+];

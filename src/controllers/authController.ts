@@ -1,5 +1,5 @@
-import { Request, Response, Router } from 'express'
-import * as authService from '../service/authService'
+import { Request, Response, Router } from "express";
+import * as authService from "../service/authService";
 
 const login = async (req: Request, res: Response) => {
   /* 	#swagger.tags = ['Auth']
@@ -17,12 +17,12 @@ const login = async (req: Request, res: Response) => {
             schema: { $ref: "#/definitions/loginResponse" },
   } */
   try {
-    const loginResult = await authService.handleLogin(req)
-    return res.status(200).json(loginResult)
+    const loginResult = await authService.handleLogin(req);
+    return res.status(200).json(loginResult);
   } catch (err) {
-    return res.status(400).json(err)
+    return res.status(400).json(err);
   }
-}
+};
 
 const signup = async (req: Request, res: Response) => {
   /* 	#swagger.tags = ['Auth']
@@ -40,11 +40,11 @@ const signup = async (req: Request, res: Response) => {
             schema: { $ref: "#/definitions/signUpResponse" }
   } */
   try {
-    const signUpResult = await authService.handleSignup(req)
-    return res.status(200).json(signUpResult)
+    const signUpResult = await authService.handleSignup(req);
+    return res.status(200).json(signUpResult);
   } catch (err) {
-    return res.status(400).json(err)
+    return res.status(400).json(err);
   }
-}
+};
 
-export default { login, signup }
+export default { login, signup };

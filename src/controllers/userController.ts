@@ -1,5 +1,5 @@
-import { Request, Response } from 'express'
-import * as userService from '../service/userService'
+import { Request, Response } from "express";
+import * as userService from "../service/userService";
 
 const getUser = async (req: Request, res: Response) => {
   /* 	#swagger.tags = ['User']
@@ -10,12 +10,12 @@ const getUser = async (req: Request, res: Response) => {
           schema: { $ref: "#/definitions/getUserResponse" }
 } */
   try {
-    const user = await userService.getUserById(req)
-    return res.status(200).json(user)
+    const user = await userService.getUserById(req);
+    return res.status(200).json(user);
   } catch (err) {
-    return res.status(400).json(err)
+    return res.status(400).json(err);
   }
-}
+};
 
 const getAllUser = async (req: Request, res: Response) => {
   /* 	#swagger.tags = ['User']
@@ -26,12 +26,12 @@ const getAllUser = async (req: Request, res: Response) => {
           schema: { $ref: "#/definitions/getAllUserResponse" }
   } */
   try {
-    const users = await userService.getAllUser()
-    return res.status(200).json(users)
+    const users = await userService.getAllUser();
+    return res.status(200).json(users);
   } catch (err) {
-    return res.status(400).json(err)
+    return res.status(400).json(err);
   }
-}
+};
 
 const createUser = async (req: Request, res: Response) => {
   /* 	#swagger.tags = ['User']
@@ -45,12 +45,12 @@ const createUser = async (req: Request, res: Response) => {
   } */
 
   try {
-    const user = await userService.createUser(req)
-    return res.status(200).json(user)
+    const user = await userService.createUser(req);
+    return res.status(200).json(user);
   } catch (err) {
-    return res.status(400).json(err)
+    return res.status(400).json(err);
   }
-}
+};
 
 const updateUser = async (req: Request, res: Response) => {
   /* 	#swagger.tags = ['User']
@@ -63,22 +63,22 @@ const updateUser = async (req: Request, res: Response) => {
       schema: { $ref: "#/definitions/putUserRequest" }
 } */
   try {
-    const user = await userService.updateUser(req)
-    return res.status(200).json(user)
+    const user = await userService.updateUser(req);
+    return res.status(200).json(user);
   } catch (err) {
-    return res.status(400).json(err)
+    return res.status(400).json(err);
   }
-}
+};
 
 const deleteUser = async (req: Request, res: Response) => {
   /* 	#swagger.tags = ['User']
       #swagger.description = 'Endpoint to delete a specific user'*/
   try {
-    const user = await userService.deleteUser(req)
-    return res.status(200).json(user)
+    const user = await userService.deleteUser(req);
+    return res.status(200).json(user);
   } catch (err) {
-    return res.status(400).json(err)
+    return res.status(400).json(err);
   }
-}
+};
 
-export default { getUser, createUser, getAllUser, updateUser, deleteUser }
+export default { getUser, createUser, getAllUser, updateUser, deleteUser };

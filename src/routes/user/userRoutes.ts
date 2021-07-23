@@ -1,17 +1,17 @@
-import express from 'express'
-import userController from '../../controllers/userController'
-import { postCheck } from '../../validation/userRoutesValidation'
+import express from "express";
+import userController from "../../controllers/userController";
+import { postCheck } from "../../validation/userRoutesValidation";
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/all', userController.getAllUser)
+router.get("/all", userController.getAllUser);
 
-router.get('/:id', userController.getUser)
+router.get("/:id", userController.getUser);
 
-router.post('/', postCheck, userController.createUser)
+router.post("/", postCheck, userController.createUser);
 
-router.put('/:id', userController.updateUser)
+router.put("/:id", userController.updateUser);
 
-router.delete('/:id', userController.deleteUser)
+router.delete("/:id", userController.deleteUser);
 
-export { router }
+export { router };
