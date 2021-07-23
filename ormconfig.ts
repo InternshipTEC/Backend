@@ -18,12 +18,12 @@ const config: ConnectionOptions[] = [
     ...baseConfig,
     entities: [`src/models/*.{ts,.js}`],
     migrations: [`src/migrations/*{.ts,.js}`],
-    synchronize: true, 
+    synchronize: true,
     cli: {
       entitiesDir: 'src/models',
       migrationsDir: 'src/migrations',
     },
-  },  
+  },
   {
     ...baseConfig,
     name: 'seed',

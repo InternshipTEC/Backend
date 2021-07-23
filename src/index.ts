@@ -11,5 +11,3 @@ connectDatabase()
   .catch(err => {
     console.log(err)
   })
-
-  

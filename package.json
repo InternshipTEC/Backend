@@ -9,7 +9,7 @@
     "dev": "nodemon",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
-    "prestart": "yarn build",
+    "prestart": "npm run-script build",
     "start": "node .",
     "test": "jest",
     "test:unit": "jest src/test/\"unit testing\"",

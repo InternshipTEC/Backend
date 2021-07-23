@@ -1,7 +1,6 @@
 import { Request, Response, Router } from 'express'
 import * as authService from '../service/authService'
 
-
 const login = async (req: Request, res: Response) => {
   /* 	#swagger.tags = ['Auth']
       #swagger.description = 'Endpoint to log in a specific user' */

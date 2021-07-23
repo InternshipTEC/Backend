@@ -2,7 +2,7 @@ import express from 'express'
 import helmet from 'helmet'
 import bodyParser from 'body-parser'
 import cors, { CorsOptions } from 'cors'
-import * as swaggerFile from "./docs/swagger-output.json"
+import * as swaggerFile from './docs/swagger-output.json'
 import swaggerUI from 'swagger-ui-express'
 import { router } from './routes/index'
 import dotenv from 'dotenv'

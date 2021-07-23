@@ -4,7 +4,7 @@ import { User } from '../models/User'
 import { DeleteResult } from 'typeorm'
 import { Request } from 'express'
 
-const getUserByEmail = async (req:Request): Promise<User> => {
+const getUserByEmail = async (req: Request): Promise<User> => {
   try {
     const user = await userRepository.getUserByEmail(req.body.email)
     return user
@@ -13,7 +13,7 @@ const getUserByEmail = async (req:Request): Promise<User> => {
   }
 }
 
-const getUserById = async (req:Request): Promise<User> => {
+const getUserById = async (req: Request): Promise<User> => {
   try {
     const user = await userRepository.getUserById(req.params.id)
     return user
@@ -62,7 +62,7 @@ const updateUser = async (req: Request): Promise<User> => {
   }
 }
 
-const deleteUser = async (req:Request): Promise<DeleteResult> => {
+const deleteUser = async (req: Request): Promise<DeleteResult> => {
   try {
     const result = await userRepository.deleteUser(req.params.id)
     return result
