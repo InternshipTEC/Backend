@@ -2,7 +2,7 @@ import { Request } from "express";
 import { User } from "../../models/User";
 import * as userService from "../../service/userService";
 
-jest.mock("../../repositories/userRepository", () => {
+jest.mock("../../repositories/userRepository.ts", () => {
   const mockUser = new User();
   mockUser.email = "jhonson@gmail.com";
   mockUser.name = "Jhonson Alibaba";
@@ -20,11 +20,8 @@ jest.mock("../../repositories/userRepository", () => {
 
 describe("getUserById function", () => {
   test("Return an object", async () => {
-    const request = {
-      body: {
-        id: "6862df45-240c-4cbd-8f2d-78c7c26440b1"
-      }
-    } as Request;
+    const request = {} as Request;
+    request.params = { id: "6862df45-240c-4cbd-8f2d-78c7c26440b1" };
     const response = await userService.getUserById(request);
     expect(response).toBeTruthy();
   });
