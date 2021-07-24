@@ -1,6 +1,6 @@
-import request from "supertest";
-import app from "../../app";
-import { connectDatabase, disconnectDatabase } from "../../database";
+import request from 'supertest'
+import app from '../../app'
+import { connectDatabase, disconnectDatabase } from '../../database'
 
 beforeAll(async () => {
   await connectDatabase();
