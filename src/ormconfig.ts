@@ -9,7 +9,7 @@ import {
   IS_TEST,
   DATABASE_PASSWORD,
   DATABASE_NAME
-} from "./src/config";
+} from "./config";
 
 const baseConfig: ConnectionOptions = {
   type: "mysql",
@@ -24,11 +24,11 @@ const baseConfig: ConnectionOptions = {
 const config: ConnectionOptions[] = [
   {
     ...baseConfig,
-    entities: [`src/models/*.{ts,.js}`],
-    migrations: [`src/migrations/*{.ts,.js}`],
+    entities: [`./models/*.{ts,.js}`],
+    migrations: [`./migrations/*{.ts,.js}`],
     cli: {
-      entitiesDir: "src/models",
-      migrationsDir: "src/migrations"
+      entitiesDir: "./models",
+      migrationsDir: "./migrations"
     }
   },
   {

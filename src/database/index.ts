@@ -1,7 +1,7 @@
 import { createConnection, Connection, ConnectionOptions } from "typeorm";
 
 import logger from "../logger";
-import ormConfig from "../../ormconfig";
+import ormConfig from "../ormconfig";
 import { IS_TEST } from "../config";
 
 let connection: Connection | undefined;
