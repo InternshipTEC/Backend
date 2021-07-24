@@ -24,11 +24,11 @@ const baseConfig: ConnectionOptions = {
 const config: ConnectionOptions[] = [
   {
     ...baseConfig,
-    entities: [`./models/*.{ts,.js}`],
-    migrations: [`./migrations/*{.ts,.js}`],
+    entities: [`${__dirname}/models/*{.ts,.js}`],
+    migrations: [`${__dirname}/migrations/*{.ts,.js}`],
     cli: {
-      entitiesDir: "./models",
-      migrationsDir: "./migrations"
+      entitiesDir: `${__dirname}/models`,
+      migrationsDir: `${__dirname}/migrations`
     }
   },
   {
