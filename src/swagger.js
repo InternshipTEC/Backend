@@ -15,10 +15,6 @@ const doc = {
     produces: ['application/json'],
     tags: [
         {
-            "name": "Auth",
-            "description": "Endpoints for authentication operation"
-        },
-        {
             "name": "User",
             "description": "Endpoints for user crud operation"
         },

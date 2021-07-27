@@ -32,9 +32,11 @@ export async function disconnectDatabase() {
     throw new Error("Connection doesn't exist");
   }
 
-  if (IS_TEST) {
-    await connection.dropDatabase();
-  }
+  console.log(IS_TEST)
+
+  // if (IS_TEST) {
+  //   await connection.dropDatabase();
+  // }
 
   return connection.close();
 }

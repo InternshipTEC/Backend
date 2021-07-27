@@ -9,10 +9,6 @@
   "basePath": "/",
   "tags": [
     {
-      "name": "Auth",
-      "description": "Endpoints for authentication operation"
-    },
-    {
       "name": "User",
       "description": "Endpoints for user crud operation"
     }
@@ -28,67 +24,7 @@
     "application/json"
   ],
   "paths": {
-    "/auth/signup": {
-      "post": {
-        "tags": [
-          "Auth"
-        ],
-        "description": "Endpoint to sign in a specific user",
-        "parameters": [
-          {
-            "name": "obj",
-            "in": "body",
-            "description": "Signup request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/signUpRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Get user response",
-            "schema": {
-              "$ref": "#/definitions/signUpResponse"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
-    "/auth/login": {
-      "post": {
-        "tags": [
-          "Auth"
-        ],
-        "description": "Endpoint to log in a specific user",
-        "parameters": [
-          {
-            "name": "obj",
-            "in": "body",
-            "description": "Login request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/____FUNC____"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Login response",
-            "schema": {
-              "$ref": "#/definitions/____FUNC____"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
-    "/user/all": {
+    "/user/": {
       "get": {
         "tags": [
           "User"
@@ -99,115 +35,8 @@
           "200": {
             "description": "Get all user response",
             "schema": {
-              "$ref": "#/definitions/____FUNC____"
+              "$ref": "#/definitions/getWholeUserResponse"
             }
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
-    "/user/{id}": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to get a specific user by id",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Get user response",
-            "schema": {
-              "$ref": "#/definitions/____FUNC____"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to update a specific user",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "obj",
-            "in": "body",
-            "description": "Update user request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/putUserRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint to delete a specific user",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
-    "/user/": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "description": "Endpoint create a user",
-        "parameters": [
-          {
-            "name": "obj",
-            "in": "body",
-            "description": "Create user request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/postUserRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
           },
           "400": {
             "description": "Bad Request"
@@ -217,285 +46,67 @@
     }
   },
   "definitions": {
-    "postUserRequest": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "example": "Francisco McClure"
-        },
-        "password": {
-          "type": "string",
-          "example": "0ANHh2UCpbx0mQj"
-        },
-        "email": {
-          "type": "string",
-          "example": "Octavia_Mueller@gmail.com"
-        }
-      }
-    },
-    "putUserRequest": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "example": "Lila Smitham"
-        },
-        "password": {
-          "type": "string",
-          "example": "aSt3nN16ztAuay1"
-        },
-        "email": {
-          "type": "string",
-          "example": "Amy.Bogan@hotmail.com"
-        }
-      }
-    },
-    "signUpRequest": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "example": "Lance Lubowitz"
-        },
-        "password": {
-          "type": "string",
-          "example": "vBDEtjIvXE6SJ9j"
-        },
-        "email": {
-          "type": "string",
-          "example": "Alvis5@gmail.com"
-        }
-      }
-    },
-    "loginRequest": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "example": "Stacy McKenzie"
-        },
-        "password": {
-          "type": "string",
-          "example": "gWmBywMm7CIj_CJ"
-        }
-      }
-    },
-    "postUserResponse": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "example": "Francisco McClure"
-        },
-        "password": {
-          "type": "string",
-          "example": "$2b$10$9a9ze3xZNceGbJwF3NCopupwSfAZj2wH9HefD2OKiE9NML6dMDlva"
-        },
-        "email": {
-          "type": "string",
-          "example": "Octavia_Mueller@gmail.com"
-        },
-        "id": {
-          "type": "string",
-          "example": "826c6b1d-cf07-4cb6-9afe-0e4b5676d69f"
-        }
-      }
-    },
-    "putUserResponse": {
-      "type": "object",
-      "properties": {
-        "generatedMaps": {
-          "type": "array",
-          "example": [],
-          "items": {}
-        },
-        "raw": {
-          "type": "object",
-          "properties": {
-            "fieldCount": {
-              "type": "number",
-              "example": 0
-            },
-            "affectedRows": {
-              "type": "number",
-              "example": 1
-            },
-            "insertId": {
-              "type": "number",
-              "example": 0
-            },
-            "serverStatus": {
-              "type": "number",
-              "example": 2
-            },
-            "warningCount": {
-              "type": "number",
-              "example": 0
-            },
-            "message": {
-              "type": "string",
-              "example": "(Rows matched: 1  Changed: 1  Warnings: 0"
-            },
-            "protocol41": {
-              "type": "boolean",
-              "example": true
-            },
-            "changedRows": {
-              "type": "number",
-              "example": 1
-            }
-          }
-        },
-        "affected": {
-          "type": "number",
-          "example": 1
-        }
-      }
-    },
-    "getAllUserResponse": {
+    "getWholeUserResponse": {
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
-          "id": {
+          "userId": {
             "type": "string",
-            "example": "ecf28d30-2920-4b90-bdd2-627fc2f196c0"
+            "example": "5d3311486f96d96ac5babb67"
           },
-          "email": {
+          "type": {
+            "type": "number",
+            "example": 0
+          },
+          "userEmail": {
             "type": "string",
-            "example": "Giles_Bartell99@gmail.com"
+            "example": "admin@bukitvista.com"
+          },
+          "userType": {
+            "type": "string",
+            "example": "5d304d8765eea901bff7542f"
+          },
+          "isEmailVerified": {
+            "type": "number",
+            "example": 1
+          },
+          "status": {
+            "type": "number",
+            "example": 1
+          },
+          "userPassword": {
+            "type": "string",
+            "example": "InspireDelight2017"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2019-07-22T04:53:53.000Z"
+          },
+          "loggedAt": {
+            "type": "string",
+            "example": "2019-07-22T04:53:53.000Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2019-10-06T05:09:19.000Z"
+          },
+          "isProfile": {
+            "type": "number",
+            "example": 1
           },
           "name": {
             "type": "string",
-            "example": "Kristopher Hessel"
+            "example": "Admin"
           },
-          "password": {
+          "isOnBoarded": {
+            "type": "number",
+            "example": 1
+          },
+          "locale": {
             "type": "string",
-            "example": "$2b$10$I/OTw8ZiJ4lXGmcd4RdnO.J3vkHYHNbBaig5BeLzRDkQ4/ucObKui"
+            "example": "en"
           }
-        }
-      }
-    },
-    "getUserResponse": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "example": "826c6b1d-cf07-4cb6-9afe-0e4b5676d69f"
-        },
-        "email": {
-          "type": "string",
-          "example": "Octavia_Mueller@gmail.com"
-        },
-        "name": {
-          "type": "string",
-          "example": "Francisco McClure"
-        },
-        "password": {
-          "type": "string",
-          "example": "$2b$10$9a9ze3xZNceGbJwF3NCopupwSfAZj2wH9HefD2OKiE9NML6dMDlva"
-        }
-      }
-    },
-    "deleteUserResponse": {
-      "type": "object",
-      "properties": {
-        "raw": {
-          "type": "object",
-          "properties": {
-            "fieldCount": {
-              "type": "number",
-              "example": 0
-            },
-            "affectedRows": {
-              "type": "number",
-              "example": 1
-            },
-            "insertId": {
-              "type": "number",
-              "example": 0
-            },
-            "serverStatus": {
-              "type": "number",
-              "example": 2
-            },
-            "warningCount": {
-              "type": "number",
-              "example": 0
-            },
-            "message": {
-              "type": "string",
-              "example": ""
-            },
-            "protocol41": {
-              "type": "boolean",
-              "example": true
-            },
-            "changedRows": {
-              "type": "number",
-              "example": 0
-            }
-          }
-        },
-        "affected": {
-          "type": "number",
-          "example": 1
-        }
-      }
-    },
-    "loginResponse": {
-      "type": "object",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "msg": {
-                "type": "string",
-                "example": "Invalid value"
-              },
-              "param": {
-                "type": "string",
-                "example": "email"
-              },
-              "location": {
-                "type": "string",
-                "example": "body"
-              }
-            }
-          }
-        }
-      }
-    },
-    "signUpResponse": {
-      "type": "object",
-      "properties": {
-        "user": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "example": "Lance Lubowitz"
-            },
-            "password": {
-              "type": "string",
-              "example": "$2b$10$grji66bTcXI8N9wpPuP9Pe5s5oeW8B6do/WwzivfHu/AsfRCYMNaO"
-            },
-            "email": {
-              "type": "string",
-              "example": "Alvis5@gmail.com"
-            },
-            "id": {
-              "type": "string",
-              "example": "bc106059-9e7e-4b7b-8054-a1d19521895b"
-            }
-          }
-        },
-        "accessToken": {
-          "type": "string",
-          "example": "eyJhbGciOiJIUzI1NiJ9.YmMxMDYwNTktOWU3ZS00YjdiLTgwNTQtYTFkMTk1MjE4OTVi.oVhOXkuotnG_kRLWld06uVLiFiMbfuzCrVYu6IHYmWQ"
         }
       }
     }
