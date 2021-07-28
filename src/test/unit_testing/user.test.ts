@@ -1,4 +1,3 @@
-import { Request } from "express";
 import { User } from "../../models/User";
 import * as userService from "../../service/userService";
 

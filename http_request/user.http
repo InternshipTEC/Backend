@@ -2,7 +2,7 @@
 GET http://localhost:3000/user/633355f1-4d6d-4ead-9566-57cceab87677 HTTP/1.1
 
 ### Get all user
-GET http://localhost:3000/user/all HTTP/1.1
+GET http://localhost:3000/user HTTP/1.1
 
 ### Valid create user request 
 POST http://localhost:3000/user HTTP/1.1

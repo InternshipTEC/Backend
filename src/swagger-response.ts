@@ -9,9 +9,7 @@ dotenv.config();
 const PORT = 3000;
 const URI = `localhost:${PORT}`;
 
-export const requests = {
-  
-};
+export const requests = {};
 
 const processData = async () => {
   await connectDatabase();
@@ -21,7 +19,7 @@ const processData = async () => {
   await disconnectDatabase();
   return {
     ...requests,
-    getWholeUserResponse: getWholeUserResponse.body,
+    getWholeUserResponse: getWholeUserResponse.body
   };
 };
 

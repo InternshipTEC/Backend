@@ -12,7 +12,7 @@
     "lint:fix": "eslint . --ext .ts --fix",
     "prestart": "npm run-script build",
     "start": "node .",
-    "test": "jest",
+    "test": "jest ./src/test",
     "test:unit": "jest ./src/test/unit_testing",
     "test:integration": "jest src/test/integration_testing",
     "migrate:generate": "node --require ts-node/register ./node_modules/typeorm/cli.js --config src/ormconfig.ts migration:generate",

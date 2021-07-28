@@ -109,6 +109,15 @@
           }
         }
       }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "test": {
+          "type": "string",
+          "example": "tests"
+        }
+      }
     }
   }
 }

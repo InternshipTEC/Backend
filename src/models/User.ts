@@ -1,9 +1,6 @@
-import {
-  Column,
-  Entity,
-} from "typeorm";
+import { Column, Entity } from "typeorm";
 
-@Entity("user", { schema: "bukitvista_dev" })
+@Entity("user")
 export class User {
   @Column("varchar", { primary: true, name: "user_id", length: 45 })
   userId: string;
@@ -15,7 +12,7 @@ export class User {
     name: "google_id",
     nullable: true,
     unique: true,
-    length: 64,
+    length: 64
   })
   googleId: string | null;
 
@@ -28,7 +25,7 @@ export class User {
   @Column("tinyint", {
     name: "is_email_verified",
     width: 1,
-    default: () => "'0'",
+    default: () => "'0'"
   })
   isEmailVerified: boolean;
 
@@ -47,7 +44,7 @@ export class User {
   @Column("varchar", {
     name: "service_provider_id",
     nullable: true,
-    length: 50,
+    length: 50
   })
   serviceProviderId: string | null;
 
@@ -57,14 +54,14 @@ export class User {
   @Column("timestamp", {
     name: "created_at",
     nullable: true,
-    default: () => "CURRENT_TIMESTAMP",
+    default: () => "CURRENT_TIMESTAMP"
   })
   createdAt: Date | null;
 
   @Column("timestamp", {
     name: "logged_at",
     nullable: true,
-    default: () => "CURRENT_TIMESTAMP",
+    default: () => "CURRENT_TIMESTAMP"
   })
   loggedAt: Date | null;
 
@@ -77,7 +74,7 @@ export class User {
   @Column("tinyint", {
     name: "is_profile",
     nullable: true,
-    default: () => "'0'",
+    default: () => "'0'"
   })
   isProfile: number | null;
 
@@ -93,7 +90,7 @@ export class User {
   @Column("int", {
     name: "is_on_boarded",
     nullable: true,
-    default: () => "'0'",
+    default: () => "'0'"
   })
   isOnBoarded: number | null;
 
@@ -101,7 +98,7 @@ export class User {
     name: "locale",
     nullable: true,
     length: 15,
-    default: () => "'en'",
+    default: () => "'en'"
   })
   locale: string | null;
 
@@ -128,5 +125,4 @@ export class User {
 
   @Column("tinyint", { name: "is_on_boarded_mobile", nullable: true })
   isOnBoardedMobile: number | null;
-
 }

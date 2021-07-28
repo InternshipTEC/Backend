@@ -20,7 +20,7 @@ const doc = {
         },
     ],
     definitions: {
-        ...requests
+        ...requests,
     }
 }
 
