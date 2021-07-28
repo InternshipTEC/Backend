@@ -24,7 +24,7 @@
     "application/json"
   ],
   "paths": {
-    "/user/": {
+    "/v2/user/": {
       "get": {
         "tags": [
           "User"
@@ -107,15 +107,6 @@
             "type": "string",
             "example": "en"
           }
-        }
-      }
-    },
-    "User": {
-      "type": "object",
-      "properties": {
-        "test": {
-          "type": "string",
-          "example": "tests"
         }
       }
     }

@@ -20,7 +20,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(helmet());
 
-app.use("/", router);
+app.use("/v2", router);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerFile));
 
 export default app;
