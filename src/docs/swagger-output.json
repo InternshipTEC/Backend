@@ -24,7 +24,7 @@
     "application/json"
   ],
   "paths": {
-    "/v2/user/": {
+    "/STAGE/API_VERSION/user/": {
       "get": {
         "tags": [
           "User"
