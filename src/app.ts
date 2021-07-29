@@ -20,8 +20,8 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(helmet());
 
-app.use("/" + STAGE + "/" + API_VERSION, router);
-console.log(process.env.STAGE + "/" + process.env.API_VERSION);
+app.use(`/${STAGE}/${API_VERSION}`, router);
+console.info(`Endpoint path set to: ${STAGE}/${API_VERSION}`);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerFile));
 
 export default app;
