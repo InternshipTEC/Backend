@@ -46,4 +46,6 @@ jobs:
           DATABASE_NAME: test_database
           JWT_SECRET: secret
           PORT: 3000
+          API_VERSION: v2
+          STAGE: development
       run: npm run test --watch
