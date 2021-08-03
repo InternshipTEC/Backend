@@ -24,13 +24,26 @@
     "application/json"
   ],
   "paths": {
-    "/STAGE/API_VERSION/user/": {
+    "/${STAGE}/${API_VERSION}/user/": {
       "get": {
         "tags": [
           "User"
         ],
         "description": "Endpoint get all user",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "STAGE",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "API_VERSION",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Get all user response",

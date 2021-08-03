@@ -19,18 +19,18 @@ const processData = async () => {
   await disconnectDatabase();
   return {
     ...requests,
-    getWholeUserResponse: getWholeUserResponse.body
+    getWholeUserResponse: getWholeUserResponse.body,
   };
 };
 
 processData()
-  .then(rawdata => {
+  .then((rawdata) => {
     const data = JSON.stringify(rawdata);
-    fs.writeFile("./src/docs/swagger-req-res-definition.json", data, err => {
+    fs.writeFile("./src/docs/swagger-req-res-definition.json", data, (err) => {
       if (err) {
         throw err;
       }
       console.log("Request and response data is saved");
     });
   })
-  .catch(err => console.log(err));
+  .catch((err) => console.log(err));
