@@ -67,6 +67,7 @@ export class base1628029207029 implements MigrationInterface {
         await queryRunner.query("ALTER TABLE `user` ADD `flexibility` smallint NULL");
         await queryRunner.query("ALTER TABLE `user` ADD `is_on_boarded_mobile` tinyint NULL");
         await queryRunner.query(`INSERT INTO bukitvista_dev.user (user_id,type,user_email,is_email_verified,status) VALUES ("2d3311486f96d96ac5babb67",1,"admin2@bukitvista.com",1,1)`);
+
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
