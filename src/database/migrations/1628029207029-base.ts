@@ -66,7 +66,7 @@ export class base1628029207029 implements MigrationInterface {
         await queryRunner.query("ALTER TABLE `user` ADD `responsiveness` smallint NULL");
         await queryRunner.query("ALTER TABLE `user` ADD `flexibility` smallint NULL");
         await queryRunner.query("ALTER TABLE `user` ADD `is_on_boarded_mobile` tinyint NULL");
-        await queryRunner.query("INSERT INTO `user` (user_id,type,google_id,user_email,user_type,is_email_verified,status,user_password,access_token,employee_id,service_provider_id,partner_id,created_at,logged_at,updated_at,deleted_at) VALUES (3d4f96bca1a0747cf418333d,1,WRFfZM9fNqe5KcTqQszbJtLb1d53,superhost@iukitvistabali.com,5d304d8765eea901bff7542e,1,1,bukitvista,ya29.a0AfH6SMD7752P8Xje0YJRPLi871Xo6bqzSmaJG0pZvLXKT25wxUqSsvVcP4v1FvIZos9Q_q8x5DmxpHiye_1Ix7C63WMIs4r4HN2hjGMAzVl6H1vr4krRwltpgaxpl6fsKf3tLozWIWJiDvKWmXWr_eRW9uwJyg,5d4f9711a1a0747cf418333e,11/08/2019,04:17:01,28/07/2021,08:38:05,28/07/2021,08:38:05,00/01/1900,00:00:00)");
+        await queryRunner.query(`INSERT INTO bukitvista_dev.user (user_id,type,user_email,is_email_verified,status) VALUES ("2d3311486f96d96ac5babb67",1,"admin2@bukitvista.com",1,1)`);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
