@@ -37,6 +37,26 @@ jobs:
       run: npm install
     - name: Build Project
       run: npm build
+    - name: Generate migration
+      env:
+          DATABASE_HOST: localhost
+          DATABASE_PORT: 3306
+          DATABASE_USERNAME: admin
+          DATABASE_PASSWORD: rootpass
+          DATABASE_NAME: test_database
+          JWT_SECRET: secret
+          PORT: 3000
+      run: npm run migrate:generate -- -n base
+    - name: Do migration
+      env:
+          DATABASE_HOST: localhost
+          DATABASE_PORT: 3306
+          DATABASE_USERNAME: admin
+          DATABASE_PASSWORD: rootpass
+          DATABASE_NAME: test_database
+          JWT_SECRET: secret
+          PORT: 3000
+      run: npm run migrate:run
     - name: Run Tests
       env:
           DATABASE_HOST: localhost
@@ -46,6 +66,4 @@ jobs:
           DATABASE_NAME: test_database
           JWT_SECRET: secret
           PORT: 3000
-          API_VERSION: v2
-          STAGE: development
       run: npm run test --watch
