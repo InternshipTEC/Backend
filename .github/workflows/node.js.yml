@@ -39,6 +39,10 @@ jobs:
       run: npm build
     - name: Generate migration
       env:
+          STAGE: development
+          API_VERSION: v2
+          PORT: 3000
+          LOGGER_LEVEL: debug
           DATABASE_HOST: localhost
           DATABASE_PORT: 3306
           DATABASE_USERNAME: admin
@@ -49,6 +53,10 @@ jobs:
       run: npm run migrate:generate -- -n base
     - name: Do migration
       env:
+          STAGE: development
+          API_VERSION: v2
+          PORT: 3000
+          LOGGER_LEVEL: debug
           DATABASE_HOST: localhost
           DATABASE_PORT: 3306
           DATABASE_USERNAME: admin
@@ -59,6 +67,10 @@ jobs:
       run: npm run migrate:run
     - name: Run Tests
       env:
+          STAGE: development
+          API_VERSION: v2
+          PORT: 3000
+          LOGGER_LEVEL: debug
           DATABASE_HOST: localhost
           DATABASE_PORT: 3306
           DATABASE_USERNAME: admin
