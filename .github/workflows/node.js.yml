@@ -49,7 +49,6 @@ jobs:
           DATABASE_PASSWORD: rootpass
           DATABASE_NAME: test_database
           JWT_SECRET: secret
-          PORT: 3000
       run: npm run migrate:generate -- -n base
     - name: Do migration
       env:
@@ -63,7 +62,6 @@ jobs:
           DATABASE_PASSWORD: rootpass
           DATABASE_NAME: test_database
           JWT_SECRET: secret
-          PORT: 3000
       run: npm run migrate:run
     - name: Run Tests
       env:
@@ -77,5 +75,4 @@ jobs:
           DATABASE_PASSWORD: rootpass
           DATABASE_NAME: test_database
           JWT_SECRET: secret
-          PORT: 3000
       run: npm run test --watch
