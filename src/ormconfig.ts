@@ -33,11 +33,10 @@ const config: ConnectionOptions[] = [
   {
     ...baseConfig,
     name: "seed",
-    entities: [`${__dirname}/**/entities/**/*{.ts,.js}`],
-    migrationsTableName: "seeds",
-    migrations: ["seeds/**/*{.ts,.js}"],
+    entities: [`${__dirname}/models/*{.ts,.js}`],
+    migrations: [`${__dirname}/database/migrations/*{.ts,.js}`],
     cli: {
-      migrationsDir: "seeds"
+      migrationsDir: "src/seeds"
     }
   }
 ];
