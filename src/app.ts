@@ -6,7 +6,7 @@ import * as swaggerFile from "./docs/swagger-output.json";
 import swaggerUI from "swagger-ui-express";
 import { router } from "./routes/index";
 import dotenv from "dotenv";
-import { IS_PRODUCTION } from "./config";
+import { IS_PRODUCTION, STAGE, API_VERSION } from "./config";
 
 dotenv.config();
 
@@ -20,7 +20,8 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(helmet());
 
-app.use("/", router);
+app.use(`/${STAGE}/${API_VERSION}`, router);
+console.info(`Endpoint path set to: ${STAGE}/${API_VERSION}`);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerFile));
 
 export default app;

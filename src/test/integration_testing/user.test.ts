@@ -1,6 +1,7 @@
 import request from "supertest";
 import app from "../../app";
 import { connectDatabase, disconnectDatabase } from "../../database";
+import { STAGE, API_VERSION } from "../../config";
 
 beforeAll(async () => {
   jest.setTimeout(10000);
@@ -15,7 +16,7 @@ describe("Get /user", () => {
   describe("valid request", () => {
     test("Should responded with a 200 status code", async () => {
       const response = await request(app)
-        .get("/user")
+        .get(`/${STAGE}/${API_VERSION}/user`)
         .send();
       expect(response.statusCode).toBe(200);
     });

@@ -12,6 +12,9 @@ export const LOGGER_LEVEL = process.env.LOGGER_LEVEL || "info";
 export const IS_PRODUCTION = process.env.NODE_ENV === "production";
 export const IS_TEST = process.env.NODE_ENV === "test";
 
+export const STAGE = process.env.STAGE || "development";
+export const API_VERSION = process.env.API_VERSION || "";
+
 export const DATABASE_LOGGING: LoggerOptions = createTypeormLogger(
   process.env.DATABASE_LOGGING
 );
@@ -20,5 +23,3 @@ export const DATABASE_USERNAME = process.env.DATABASE_USERNAME || "";
 export const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD || "";
 export const DATABASE_NAME = process.env.DATABASE_NAME || "";
 export const DATABASE_PORT = process.env.DATABASE_PORT || "";
-
-console.log(DATABASE_HOST);
