@@ -3,6 +3,7 @@ import app from "../../app";
 import { connectDatabase, disconnectDatabase } from "../../database";
 
 beforeAll(async () => {
+  jest.setTimeout(10000);
   await connectDatabase();
 });
 afterAll(async () => {
