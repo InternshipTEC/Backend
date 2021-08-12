@@ -1,4 +1,9 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, ManyToOne, JoinColumn, OneToMany } from "typeorm";
+import { BookingServiceProvider } from "./BookingServiceProvider";
+import { Employee } from "./Employee";
+import { GuestJourneyStatusTracking } from "./GuestJourneyStatusTracking";
+import { SurveyUsers } from "./SurveyUsers";
+import { UserTypes } from "./UserTypes";
 
 @Entity("user")
 export class User {
@@ -19,8 +24,9 @@ export class User {
   @Column("varchar", { name: "user_email", nullable: true, length: 45 })
   userEmail: string | null;
 
-  @Column("varchar", { name: "user_type", nullable: true, length: 45 })
-  userType: string | null;
+  @ManyToOne(() => UserTypes, (user_type) => user_type.userTypesId)
+  @JoinColumn([{ name: "user_type" }])
+  userType: UserTypes;
 
   @Column("tinyint", {
     name: "is_email_verified",
@@ -125,4 +131,27 @@ export class User {
 
   @Column("tinyint", { name: "is_on_boarded_mobile", nullable: true })
   isOnBoardedMobile: number | null;
+
+  @OneToMany(
+    () => BookingServiceProvider,
+    (bookingServiceProvider) => bookingServiceProvider.user
+  )
+  bookingServiceProviders: BookingServiceProvider[];
+
+  @OneToMany(
+    () => GuestJourneyStatusTracking,
+    (guestJourneyStatusTracking) => guestJourneyStatusTracking.user
+  )
+  guestJourneyStatusTrackings: GuestJourneyStatusTracking[];
+
+
+  @OneToMany(() => SurveyUsers, (surveyUsers) => surveyUsers.user)
+  surveyUsers: SurveyUsers[];
+
+  @ManyToOne(() => Employee, (employee) => employee.users, {
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
+  })
+  @JoinColumn([{ name: "employee_id", referencedColumnName: "employeeId" }])
+  employee: Employee;
 }

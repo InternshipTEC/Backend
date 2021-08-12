@@ -16,6 +16,5 @@ define(User, (faker: typeof Faker) => {
     user.type = type
     user.status = status
     user.isEmailVerified = is_email_verified
-    console.log(user)
     return user
 })

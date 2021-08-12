@@ -56,6 +56,48 @@
           }
         }
       }
+    },
+    "/${STAGE}/${API_VERSION}/auth/login": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Endpoint to log in a specific user",
+        "parameters": [
+          {
+            "name": "STAGE",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "API_VERSION",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Login request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/____FUNC____"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login response",
+            "schema": {
+              "$ref": "#/definitions/____FUNC____"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
     }
   },
   "definitions": {
