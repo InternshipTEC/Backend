@@ -84,14 +84,14 @@ export const updateUserLoggedAt = async (user_id: string): Promise<any|void> => 
 export const getUserDashboard = async (role_ids:Array<any>): Promise<any|void> => {
   // missing implementation of permission id
   try {
-    const user = await getRepository(RoleDashboard)
-      .createQueryBuilder("role_dashboard_items")
-      .select(['role_dashboard_items.dashboard_name','role_dashboard_items.dashboard_type'])
-      .innerJoin("role_dashboard_items", "role_dashboard_items.dashboard_item_id=role_dashboard.dashboard_item_id")
-      .innerJoin("role", "role.role_id=role_dashboard.role_id")
-      .where("role.role_id IN (:...role_ids)", {role_ids})
-      .groupBy("dashboard_name")
-      .getMany();
+    // const user = await getRepository(RoleDashboard)
+    //   .createQueryBuilder("role_dashboard_items")
+    //   .select(['role_dashboard_items.dashboard_name','role_dashboard_items.dashboard_type'])
+    //   .innerJoin("role_dashboard_items", "role_dashboard_items.dashboard_item_id=role_dashboard.dashboard_item_id")
+    //   .innerJoin("role", "role.role_id=role_dashboard.role_id")
+    //   .where("role.role_id IN (:...role_ids)", {role_ids})
+    //   .groupBy("dashboard_name")
+    //   .getMany();
   } catch (err) {
     throw TypeError(err);
   }

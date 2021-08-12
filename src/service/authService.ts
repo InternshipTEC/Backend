@@ -25,9 +25,12 @@ const handleLogin = async (req: Request) => {
         await userRepository.updateUserLoggedAt(user.userId)
       }
     }
+    
+    return {
+      user,
+      token
+    };
 
-
-    return user;
   } catch(err) {
     throw err
   }
