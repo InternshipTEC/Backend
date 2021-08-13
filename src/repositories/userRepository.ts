@@ -2,7 +2,12 @@ import { UserTypes } from "../models/UserTypes";
 import { getRepository } from "typeorm";
 import { User } from "../models/User";
 import moment from "moment";
+import { RoleDashboardItems } from "../models/RoleDashboardItems";
+import { Role } from "../models/Role";
 import { RoleDashboard } from "../models/RoleDashboard";
+import { EmployeeRole } from "../models/EmployeeRole";
+import { pick } from "lodash";
+import { RolePermission } from "../models/RolePermission";
 
 export const getAllUser = async (): Promise<User[]> => {
   try {
@@ -81,17 +86,28 @@ export const updateUserLoggedAt = async (user_id: string): Promise<any|void> => 
 };
 
 
-export const getUserDashboard = async (role_ids:Array<any>): Promise<any|void> => {
-  // missing implementation of permission id
+export const getUserDashboard = async (roles:EmployeeRole[]): Promise<any|void> => {
+  const role_ids = roles.map(role => role.rolePermissionId);
   try {
-    // const user = await getRepository(RoleDashboard)
-    //   .createQueryBuilder("role_dashboard_items")
-    //   .select(['role_dashboard_items.dashboard_name','role_dashboard_items.dashboard_type'])
-    //   .innerJoin("role_dashboard_items", "role_dashboard_items.dashboard_item_id=role_dashboard.dashboard_item_id")
-    //   .innerJoin("role", "role.role_id=role_dashboard.role_id")
-    //   .where("role.role_id IN (:...role_ids)", {role_ids})
-    //   .groupBy("dashboard_name")
-    //   .getMany();
+    const roleRawDashboard = await getRepository(RoleDashboardItems)
+      .createQueryBuilder("role_dashboard_items")
+      .select(['role_dashboard_items.dashboard_name','role_dashboard_items.dashboard_type'])
+      .innerJoin(RoleDashboard, "role_dashboard", "role_dashboard_items.dashboard_item_id=role_dashboard.dashboard_item_id")
+      .innerJoin(Role ,"role", "role.role_id=role_dashboard.role_id")
+      .where("role.role_id IN(:...role_ids)", {role_ids})
+      .groupBy("dashboard_name")
+      .getRawMany();
+    const roleDashboard = roleRawDashboard.map(role=>pick(role,["dashboard_name","dashboard_type"])) 
+    return roleDashboard;
+  } catch (err) {
+    throw TypeError(err);
+  }
+}
+
+export const getEmployeeSubRole = async (roles:EmployeeRole[]): Promise<any|void> => {
+  const role_ids = roles.map(role => role.rolePermissionId);
+  try {
+    const roleRawDashboard = await getRepository(RolePermission)
   } catch (err) {
     throw TypeError(err);
   }

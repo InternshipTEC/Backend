@@ -1,17 +1,20 @@
 import * as bcrypt from "bcrypt";
-import { Request } from "express";
+import { Request, response } from "express";
 import * as jwt from "jsonwebtoken";
 import * as userRepository from "../repositories/userRepository";
+import * as employeeRoleRepository from "../repositories/employeeRoleRepository";
 
 const handleLogin = async (req: Request) => {
   const data = req.body;
   var user;
+  var response_payload = {};
   try{
     if(data.type === "normal") {
       user =  await userRepository.getUserWithRoleByEmail(data.email);
     } else {
       user = await userRepository.getUserWithRoleByGoogleId(data.googleId);
     }
+    response_payload = {...response_payload, ...user}
     
     const token = generateAccessToken(user.userId)
     if(token){
@@ -23,6 +26,9 @@ const handleLogin = async (req: Request) => {
       }
       if(user.employeeId && user.employeeId != ""){
         await userRepository.updateUserLoggedAt(user.userId)
+        const employee_roles = await employeeRoleRepository.getEmployeeRoleByEmployeeId(user.employeeId)
+        const user_dashboard = await userRepository.getUserDashboard(employee_roles)
+        response_payload = {...response_payload, dashboard:user_dashboard||[]}
       }
     }
     
