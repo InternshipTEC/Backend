@@ -1,4 +1,4 @@
-import { Request, Response, Router } from "express";
+import { Request, Response, Router } from 'express'
 import * as authService from '../service/authService'
 
 export const login = async (req: Request, res: Response) => {
@@ -17,11 +17,9 @@ export const login = async (req: Request, res: Response) => {
             schema: { $ref: "#/definitions/loginResponse" },
   } */
   try {
-    const loginResult = await authService.handleLogin(req);
-    return res.status(200).json(loginResult);
+    const loginResult = await authService.handleLogin(req)
+    return res.status(200).json(loginResult)
   } catch (err) {
-    return res.status(400).json(err);
+    return res.status(400).json(err)
   }
-};
-
-
+}

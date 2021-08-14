@@ -4,6 +4,12 @@
   "jsRules": {},
   "rules": {
     "import-name": false,
+    "variable-name":[
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore"
+    ],
     "no-console": false,
     "object-literal-sort-keys": false,
     "prettier": true,

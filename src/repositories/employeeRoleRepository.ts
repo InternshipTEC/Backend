@@ -1,16 +1,14 @@
-import { getRepository } from "typeorm";
-import { EmployeeRole } from "../models/EmployeeRole";
+import { getRepository } from 'typeorm'
+import { EmployeeRole } from '../models/EmployeeRole'
 
-export const getEmployeeRoleByEmployeeId = async (employee_id: string): Promise<EmployeeRole[]> => {
+export const getEmployeeRoleByEmployeeId = async (employeeId: string): Promise<EmployeeRole[]> => {
   try {
-    const employee_roles = await getRepository(EmployeeRole)
-      .createQueryBuilder("employee_role")
-      .where("employee_id = :employee_id", { employee_id })
-      .getMany();
-      console.log(employee_roles)
-    return employee_roles;
+    const employeeRoles = await getRepository(EmployeeRole)
+      .createQueryBuilder('employee_role')
+      .where('employee_id = :employeeId', { employeeId })
+      .getMany()
+    return employeeRoles
   } catch (err) {
-    throw TypeError(err);
+    throw TypeError(err)
   }
-};
-
+}

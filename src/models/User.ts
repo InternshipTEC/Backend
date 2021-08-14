@@ -1,157 +1,166 @@
-import { Column, Entity, ManyToOne, JoinColumn, OneToMany } from "typeorm";
-import { BookingServiceProvider } from "./BookingServiceProvider";
-import { Employee } from "./Employee";
-import { GuestJourneyStatusTracking } from "./GuestJourneyStatusTracking";
-import { SurveyUsers } from "./SurveyUsers";
-import { UserTypes } from "./UserTypes";
+import { Column, Entity, ManyToOne, JoinColumn, OneToMany } from 'typeorm'
+import { BookingServiceProvider } from './BookingServiceProvider'
+import { Employee } from './Employee'
+import { GuestJourneyStatusTracking } from './GuestJourneyStatusTracking'
+import { SurveyUsers } from './SurveyUsers'
+import { UserTypes } from './UserTypes'
 
-@Entity("user")
+@Entity('user')
 export class User {
-  @Column("varchar", { primary: true, name: "user_id", length: 45 })
-  userId: string;
+  @Column('varchar', { primary: true, name: 'user_id', length: 45 })
+  userId: string
 
-  @Column("tinyint", { name: "type", comment: "0-normal, 1-google", width: 1 })
-  type: boolean;
+  @Column('tinyint', { name: 'type', comment: '0-normal, 1-google', width: 1 })
+  type: boolean
 
-  @Column("varchar", {
-    name: "google_id",
+  @Column('varchar', {
+    name: 'google_id',
     nullable: true,
     unique: true,
-    length: 64
+    length: 64,
   })
-  googleId: string | null;
+  googleId: string | null
 
-  @Column("varchar", { name: "user_email", nullable: true, length: 45 })
-  userEmail: string | null;
+  @Column('varchar', { name: 'user_email', nullable: true, length: 45 })
+  userEmail: string | null
 
-  @ManyToOne(() => UserTypes, (user_type) => user_type.userTypesId)
-  @JoinColumn([{ name: "user_type" }])
-  userType: UserTypes;
+  @ManyToOne(
+    () => UserTypes,
+    userType => userType.userTypesId,
+  )
+  @JoinColumn([{ name: 'user_type' }])
+  userType: UserTypes
 
-  @Column("tinyint", {
-    name: "is_email_verified",
+  @Column('tinyint', {
+    name: 'is_email_verified',
     width: 1,
-    default: () => "'0'"
+    default: () => "'0'",
   })
-  isEmailVerified: boolean;
+  isEmailVerified: boolean
 
-  @Column("tinyint", { name: "status", width: 1, default: () => "'0'" })
-  status: boolean;
+  @Column('tinyint', { name: 'status', width: 1, default: () => "'0'" })
+  status: boolean
 
-  @Column("varchar", { name: "user_password", nullable: true, length: 225 })
-  userPassword: string | null;
+  @Column('varchar', { name: 'user_password', nullable: true, length: 225 })
+  userPassword: string | null
 
-  @Column("varchar", { name: "access_token", nullable: true, length: 256 })
-  accessToken: string | null;
+  @Column('varchar', { name: 'access_token', nullable: true, length: 256 })
+  accessToken: string | null
 
-  @Column("varchar", { name: "employee_id", nullable: true, length: 45 })
-  employeeId: string | null;
+  @Column('varchar', { name: 'employee_id', nullable: true, length: 45 })
+  employeeId: string | null
 
-  @Column("varchar", {
-    name: "service_provider_id",
+  @Column('varchar', {
+    name: 'service_provider_id',
     nullable: true,
-    length: 50
+    length: 50,
   })
-  serviceProviderId: string | null;
+  serviceProviderId: string | null
 
-  @Column("varchar", { name: "partner_id", nullable: true, length: 24 })
-  partnerId: string | null;
+  @Column('varchar', { name: 'partner_id', nullable: true, length: 24 })
+  partnerId: string | null
 
-  @Column("timestamp", {
-    name: "created_at",
+  @Column('timestamp', {
+    name: 'created_at',
     nullable: true,
-    default: () => "CURRENT_TIMESTAMP"
+    default: () => 'CURRENT_TIMESTAMP',
   })
-  createdAt: Date | null;
+  createdAt: Date | null
 
-  @Column("timestamp", {
-    name: "logged_at",
+  @Column('timestamp', {
+    name: 'logged_at',
     nullable: true,
-    default: () => "CURRENT_TIMESTAMP"
+    default: () => 'CURRENT_TIMESTAMP',
   })
-  loggedAt: Date | null;
+  loggedAt: Date | null
 
-  @Column("timestamp", { name: "updated_at", nullable: true })
-  updatedAt: Date | null;
+  @Column('timestamp', { name: 'updated_at', nullable: true })
+  updatedAt: Date | null
 
-  @Column("timestamp", { name: "deleted_at", nullable: true })
-  deletedAt: Date | null;
+  @Column('timestamp', { name: 'deleted_at', nullable: true })
+  deletedAt: Date | null
 
-  @Column("tinyint", {
-    name: "is_profile",
+  @Column('tinyint', {
+    name: 'is_profile',
     nullable: true,
-    default: () => "'0'"
+    default: () => "'0'",
   })
-  isProfile: number | null;
+  isProfile: number | null
 
-  @Column("varchar", { name: "image_url", nullable: true, length: 128 })
-  imageUrl: string | null;
+  @Column('varchar', { name: 'image_url', nullable: true, length: 128 })
+  imageUrl: string | null
 
-  @Column("varchar", { name: "name", nullable: true, length: 45 })
-  name: string | null;
+  @Column('varchar', { name: 'name', nullable: true, length: 45 })
+  name: string | null
 
-  @Column("varchar", { name: "old_user_email", nullable: true, length: 45 })
-  oldUserEmail: string | null;
+  @Column('varchar', { name: 'old_user_email', nullable: true, length: 45 })
+  oldUserEmail: string | null
 
-  @Column("int", {
-    name: "is_on_boarded",
+  @Column('int', {
+    name: 'is_on_boarded',
     nullable: true,
-    default: () => "'0'"
+    default: () => "'0'",
   })
-  isOnBoarded: number | null;
+  isOnBoarded: number | null
 
-  @Column("varchar", {
-    name: "locale",
+  @Column('varchar', {
+    name: 'locale',
     nullable: true,
     length: 15,
-    default: () => "'en'"
+    default: () => "'en'",
   })
-  locale: string | null;
+  locale: string | null
 
-  @Column("varchar", { name: "bank_details_id", nullable: true, length: 255 })
-  bankDetailsId: string | null;
+  @Column('varchar', { name: 'bank_details_id', nullable: true, length: 255 })
+  bankDetailsId: string | null
 
-  @Column("smallint", { name: "communication", nullable: true })
-  communication: number | null;
+  @Column('smallint', { name: 'communication', nullable: true })
+  communication: number | null
 
-  @Column("smallint", { name: "compliance", nullable: true })
-  compliance: number | null;
+  @Column('smallint', { name: 'compliance', nullable: true })
+  compliance: number | null
 
-  @Column("smallint", { name: "participation", nullable: true })
-  participation: number | null;
+  @Column('smallint', { name: 'participation', nullable: true })
+  participation: number | null
 
-  @Column("smallint", { name: "logicality", nullable: true })
-  logicality: number | null;
+  @Column('smallint', { name: 'logicality', nullable: true })
+  logicality: number | null
 
-  @Column("smallint", { name: "responsiveness", nullable: true })
-  responsiveness: number | null;
+  @Column('smallint', { name: 'responsiveness', nullable: true })
+  responsiveness: number | null
 
-  @Column("smallint", { name: "flexibility", nullable: true })
-  flexibility: number | null;
+  @Column('smallint', { name: 'flexibility', nullable: true })
+  flexibility: number | null
 
-  @Column("tinyint", { name: "is_on_boarded_mobile", nullable: true })
-  isOnBoardedMobile: number | null;
+  @Column('tinyint', { name: 'is_on_boarded_mobile', nullable: true })
+  isOnBoardedMobile: number | null
 
   @OneToMany(
     () => BookingServiceProvider,
-    (bookingServiceProvider) => bookingServiceProvider.user
+    bookingServiceProvider => bookingServiceProvider.user,
   )
-  bookingServiceProviders: BookingServiceProvider[];
+  bookingServiceProviders: BookingServiceProvider[]
 
   @OneToMany(
     () => GuestJourneyStatusTracking,
-    (guestJourneyStatusTracking) => guestJourneyStatusTracking.user
+    guestJourneyStatusTracking => guestJourneyStatusTracking.user,
   )
-  guestJourneyStatusTrackings: GuestJourneyStatusTracking[];
+  guestJourneyStatusTrackings: GuestJourneyStatusTracking[]
 
+  @OneToMany(
+    () => SurveyUsers,
+    surveyUsers => surveyUsers.user,
+  )
+  surveyUsers: SurveyUsers[]
 
-  @OneToMany(() => SurveyUsers, (surveyUsers) => surveyUsers.user)
-  surveyUsers: SurveyUsers[];
-
-  @ManyToOne(() => Employee, (employee) => employee.users, {
-    onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
-  })
-  @JoinColumn([{ name: "employee_id", referencedColumnName: "employeeId" }])
-  employee: Employee;
+  @ManyToOne(
+    () => Employee,
+    employee => employee.users,
+    {
+      onDelete: 'NO ACTION',
+      onUpdate: 'NO ACTION',
+    },
+  )
+  @JoinColumn([{ name: 'employee_id', referencedColumnName: 'employeeId' }])
+  employee: Employee
 }

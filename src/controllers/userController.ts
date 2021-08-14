@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import * as userService from "../service/userService";
+import { Request, Response } from 'express'
+import * as userService from '../service/userService'
 
 export const getAllUser = async (req: Request, res: Response) => {
   /* 	#swagger.tags = ['User']
@@ -10,9 +10,9 @@ export const getAllUser = async (req: Request, res: Response) => {
           schema: { $ref: "#/definitions/getWholeUserResponse" }
   } */
   try {
-    const users = await userService.getAllUser();
-    return res.status(200).json(users);
+    const users = await userService.getAllUser()
+    return res.status(200).json(users)
   } catch (err) {
-    return res.status(400).json(err);
+    return res.status(400).json(err)
   }
-};
+}
