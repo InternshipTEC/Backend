@@ -5,12 +5,16 @@ import { STAGE, API_VERSION } from '../../config'
 import { User } from '../../models/User'
 
 beforeAll(async () => {
-  jest.setTimeout(10000)
+  jest.setTimeout(50000)
   await connectDatabase()
 })
 afterAll(async () => {
   await disconnectDatabase()
   jest.setTimeout(10000)
+})
+
+beforeEach(()=>{
+  jest.setTimeout(50000)
 })
 
 describe('Get /user', () => {
@@ -54,8 +58,8 @@ describe('POST /auth/login', () => {
       expect(response.body).toBeTruthy()
     })
   })
-  describe('invalid request google', () => {
-    test('Should responded with a 400 status code', async () => {
+  describe('valid request google', () => {
+    test('Should responded with a 200 status code', async () => {
       const response = await request(app)
         .post(`/${STAGE}/${API_VERSION}/auth/login`)
         .send({
@@ -66,7 +70,7 @@ describe('POST /auth/login', () => {
           access_token: 'sasdf4w355424234adsaer323423',
           image_url: 'https:.asasdfasfd',
         })
-      expect(response.statusCode).toBe(400)
+      expect(response.statusCode).toBe(200)
     })
     test('Should responded with an userId', async () => {
       const response = await request(app)
@@ -80,6 +84,76 @@ describe('POST /auth/login', () => {
           image_url: 'https:.asasdfasfd',
         })
       expect(response.body).toHaveProperty('userId')
+    })
+  })
+  describe('service provider request', () => {
+    test('Should responded with a 200 status code', async () => {
+      const response = await request(app)
+        .post(`/${STAGE}/${API_VERSION}/auth/login`)
+        .send({
+          email: 'eka_tourbali@yahoo.com',
+          password:"bukitvista",
+          type:"normal",
+        })
+      expect(response.statusCode).toBe(200)
+    })
+  })
+  describe('valid request mobile', () => {
+    describe('employee payload', () => {
+      test('Should responded with a 200 status code', async () => {
+        const response = await request(app)
+          .post(`/${STAGE}/${API_VERSION}/auth/login`)
+          .send(
+            {
+              "email":"shintya.bukitvista@gmail.com",
+              "password":"bukitvista",
+              "type":"normal",
+              "platform": "mobile"
+          }
+          )
+        expect(response.statusCode).toBe(200)
+      })
+      test('Should responded with an userId', async () => {
+          const response = await request(app)
+            .post(`/${STAGE}/${API_VERSION}/auth/login`)
+            .send(
+              {
+                "email":"shintya.bukitvista@gmail.com",
+                "password":"bukitvista",
+                "type":"normal",
+                "platform": "mobile"
+            }
+            )
+        expect(response.body).toHaveProperty('userId')
+      })
+    })
+    describe('partner payload', () => {
+    test('Should responded with a 200 status code', async () => {
+        const response = await request(app)
+          .post(`/${STAGE}/${API_VERSION}/auth/login`)
+          .send(
+            {
+              "email":"bv.partner1@gmail.com",
+              "password":"bukitvista",
+              "type":"normal",
+              "platform": "mobile"
+          }
+          )
+        expect(response.statusCode).toBe(200)
+      })
+      test('Should responded with an userId', async () => {
+          const response = await request(app)
+            .post(`/${STAGE}/${API_VERSION}/auth/login`)
+            .send(
+              {
+                "email":"bv.partner1@gmail.com",
+                "password":"bukitvista",
+                "type":"normal",
+                "platform": "mobile"
+            }
+            )
+        expect(response.body).toHaveProperty('userId')
+      })
     })
   })
 })

@@ -1,15 +1,14 @@
-import { UserTypes } from '../models/UserTypes'
-import { getRepository } from 'typeorm'
-import { User } from '../models/User'
-import moment from 'moment'
-import { RoleDashboardItems } from '../models/RoleDashboardItems'
-import { Role } from '../models/Role'
-import { RoleDashboard } from '../models/RoleDashboard'
-import { EmployeeRole } from '../models/EmployeeRole'
 import { pick } from 'lodash'
-import { RolePermission } from '../models/RolePermission'
+import moment from 'moment'
+import { getRepository } from 'typeorm'
 import { MobileAllowedModules } from '../models/MobileAllowedModules'
 import { MobileView } from '../models/MobileView'
+import { Role } from '../models/Role'
+import { RoleDashboard } from '../models/RoleDashboard'
+import { RoleDashboardItems } from '../models/RoleDashboardItems'
+import { RolePermission } from '../models/RolePermission'
+import { User } from '../models/User'
+import { UserTypes } from '../models/UserTypes'
 
 export const getAllUser = async (): Promise<User[]> => {
   try {
@@ -86,7 +85,7 @@ export const updateUserLoggedAt = async (userId: string): Promise<any | void> =>
   }
 }
 
-export const getUserDashboard = async (roles: EmployeeRole[]): Promise<any | void> => {
+export const getUserDashboard = async (roles: any[]): Promise<any | void> => {
   const roleIds = roles.map(role => role.rolePermissionId)
   try {
     const roleRawDashboard = await getRepository(RoleDashboardItems)
@@ -104,7 +103,7 @@ export const getUserDashboard = async (roles: EmployeeRole[]): Promise<any | voi
   }
 }
 
-export const getEmployeeSubRole = async (roles: EmployeeRole[]): Promise<any | void> => {
+export const getSubRole = async (roles: any[]): Promise<any | void> => {
   const roleIds = roles.map(role => role.rolePermissionId)
   try {
     const rawRolePermission = await getRepository(RolePermission)
@@ -120,18 +119,15 @@ export const getEmployeeSubRole = async (roles: EmployeeRole[]): Promise<any | v
   }
 }
 
-export const getAllowedModules = async (roles: EmployeeRole[]): Promise<any | void> => {
+export const getAllowedModules = async (roles: any[]): Promise<any | void> => {
   const roleIds = roles.map(role => role.rolePermissionId)
   try {
     const rawRolePermission = await getRepository(MobileAllowedModules)
       .createQueryBuilder('mobile_allowed_modules')
       .leftJoinAndMapMany('mobile_allowed_modules.view', MobileView, 'mobile_view', 'mobile_allowed_modules.view=mobile_view.view_name')
-      .where('mobile_allowed_modules IN(:...roleIds)', { roleIds })
-      .groupBy('permission_id')
-      .getRawMany()
-    console.log(rawRolePermission)
-    const rolePermission = rawRolePermission.map(role => role.permission_id)
-    return rolePermission
+      .where('mobile_allowed_modules.role_id IN(:...roleIds)', { roleIds })
+      .getMany()
+    return rawRolePermission
   } catch (err) {
     throw TypeError(err)
   }
