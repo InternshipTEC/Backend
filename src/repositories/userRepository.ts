@@ -129,6 +129,7 @@ export const getAllowedModules = async (roles: any[]): Promise<any | void> => {
       .leftJoin(MobileView, 'mobile_view', 'mobile_allowed_modules.view=mobile_view.view_name')
       .where('mobile_allowed_modules.role_id IN(:...roleIds)', { roleIds })
       .getRawMany()
+
     return rawRolePermission
   } catch (err) {
     throw TypeError(err)
