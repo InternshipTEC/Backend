@@ -1,7 +1,7 @@
 import { ServiceProviderRole } from '../models/ServiceProviderRole'
 import { getRepository } from 'typeorm'
 
-export const getServiceProviderRoleById = async (serviceProviderId : string): Promise<ServiceProviderRole[]> => {
+export const getServiceProviderRoleById = async (serviceProviderId: string): Promise<ServiceProviderRole[]> => {
   try {
     const employeeRoles = await getRepository(ServiceProviderRole)
       .createQueryBuilder('service_provider_role')
@@ -13,4 +13,3 @@ export const getServiceProviderRoleById = async (serviceProviderId : string): Pr
     throw TypeError(err)
   }
 }
-

@@ -58,7 +58,7 @@
       }
     },
     "/${STAGE}/${API_VERSION}/auth/login": {
-      "get": {
+      "post": {
         "tags": [
           "Auth"
         ],

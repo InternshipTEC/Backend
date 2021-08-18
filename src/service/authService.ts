@@ -1,19 +1,24 @@
 import * as bcrypt from 'bcrypt'
 import { Request } from 'express'
+import { decamelizeKeys } from 'humps'
 import * as jwt from 'jsonwebtoken'
-import * as partnerAssociatesPropertiesRepository from '../repositories/partnerAssociatesPropertiesRepository'
+import { groupBy, pick } from 'lodash'
+import * as adminRoleRepository from '../repositories/adminRoleRepository'
+import * as employeeRepository from '../repositories/employeeRepository'
 import * as employeeRoleRepository from '../repositories/employeeRoleRepository'
+import * as partnerAssociatesPropertiesRepository from '../repositories/partnerAssociatesPropertiesRepository'
+import * as partnerRepository from '../repositories/partnerRepository'
 import * as partnerRoleRepository from '../repositories/partnerRoleRepository'
-import * as userRepository from '../repositories/userRepository'
+import * as serviceProviderAvailabilityAreaRepository from '../repositories/serviceProviderAvailabilityAreaRepository'
+import * as serviceProviderRepository from '../repositories/serviceProviderRepository'
 import * as serviceProviderRoleRepository from '../repositories/serviceProviderRoleRepository'
 import * as serviceProviderRoleServicesRepository from '../repositories/serviceProviderRoleServicesRepository'
-import * as serviceProviderAvailabilityAreaRepository from '../repositories/serviceProviderAvailabilityAreaRepository'
-import * as adminRoleRepository from '../repositories/adminRoleRepository'
+import * as userRepository from '../repositories/userRepository'
 
 const handleLogin = async (req: Request) => {
   const data = req.body
   let user
-  let responsePayload : any = {}
+  let responsePayload: any = {}
   try {
     if (data.type === 'normal') {
       user = await userRepository.getUserWithRoleByEmail(data.email)
@@ -24,69 +29,99 @@ const handleLogin = async (req: Request) => {
       user = await userRepository.getUserWithRoleByGoogleId(data.googleId)
     }
     responsePayload = { ...responsePayload, ...user }
-    console.log(user)
+    responsePayload = {
+      ...responsePayload,
+      user_type: responsePayload.user_type.userTypesId,
+    }
 
     const token = generateAccessToken(user.userId)
     if (token) {
       if (user.status === 2) {
         throw new Error('Your account has been deactivated!')
       }
-      var roles;
+      let roles: any
       if (user.employeeId) {
         roles = await employeeRoleRepository.getEmployeeRoleByEmployeeId(user.employeeId)
-        const userDashboard = await userRepository.getUserDashboard(roles)
-        const permissions = await userRepository.getSubRole(roles)
-        if (permissions) {
-          responsePayload = {
-            ...responsePayload,
-            permissions,
-            dashboard: userDashboard || [],
-          }
+        const employee = await employeeRepository.getEmployeeById(user.employeeId)
+        responsePayload = {
+          ...responsePayload,
+          employee,
+          role: 'employee',
         }
       } else if (user.partnerId) {
         roles = await partnerRoleRepository.getPartnerRoleByPartnerId(user.partnerId)
-        const userDashboard = await userRepository.getUserDashboard(roles)
-        const permissions = await userRepository.getSubRole(roles)
-        responsePayload = {
-          ...responsePayload,
-          permissions,
-          dashboard: userDashboard || [],
-          sub_roles:roles.map(role=>role.rolePermissionId)
-        }
+        const partner = await partnerRepository.getPartnerById(user.partnerId)
         const partnerProperties = await partnerAssociatesPropertiesRepository.getPartnerRoleByPartnerId(user.partnerId)
         responsePayload = {
           ...responsePayload,
-          partner_associates:partnerProperties.map(propertyData => propertyData.propertyId)
+          partner,
+          role: 'partner',
+          partner_associates: partnerProperties.map(propertyData => propertyData.propertyId),
         }
       } else if (user.serviceProviderId) {
         roles = await serviceProviderRoleRepository.getServiceProviderRoleById(user.serviceProviderId)
-        console.log(roles)
-        const userDashboard = await userRepository.getUserDashboard(roles)
-        console.log(userDashboard)
-        const permissions = await userRepository.getSubRole(roles)
-        const serviceProviderRoleServices = await serviceProviderRoleServicesRepository.getServiceProviderRoleById(roles[0].serviceProviderRoleId) 
+        const serviceProvider = await serviceProviderRepository.getServiceProviderId(user.serviceProviderId)
+        const serviceProviderRoleServices = await serviceProviderRoleServicesRepository.getServiceProviderRoleById(roles[0].serviceProviderRoleId)
         const areaAvailability = await serviceProviderAvailabilityAreaRepository.getAreaAvaliability(user.serviceProviderId)
+        responsePayload = {
+          ...responsePayload,
+          role: 'service_provider',
+          service_provider: serviceProvider,
+          servide_provider_role_services: serviceProviderRoleServices.map(
+            serviceProviderRoleService => serviceProviderRoleService.serviceProviderRoleServiceId,
+          ),
+          area_availability: areaAvailability.map(area => area.areaId),
+        }
       } else {
-        if(!user.userType.userTypeName){
+        if (!user.userType.userTypeName) {
           responsePayload.user.role = null
         }
-        if(user.userType.userTypeName === "admin") {
+        if (user.userType.userTypeName === 'admin') {
           roles = await adminRoleRepository.getAdminRoleByAdminId(user.serviceProviderId)
-          const permissions = await userRepository.getSubRole(roles)
+          responsePayload = {
+            ...responsePayload,
+            role: 'admin',
+            admin: {},
+          }
         } else {
           responsePayload.sub_role = []
           responsePayload.permission = []
         }
-      } 
+      }
+      const userDashboard = await userRepository.getUserDashboard(roles)
+      const permissions = await userRepository.getSubRole(roles)
 
+      responsePayload = {
+        ...responsePayload,
+        token,
+        permissions,
+        dashboards: userDashboard,
+        subroles: roles.map((role: any) => role.rolePermissionId),
+      }
+      delete responsePayload.userPassword
+
+      responsePayload = decamelizeKeys(responsePayload)
+      // allowedModule not decamelized in v1
       if (data.platform === 'mobile') {
-        const allowedModules = userRepository.getAllowedModules(roles)
+        const allowedModules = await userRepository.getAllowedModules(roles)
+        const allowedModulesGroupedByView = groupBy(allowedModules, 'view')
+        const modules = []
+        for (const i in allowedModulesGroupedByView) {
+          if (allowedModulesGroupedByView.hasOwnProperty(i)) {
+            modules.push({
+              view: i,
+              navigationItem: !!allowedModulesGroupedByView[i].map((v: any) => v.navigationItem)[0],
+              modules: allowedModulesGroupedByView[i].map((v: any) => pick(v, ['position', 'module'])),
+            })
+          }
+        }
         responsePayload = {
           ...responsePayload,
-          allowedModules
+          allowedModules: modules,
         }
       }
     }
+
     await userRepository.updateUserLoggedAt(user.userId)
     return responsePayload
   } catch (err) {

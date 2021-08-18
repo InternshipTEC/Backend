@@ -13,7 +13,6 @@ define(User, (faker: typeof Faker) => {
   user.userId = userId
   user.userEmail = userEmail
   user.type = type
-  user.status = status
   user.isEmailVerified = isEmailVerified
   return user
 })

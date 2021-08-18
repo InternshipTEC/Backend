@@ -124,9 +124,11 @@ export const getAllowedModules = async (roles: any[]): Promise<any | void> => {
   try {
     const rawRolePermission = await getRepository(MobileAllowedModules)
       .createQueryBuilder('mobile_allowed_modules')
-      .leftJoinAndMapMany('mobile_allowed_modules.view', MobileView, 'mobile_view', 'mobile_allowed_modules.view=mobile_view.view_name')
+      .select('mobile_allowed_modules.*')
+      .addSelect('mobile_view.navigation_item', 'navigationItem')
+      .leftJoin(MobileView, 'mobile_view', 'mobile_allowed_modules.view=mobile_view.view_name')
       .where('mobile_allowed_modules.role_id IN(:...roleIds)', { roleIds })
-      .getMany()
+      .getRawMany()
     return rawRolePermission
   } catch (err) {
     throw TypeError(err)

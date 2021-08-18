@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm'
 import { ServiceProviderAvailabilityArea } from '../models/ServiceProviderAvailabilityArea'
 
-export const getAreaAvaliability = async (serviceProviderId : string): Promise<ServiceProviderAvailabilityArea[]> => {
+export const getAreaAvaliability = async (serviceProviderId: string): Promise<ServiceProviderAvailabilityArea[]> => {
   try {
     const employeeRoles = await getRepository(ServiceProviderAvailabilityArea)
       .createQueryBuilder('service_provider_availability_area')

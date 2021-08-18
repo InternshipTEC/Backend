@@ -39,7 +39,7 @@ export class User {
   isEmailVerified: boolean
 
   @Column('tinyint', { name: 'status', width: 1, default: () => "'0'" })
-  status: number 
+  status: number
 
   @Column('varchar', { name: 'user_password', nullable: true, length: 225 })
   userPassword: string | null

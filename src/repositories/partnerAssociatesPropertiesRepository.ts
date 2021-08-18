@@ -2,7 +2,7 @@ import { PartnerRole } from '../models/PartnerRole'
 import { getRepository } from 'typeorm'
 import { PartnerAssociatesProperties } from '../models/PartnerAssociatesProperties'
 
-export const getAdminRoleByAdminId = async (partnerId: string): Promise<PartnerAssociatesProperties[]> => {
+export const getPartnerRoleByPartnerId = async (partnerId: string): Promise<PartnerAssociatesProperties[]> => {
   try {
     const partnerRoles = await getRepository(PartnerAssociatesProperties)
       .createQueryBuilder('partner_associates_properties')

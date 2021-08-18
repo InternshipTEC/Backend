@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 import { ConnectionOptions } from 'typeorm'
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
 
 import { DATABASE_LOGGING, DATABASE_HOST, DATABASE_PORT, DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_NAME } from './config'
 
@@ -22,6 +23,7 @@ const config: ConnectionOptions[] = [
       entitiesDir: `src/models`,
       migrationsDir: `src/database/migrations`,
     },
+    namingStrategy: new SnakeNamingStrategy(),
   },
   {
     ...baseConfig,
@@ -31,6 +33,7 @@ const config: ConnectionOptions[] = [
     cli: {
       migrationsDir: 'src/seeds',
     },
+    namingStrategy: new SnakeNamingStrategy(),
   },
 ]
 

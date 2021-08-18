@@ -18,8 +18,14 @@ export const login = async (req: Request, res: Response) => {
   } */
   try {
     const loginResult = await authService.handleLogin(req)
-    return res.status(200).json(loginResult)
+    return res.status(200).json({
+      msg: 'Login success',
+      data: loginResult,
+    })
   } catch (err) {
-    return res.status(400).json(err)
+    return res.status(400).json({
+      msg: err,
+      data: {},
+    })
   }
 }
