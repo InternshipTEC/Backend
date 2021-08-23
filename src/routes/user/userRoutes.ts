@@ -4,9 +4,9 @@ import { postCheck } from '../../validation/userRoutesValidation'
 
 const router = express.Router()
 
-router.get('/all', userController.getAllUser)
-
 router.get('/:id', userController.getUser)
+
+router.get('/', userController.getAllUser)
 
 router.post('/', postCheck, userController.createUser)
 

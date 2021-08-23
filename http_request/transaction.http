@@ -1,0 +1,22 @@
+### Get all transaction
+GET http://localhost:3000/transaction/ HTTP/1.1
+
+### Valid signup request test
+POST http://localhost:3000/transaction HTTP/1.1
+content-type: application/json
+
+{
+    "photoUrl":"test.com/fasdfasf",
+    "metode":"test",
+    "media":"BNI",
+    "noRekening":"3413431412",
+    "pemilikRekening":"Nana",
+    "usersEmail":[
+        "dua@mail.com",
+        "satu@mail.com"
+    ]
+}
+
+### Delete
+
+DELETE http://localhost:3000/transaction/044d1a75-41aa-4695-b687-7711ab26a3de HTTP/1.1

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique, ManyToOne } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, Unique, ManyToOne, JoinTable } from 'typeorm'
 import { Transaction } from './Transaction'
 import { IsEmail, IsNotEmpty } from 'class-validator'
 
@@ -15,8 +15,8 @@ export class User {
   @Column()
   nim: string
 
-  @Column()
-  verified: boolean
+  @Column({ default: false })
+  verified: boolean = false
 
   @Column()
   @IsNotEmpty()
@@ -26,6 +26,13 @@ export class User {
   @IsNotEmpty()
   password: string
 
-  @ManyToOne(()=>Transaction,transaction=>transaction.users)
-  transaction: string
+  @ManyToOne(
+    () => Transaction,
+    transaction => transaction.users,
+    {
+      cascade:true
+    }
+  )
+  @JoinTable()
+  transaction: Transaction
 }

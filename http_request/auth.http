@@ -1,0 +1,35 @@
+### Invalid signup request test
+POST http://localhost:3000/auth/signup HTTP/1.1
+content-type: application/json
+
+{
+    "email": "test@gmail.com"
+}
+
+### Invalid login request test
+POST http://localhost:3000/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "gmail.com"
+}
+
+### Valid signup request test
+POST http://localhost:3000/development/v2/auth/login HTTP/1.1
+content-type: application/json
+
+{
+	"email": "superhost@bukitvistabali.com",
+	"password": "bukitvista",
+	"type": "normal",
+	"platform": "mobile"
+}
+
+### Valid login request test
+POST http://localhost:3000/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "zay@mail.com",
+	"password": "zay123"
+}

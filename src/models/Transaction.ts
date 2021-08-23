@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany, JoinTable } from 'typeorm'
 import { User } from './User'
 
 @Entity()
@@ -26,7 +26,7 @@ export class Transaction {
 
   @OneToMany(
     () => User,
-    user => user.transaction,
+    user => user.transaction
   )
   users: User[]
 }
