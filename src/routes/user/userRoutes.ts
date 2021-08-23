@@ -1,8 +1,17 @@
-import express from 'express'
-import * as userController from '../../controllers/userController'
+import express from "express";
+import userController from "../../controllers/userController";
+import { postCheck } from "../../validation/userRoutesValidation";
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/', userController.getAllUser)
+router.get("/all", userController.getAllUser);
 
-export { router }
+router.get("/:id", userController.getUser);
+
+router.post("/", postCheck, userController.createUser);
+
+router.put("/:id", userController.updateUser);
+
+router.delete("/:id", userController.deleteUser);
+
+export { router };

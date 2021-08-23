@@ -1,31 +1,34 @@
-import { Request, Response, Router } from 'express'
-import * as authService from '../service/authService'
+import { Request, Response } from "express";
+import * as authService from "../service/authService";
 
-export const login = async (req: Request, res: Response) => {
-  /* 	#swagger.tags = ['Auth']
-      #swagger.description = 'Endpoint to log in a specific user' */
-
-  /*	#swagger.parameters['obj'] = {
-      in: 'body',
-      description: 'Login request',
-      required: true,
-      schema: { $ref: "#/definitions/loginRequest" }
-  } */
-
-  /* #swagger.responses[200] = {
-            description: "Login response",
-            schema: { $ref: "#/definitions/loginResponse" },
-  } */
+const login = async (req: Request, res: Response) => {
   try {
-    const loginResult = await authService.handleLogin(req)
+    const loginResult = await authService.handleLogin(req);
     return res.status(200).json({
-      msg: 'Login success',
+      msg: 'Login Success',
       data: loginResult,
     })
   } catch (err) {
     return res.status(400).json({
-      msg: err,
+      msg: err.toString(),
       data: {},
     })
   }
-}
+};
+
+const signup = async (req: Request, res: Response) => {
+  try {
+    const signUpResult = await authService.handleSignup(req);
+    return res.status(200).json({
+      msg: 'Signup Success',
+      data: signUpResult,
+    })
+  } catch (err) {
+    return res.status(400).json({
+      msg: err.toString(),
+      data: {},
+    })
+  }
+};
+
+export default { login, signup };

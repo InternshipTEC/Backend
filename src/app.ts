@@ -2,11 +2,9 @@ import express from 'express'
 import helmet from 'helmet'
 import bodyParser from 'body-parser'
 import cors, { CorsOptions } from 'cors'
-import * as swaggerFile from './docs/swagger-output.json'
-import swaggerUI from 'swagger-ui-express'
 import { router } from './routes/index'
 import dotenv from 'dotenv'
-import { IS_PRODUCTION, STAGE, API_VERSION } from './config'
+import { IS_PRODUCTION } from './config'
 
 dotenv.config()
 
@@ -20,8 +18,6 @@ app.use(cors(corsOptions))
 app.use(bodyParser.json())
 app.use(helmet())
 
-app.use(`/${STAGE}/${API_VERSION}`, router)
-console.info(`Endpoint path set to: ${STAGE}/${API_VERSION}`)
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerFile))
+app.use(`/`, router)
 
 export default app

@@ -1,0 +1,24 @@
+### Invalid signup request test
+POST http://localhost:3000/auth/signup HTTP/1.1
+content-type: application/json
+
+{
+    "email": "test@gmail.com"
+}
+
+### Invalid login request test
+POST http://localhost:3000/email/notify-friends HTTP/1.1
+content-type: application/json
+
+{
+    "name":"Farhan",
+    "invite_sender_name":"Mazaya",
+    "invite_sender_email":"msulthanmazaya@gmail.com",
+    "action_url":"https://testinginterntec.web.app/",
+    "support_email":"web.tec.internship@gmail.com",
+    "help_url":"https://testinginterntec.web.app/",
+    "emails":[
+        {"address":"bimbalabum@gmail.com"},
+        {"address":"msulthanmazaya@gmail.com"}
+    ]
+}
