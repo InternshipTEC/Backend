@@ -30,8 +30,8 @@ export class User {
     () => Transaction,
     transaction => transaction.users,
     {
-      cascade:true
-    }
+      cascade: true,
+    },
   )
   @JoinTable()
   transaction: Transaction

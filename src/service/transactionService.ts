@@ -24,12 +24,12 @@ export const getAllTransaction = async (): Promise<Transaction[]> => {
 }
 
 export const createTransaction = async (req: Request): Promise<Transaction> => {
-  const {photoUrl, metode, media, noRekening, pemilikRekening, usersEmail } = req.body
+  const { photoUrl, metode, media, noRekening, pemilikRekening, usersEmail } = req.body
 
-  const users : User[] = []
+  const users: User[] = []
   try {
     const transaction = new Transaction()
-    transaction.photoUrl = photoUrl 
+    transaction.photoUrl = photoUrl
     transaction.metode = metode
     transaction.media = media
     transaction.noRekening = noRekening
@@ -37,13 +37,13 @@ export const createTransaction = async (req: Request): Promise<Transaction> => {
     transaction.verified = false
     transaction.users = users
     const newTransaction = await transactionRepository.createTransaction(transaction)
-    usersEmail.forEach(async (email:string) => {
-      let user = new User();
+    usersEmail.forEach(async (email: string) => {
+      let user = new User()
       user = await userRepository.getUserByEmail(email)
-      await userRepository.updateUser(user.id, {...user, transaction:newTransaction})
+      await userRepository.updateUser(user.id, { ...user, transaction: newTransaction })
       users.push(user)
-    });
-    return newTransaction 
+    })
+    return newTransaction
   } catch (err) {
     throw TypeError(err)
   }

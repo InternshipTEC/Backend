@@ -4,7 +4,6 @@ import { postCheck } from '../../validation/transactionRoutesValidation'
 
 const router = express.Router()
 
-
 router.get('/:id', transactionController.getTransaction)
 
 router.get('/', transactionController.getAllTransaction)

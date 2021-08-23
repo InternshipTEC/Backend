@@ -26,7 +26,7 @@ export class Transaction {
 
   @OneToMany(
     () => User,
-    user => user.transaction
+    user => user.transaction,
   )
   users: User[]
 }

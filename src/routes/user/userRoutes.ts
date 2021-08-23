@@ -1,4 +1,5 @@
 import express from 'express'
+import { setContentRange } from '../../middleware/validation'
 import userController from '../../controllers/userController'
 import { postCheck } from '../../validation/userRoutesValidation'
 
@@ -12,6 +13,6 @@ router.post('/', postCheck, userController.createUser)
 
 router.put('/:id', userController.updateUser)
 
-router.delete('/:id', userController.deleteUser)
+router.delete('/:id', setContentRange, userController.deleteUser)
 
 export { router }

@@ -7,9 +7,8 @@ import { router as transactionRoutes } from './transaction/transactionRoutes'
 const router = express.Router()
 
 router.use('/email', emailRouter)
-router.use('/transaction', emailRouter)
 router.use('/auth', authRoutes)
-router.use('/user', userRoutes)
-router.use('/transaction', transactionRoutes )
+router.use('/users', userRoutes)
+router.use('/transaction', transactionRoutes)
 
 export { router }

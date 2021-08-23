@@ -19,10 +19,11 @@ const getUser = async (req: Request, res: Response) => {
 const getAllUser = async (req: Request, res: Response) => {
   try {
     const users = await userService.getAllUser()
-    return res.status(200).json({
-      msg: 'get all user success',
-      data: users,
-    })
+    return res
+      .set('Access-Control-Expose-Headers', 'Content-Range')
+      .set('Content-Range', `posts 0-10/${users.length}`)
+      .status(200)
+      .send(users)
   } catch (err) {
     return res.status(400).json({
       msg: err.toString(),

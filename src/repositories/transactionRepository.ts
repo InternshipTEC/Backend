@@ -12,7 +12,7 @@ export const getTransactionById = async (id: string): Promise<Transaction> => {
 
 export const getAllTransaction = async (): Promise<Transaction[]> => {
   try {
-    const allTransaction = await getRepository(Transaction).find({relations:['users']})
+    const allTransaction = await getRepository(Transaction).find({ relations: ['users'] })
     return allTransaction
   } catch (err) {
     throw TypeError(err)
@@ -24,7 +24,7 @@ export const createTransaction = async (props: Transaction): Promise<Transaction
     let transaction = new Transaction()
     transaction = props
     const newTransaction = await getManager().save(transaction)
-    return newTransaction 
+    return newTransaction
   } catch (err) {
     throw TypeError(err)
   }
@@ -44,7 +44,7 @@ export const updateTransaction = async (id: string, props: Transaction): Promise
   }
 }
 
-export const deleteTransaction = async (id: string) : Promise<DeleteResult>  => {
+export const deleteTransaction = async (id: string): Promise<DeleteResult> => {
   try {
     const deleteResult = await getConnection()
       .createQueryBuilder()
