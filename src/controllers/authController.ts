@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
-import * as authService from "../service/authService";
+import { Request, Response } from 'express'
+import * as authService from '../service/authService'
 
 const login = async (req: Request, res: Response) => {
   try {
-    const loginResult = await authService.handleLogin(req);
+    const loginResult = await authService.handleLogin(req)
     return res.status(200).json({
       msg: 'Login Success',
       data: loginResult,
@@ -14,11 +14,11 @@ const login = async (req: Request, res: Response) => {
       data: {},
     })
   }
-};
+}
 
 const signup = async (req: Request, res: Response) => {
   try {
-    const signUpResult = await authService.handleSignup(req);
+    const signUpResult = await authService.handleSignup(req)
     return res.status(200).json({
       msg: 'Signup Success',
       data: signUpResult,
@@ -29,6 +29,6 @@ const signup = async (req: Request, res: Response) => {
       data: {},
     })
   }
-};
+}
 
-export default { login, signup };
+export default { login, signup }

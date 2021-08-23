@@ -1,20 +1,31 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-import { IsEmail, IsNotEmpty } from "class-validator";
+import { Entity, PrimaryGeneratedColumn, Column, Unique, ManyToOne } from 'typeorm'
+import { Transaction } from './Transaction'
+import { IsEmail, IsNotEmpty } from 'class-validator'
 
 @Entity()
+@Unique(['nim', 'email'])
 export class User {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
+  @PrimaryGeneratedColumn('increment')
+  id: string
 
-  @Column({ unique: true })
+  @Column()
   @IsEmail()
-  email: string;
+  email: string
+
+  @Column()
+  nim: string
+
+  @Column()
+  verified: boolean
 
   @Column()
   @IsNotEmpty()
-  name: string;
+  name: string
 
   @Column()
   @IsNotEmpty()
-  password: string;
+  password: string
+
+  @ManyToOne(()=>Transaction,transaction=>transaction.users)
+  transaction: string
 }
