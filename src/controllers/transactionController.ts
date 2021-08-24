@@ -19,10 +19,10 @@ export const getTransaction = async (req: Request, res: Response) => {
 export const getAllTransaction = async (req: Request, res: Response) => {
   try {
     const transactions = await transactionService.getAllTransaction()
-    return res.status(200).json({
-      msg: 'get all transaction success',
-      data: transactions,
-    })
+    return res.status(200)
+      .set('Access-Control-Expose-Headers', 'Content-Range')
+      .set('Content-Range', `posts 0-10/${transactions.length}`)
+      .send(transactions)
   } catch (err) {
     return res.status(400).json({
       msg: err.toString(),

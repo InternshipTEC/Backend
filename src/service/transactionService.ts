@@ -50,8 +50,15 @@ export const createTransaction = async (req: Request): Promise<Transaction> => {
 }
 
 export const updateTransaction = async (req: Request): Promise<Transaction> => {
+  const { users } = req.body
   try {
-    const transaction = await transactionRepository.updateTransaction(req.params.id, req.body)
+    users.forEach(async (user: any) => {
+      await userRepository.updateUser(user.id, {
+        ...user,
+        verified: req.body.verified,
+      })
+    })
+    const transaction = await transactionRepository.updateTransaction(req.params.id,req.body)
     return transaction
   } catch (err) {
     throw TypeError(err)

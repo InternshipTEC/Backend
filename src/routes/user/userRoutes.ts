@@ -1,7 +1,7 @@
 import express from 'express'
-import { setContentRange } from '../../middleware/validation'
 import userController from '../../controllers/userController'
 import { postCheck } from '../../validation/userRoutesValidation'
+import { verifyAdmin } from '../../middleware/token'
 
 const router = express.Router()
 
@@ -9,10 +9,10 @@ router.get('/:id', userController.getUser)
 
 router.get('/', userController.getAllUser)
 
-router.post('/', postCheck, userController.createUser)
+router.post('/', postCheck, verifyAdmin, userController.createUser)
 
-router.put('/:id', userController.updateUser)
+router.put('/:id', verifyAdmin, userController.updateUser)
 
-router.delete('/:id', setContentRange, userController.deleteUser)
+router.delete('/:id', verifyAdmin, userController.deleteUser)
 
 export { router }

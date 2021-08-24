@@ -1,4 +1,5 @@
 import express from 'express'
+import { verifyAdmin } from '../../middleware/token'
 import * as transactionController from '../../controllers/transactionController'
 import { postCheck } from '../../validation/transactionRoutesValidation'
 
@@ -8,10 +9,10 @@ router.get('/:id', transactionController.getTransaction)
 
 router.get('/', transactionController.getAllTransaction)
 
-router.post('/', postCheck, transactionController.createTransaction)
+router.post('/', postCheck, verifyAdmin, transactionController.createTransaction)
 
-router.put('/:id', transactionController.updateTransaction)
+router.put('/:id', verifyAdmin, transactionController.updateTransaction)
 
-router.delete('/:id', transactionController.deleteTransaction)
+router.delete('/:id', verifyAdmin, transactionController.deleteTransaction)
 
 export { router }

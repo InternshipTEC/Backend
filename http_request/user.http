@@ -2,21 +2,23 @@
 GET http://localhost:3000/user/633355f1-4d6d-4ead-9566-57cceab87677 HTTP/1.1
 
 ### Get all user
-GET http://localhost:3000/user HTTP/1.1
+GET http://localhost:3000/users HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4LCJpYXQiOjE2Mjk4MDA4MzgsImV4cCI6MTYyOTk3MzYzOH0.uhB5AfNVN3TC-3jMCiJ6rEHLED2mh4OHyN-dnLf7ezg
 
 ### Valid create user request 
-POST http://localhost:3000/user HTTP/1.1
+POST http://localhost:3000/users HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXJpZmllZCI6dHJ1ZSwiYWRtaW4iOnRydWUsImlkIjoxOSwiZW1haWwiOiJtc3VsdGhhbm1hemF5YUBnbWFpbC5jb20iLCJuaW0iOiIxMzMyMDAyOCIsIm5hbWUiOiJNdWhhbW1hZCBTdWx0aGFuIE1hemF5YSIsImlhdCI6MTYyOTgwMTc0NSwiZXhwIjoxNjI5OTc0NTQ1fQ.AQJ0cVTDSFgR4nAAtsWcci4gOSgG7jNqMSexaRcU-ro
 
 {
 	"name" : "Jhonson",
-	"email": "dua@mail.com",
-	"nim":"13320026",
+	"email": "new@mail.com",
+	"nim":"13323412",
 	"password": "JonnyJack"
 }
 
 ### Valid update user request
-PUT http://localhost:3000/user/86a9ebc4-3eb8-465d-a9a7-2d47ff43cd4e HTTP/1.1
+PUT http://localhost:3000/users/86a9ebc4-3eb8-465d-a9a7-2d47ff43cd4e HTTP/1.1
 content-type: application/json
 
 {
@@ -24,4 +26,4 @@ content-type: application/json
 }
 
 ### Delete Request
-DELETE http://localhost:3000/user/3
+DELETE http://localhost:3000/users/3

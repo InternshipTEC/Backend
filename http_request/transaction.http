@@ -6,7 +6,7 @@ POST http://localhost:3000/transaction HTTP/1.1
 content-type: application/json
 
 {
-    "photoUrl":"test.com/fasdfasf",
+    "photoUrl":"https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
     "metode":"test",
     "media":"BNI",
     "noRekening":"3413431412",

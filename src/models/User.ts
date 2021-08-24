@@ -35,4 +35,8 @@ export class User {
   )
   @JoinTable()
   transaction: Transaction
+
+
+  @Column({ default: false })
+  admin: boolean = false
 }

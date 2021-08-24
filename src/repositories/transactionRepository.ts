@@ -31,14 +31,15 @@ export const createTransaction = async (props: Transaction): Promise<Transaction
 }
 
 export const updateTransaction = async (id: string, props: Transaction): Promise<any> => {
+  delete props.users;
   try {
-    const newUser = await getConnection()
+    const updated = await getConnection()
       .createQueryBuilder()
       .update(Transaction)
       .set(props)
       .where('id = :id', { id })
       .execute()
-    return newUser
+    return updated
   } catch (err) {
     throw TypeError(err)
   }

@@ -3,6 +3,7 @@ import { Request } from 'express'
 import * as jwt from 'jsonwebtoken'
 import * as userService from '../service/userService'
 import * as userRepository from '../repositories/userRepository'
+import { User } from '../models/User'
 
 const handleLogin = async (req: Request) => {
   let user
@@ -15,7 +16,7 @@ const handleLogin = async (req: Request) => {
 
   try {
     passwordEncrypted = await checkPassword(req.body.password, user.password.toString())
-    const accessToken = generateAccessToken(user.id)
+    const accessToken = generateAccessToken(user)
     return { user, accessToken }
   } catch (err) {
     throw TypeError(err)
@@ -25,7 +26,7 @@ const handleLogin = async (req: Request) => {
 const handleSignup = async (req: Request) => {
   try {
     const user = await userService.createUser(req)
-    const accessToken = generateAccessToken(user.id)
+    const accessToken = generateAccessToken(user)
     return { user, accessToken }
   } catch (err) {
     throw TypeError(err)
@@ -41,8 +42,12 @@ const checkPassword = async (userPassword: string, reqPassword: string): Promise
   }
 }
 
-const generateAccessToken = (userId: string): string => {
-  return jwt.sign(userId, process.env.JWT_SECRET)
+const generateAccessToken = (user: User): string => {
+  const jwtPayload = {...user}
+  delete jwtPayload.password
+  return jwt.sign(jwtPayload, process.env.JWT_SECRET, {
+    expiresIn:60*60*24*2
+  })
 }
 
 export { handleLogin, handleSignup, checkPassword, generateAccessToken }

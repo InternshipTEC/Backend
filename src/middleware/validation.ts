@@ -11,7 +11,5 @@ export const requestValidator = (req: Request, res: Response, next: NextFunction
 }
 
 export const setContentRange = (req: Request, res: Response, next: NextFunction) => {
-  res.set('Access-Control-Expose-Headers','Content-Range')
-  res.set('Content-Range', `posts 0-1/${[1,2,3].length}`)
   next()
 }

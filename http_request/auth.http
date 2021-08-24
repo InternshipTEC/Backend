@@ -15,14 +15,15 @@ content-type: application/json
 }
 
 ### Valid signup request test
-POST http://localhost:3000/development/v2/auth/login HTTP/1.1
+POST http://localhost:3000/auth/signup HTTP/1.1
 content-type: application/json
 
 {
-	"email": "superhost@bukitvistabali.com",
-	"password": "bukitvista",
-	"type": "normal",
-	"platform": "mobile"
+
+	"name" : "Jhonson",
+	"email": "test@mail.com",
+	"nim":"13320026",
+	"password": "JonnyJack"
 }
 
 ### Valid login request test
@@ -30,6 +31,6 @@ POST http://localhost:3000/auth/login HTTP/1.1
 content-type: application/json
 
 {
-    "email": "zay@mail.com",
-	"password": "zay123"
+	"email": "msulthanmazaya@gmail.com",
+	"password": "Patriot*100"
 }
