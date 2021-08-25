@@ -32,12 +32,13 @@ export const getAllUser = async (): Promise<User[]> => {
 }
 
 export const createUser = async (req: Request): Promise<User> => {
-  const { nim, name, password, email } = req.body
+  const { nim, name, password, email, fakultas } = req.body
   try {
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password, salt)
     const user = new User()
     user.name = name
+    user.fakultas = fakultas 
     user.password = hashedPassword
     user.email = email
     user.nim = nim
@@ -50,17 +51,11 @@ export const createUser = async (req: Request): Promise<User> => {
 
 export const updateUser = async (req: Request): Promise<User> => {
   try {
-    const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(req.body.password, salt)
     let user
-    if (hashedPassword) {
-      user = await userRepository.updateUser(req.params.id, {
-        ...req.body,
-        password: hashedPassword,
-      })
-      return user
-    }
-    throw TypeError("Password doesn't match!")
+    user = await userRepository.updateUser(req.params.id, {
+      ...req.body,
+    })
+    return user
   } catch (err) {
     throw TypeError(err)
   }

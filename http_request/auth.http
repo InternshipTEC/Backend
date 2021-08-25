@@ -20,10 +20,8 @@ content-type: application/json
 
 {
 
-	"name" : "Jhonson",
-	"email": "test@mail.com",
-	"nim":"13320026",
-	"password": "JonnyJack"
+	"email": "teste@gmail.com",
+	"password": "Patriot*100"
 }
 
 ### Valid login request test

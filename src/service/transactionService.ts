@@ -24,13 +24,14 @@ export const getAllTransaction = async (): Promise<Transaction[]> => {
 }
 
 export const createTransaction = async (req: Request): Promise<Transaction> => {
-  const { photoUrl, metode, media, noRekening, pemilikRekening, usersEmail } = req.body
+  const { photoUrl, nominal, media, noRekening, pemilikRekening, usersEmail, uniqueIdentifier } = req.body
 
   const users: User[] = []
   try {
     const transaction = new Transaction()
     transaction.photoUrl = photoUrl
-    transaction.metode = metode
+    transaction.nominal= nominal 
+    transaction.uniqueIdentifier = uniqueIdentifier
     transaction.media = media
     transaction.noRekening = noRekening
     transaction.pemilikRekening = pemilikRekening

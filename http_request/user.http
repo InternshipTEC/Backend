@@ -2,8 +2,8 @@
 GET http://localhost:3000/user/633355f1-4d6d-4ead-9566-57cceab87677 HTTP/1.1
 
 ### Get all user
-GET http://localhost:3000/users HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4LCJpYXQiOjE2Mjk4MDA4MzgsImV4cCI6MTYyOTk3MzYzOH0.uhB5AfNVN3TC-3jMCiJ6rEHLED2mh4OHyN-dnLf7ezg
+GET http://localhost:3000/users/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXJpZmllZCI6dHJ1ZSwiYWRtaW4iOnRydWUsImlkIjoxOSwiZW1haWwiOiJtc3VsdGhhbm1hemF5YUBnbWFpbC5jb20iLCJuaW0iOiIxMzMyMDAyOCIsIm5hbWUiOiJNdWhhbW1hZCBTdWx0aGFuIE1hemF5YSIsImZha3VsdGFzIjpudWxsLCJpYXQiOjE2Mjk4ODk4OTAsImV4cCI6MTYzMDA2MjY5MH0.heuYoONsdKG_cexJivmmcCspajw-55MBramcYoPpw8Q
 
 ### Valid create user request 
 POST http://localhost:3000/users HTTP/1.1

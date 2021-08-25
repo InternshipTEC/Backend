@@ -11,7 +11,7 @@ router.get('/', userController.getAllUser)
 
 router.post('/', postCheck, verifyAdmin, userController.createUser)
 
-router.put('/:id', verifyAdmin, userController.updateUser)
+router.put('/:id', userController.updateUser)
 
 router.delete('/:id', verifyAdmin, userController.deleteUser)
 

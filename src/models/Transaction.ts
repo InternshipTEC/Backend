@@ -10,7 +10,10 @@ export class Transaction {
   photoUrl: string
 
   @Column()
-  metode: string
+  nominal: string
+
+  @Column()
+  uniqueIdentifier: string
 
   @Column()
   media: string

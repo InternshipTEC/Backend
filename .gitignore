@@ -2,9 +2,11 @@
 # Created by https://www.gitignore.io/api/node,linux,macos,windows,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=node,linux,macos,windows,visualstudiocode
 
+
+
 ### Local workflow
 
-./src/database/migrations
+src/database/migrations/
 
 ### Linux ###
 *~

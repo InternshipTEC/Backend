@@ -12,15 +12,17 @@ export class User {
   @IsEmail()
   email: string
 
-  @Column()
+  @Column({nullable:true})
   nim: string
 
   @Column({ default: false })
   verified: boolean = false
 
-  @Column()
-  @IsNotEmpty()
+  @Column({nullable:true})
   name: string
+
+  @Column({nullable:true})
+  fakultas: string
 
   @Column()
   @IsNotEmpty()

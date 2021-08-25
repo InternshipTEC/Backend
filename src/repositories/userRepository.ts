@@ -2,10 +2,11 @@ import { getConnection, getManager, getRepository } from 'typeorm'
 import { User } from '../models/User'
 import { validate } from 'class-validator'
 
-const getUserById = async (id: string): Promise<User> => {
+const getUserById = async (id: string): Promise<any> => {
   try {
-    const user = await getRepository(User).findOne({ id })
-    return user
+    const user = await getRepository(User).findOne({ id },{relations:["transaction"] })
+    delete user.password
+    return {...user,transaction:!!user.transaction}
   } catch (err) {
     throw TypeError(err)
   }
@@ -20,13 +21,10 @@ const getAllUser = async (): Promise<User[]> => {
   }
 }
 
-const getUserByEmail = async (email: string): Promise<User> => {
+const getUserByEmail = async (email: string): Promise<any> => {
   try {
-    const user = await getRepository(User)
-      .createQueryBuilder('user')
-      .where('email = :email', { email: email.toString() })
-      .getOne()
-    return user
+    const user = await getRepository(User).findOne({email},{relations:["transaction"]})
+    return {...user,transaction:!!user.transaction}
   } catch (err) {
     throw TypeError(err)
   }
