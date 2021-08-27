@@ -31,7 +31,7 @@ export const createTransaction = async (props: Transaction): Promise<Transaction
 }
 
 export const updateTransaction = async (id: string, props: Transaction): Promise<any> => {
-  delete props.users;
+  delete props.users
   try {
     const updated = await getConnection()
       .createQueryBuilder()

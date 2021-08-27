@@ -38,7 +38,7 @@ export const createUser = async (req: Request): Promise<User> => {
     const hashedPassword = await bcrypt.hash(password, salt)
     const user = new User()
     user.name = name
-    user.fakultas = fakultas 
+    user.fakultas = fakultas
     user.password = hashedPassword
     user.email = email
     user.nim = nim

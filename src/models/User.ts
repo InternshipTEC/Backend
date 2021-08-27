@@ -12,16 +12,16 @@ export class User {
   @IsEmail()
   email: string
 
-  @Column({nullable:true})
+  @Column({ nullable: true })
   nim: string
 
   @Column({ default: false })
   verified: boolean = false
 
-  @Column({nullable:true})
+  @Column({ nullable: true })
   name: string
 
-  @Column({nullable:true})
+  @Column({ nullable: true })
   fakultas: string
 
   @Column()
@@ -37,7 +37,6 @@ export class User {
   )
   @JoinTable()
   transaction: Transaction
-
 
   @Column({ default: false })
   admin: boolean = false

@@ -17,15 +17,15 @@ export const handleNotifyFriends = async (req: Request) => {
 
   await emails.forEach(async (email: any) => {
     try {
-      const data = fs.readFileSync(__dirname + '/../static/content.html', 'utf8')
+      const data = fs.readFileSync(`${__dirname}/../static/content.html`, 'utf8')
       const template = handlebars.compile(data)
       const htmlToSend = template({
-        name: email.address,
-        invite_sender_name,
-        invite_sender_email,
         action_url,
         support_email,
         help_url,
+        invite_sender_name,
+        invite_sender_email,
+        name: email.address,
       })
       const info = await transporter.sendMail({
         from: 'Web Development TEC Internship',
@@ -35,7 +35,7 @@ export const handleNotifyFriends = async (req: Request) => {
         attachments: [
           {
             filename: 'bee.png',
-            path: __dirname + '/../static/bee.png',
+            path: `${__dirname}/../static/bee.png`,
             cid: 'logo',
           },
         ],

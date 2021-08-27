@@ -19,7 +19,8 @@ export const getTransaction = async (req: Request, res: Response) => {
 export const getAllTransaction = async (req: Request, res: Response) => {
   try {
     const transactions = await transactionService.getAllTransaction()
-    return res.status(200)
+    return res
+      .status(200)
       .set('Access-Control-Expose-Headers', 'Content-Range')
       .set('Content-Range', `posts 0-10/${transactions.length}`)
       .send(transactions)

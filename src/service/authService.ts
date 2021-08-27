@@ -43,10 +43,10 @@ const checkPassword = async (userPassword: string, reqPassword: string): Promise
 }
 
 const generateAccessToken = (user: User): string => {
-  const jwtPayload = {...user}
+  const jwtPayload = { ...user }
   delete jwtPayload.password
   return jwt.sign(jwtPayload, process.env.JWT_SECRET, {
-    expiresIn:60*60*24*2
+    expiresIn: 60 * 60 * 24 * 2,
   })
 }
 

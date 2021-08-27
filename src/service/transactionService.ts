@@ -30,7 +30,7 @@ export const createTransaction = async (req: Request): Promise<Transaction> => {
   try {
     const transaction = new Transaction()
     transaction.photoUrl = photoUrl
-    transaction.nominal= nominal 
+    transaction.nominal = nominal
     transaction.uniqueIdentifier = uniqueIdentifier
     transaction.media = media
     transaction.noRekening = noRekening
@@ -59,7 +59,7 @@ export const updateTransaction = async (req: Request): Promise<Transaction> => {
         verified: req.body.verified,
       })
     })
-    const transaction = await transactionRepository.updateTransaction(req.params.id,req.body)
+    const transaction = await transactionRepository.updateTransaction(req.params.id, req.body)
     return transaction
   } catch (err) {
     throw TypeError(err)
