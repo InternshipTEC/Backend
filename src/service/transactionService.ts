@@ -1,5 +1,6 @@
 import * as transactionRepository from '../repositories/transactionRepository'
 import * as userRepository from '../repositories/userRepository'
+import * as tempUserRepository from '../repositories/tempUserRepository'
 import { Request } from 'express'
 import { Transaction } from '../models/Transaction'
 import { User } from '../models/User'
@@ -41,8 +42,12 @@ export const createTransaction = async (req: Request): Promise<Transaction> => {
     usersEmail.forEach(async (email: string) => {
       let user = new User()
       user = await userRepository.getUserByEmail(email)
-      await userRepository.updateUser(user.id, { ...user, transaction: newTransaction })
-      users.push(user)
+      console.log(user)
+      if (user) {
+        await userRepository.updateUser(user.id, { ...user, transaction: newTransaction })
+      } else {
+        await tempUserRepository.createTempUser({ email, uniqueIdentifier })
+      }
     })
     return newTransaction
   } catch (err) {
