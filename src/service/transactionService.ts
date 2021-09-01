@@ -42,7 +42,6 @@ export const createTransaction = async (req: Request): Promise<Transaction> => {
     usersEmail.forEach(async (email: string) => {
       let user = new User()
       user = await userRepository.getUserByEmail(email)
-      console.log(user)
       if (user) {
         await userRepository.updateUser(user.id, { ...user, transaction: newTransaction })
       } else {
