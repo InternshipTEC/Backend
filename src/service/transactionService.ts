@@ -6,10 +6,16 @@ import { Transaction } from '../models/Transaction'
 import { User } from '../models/User'
 import { DeleteResult } from 'typeorm'
 
-export const getTransactionById = async (req: Request): Promise<Transaction> => {
+export const getTransactionById = async (req: Request): Promise<any> => {
   try {
     const transaction = await transactionRepository.getTransactionById(req.params.id)
-    return transaction
+    const registeredUsers = await userRepository.getUsersWithTransactionId(transaction.id)
+    let users : Array<string> = registeredUsers.map(user=>user.email)
+    if(registeredUsers.length === 1){
+      const tempusers = await tempUserRepository.getTempUserWithUniqueIdenfitier(registeredUsers[0].id)
+      tempusers.forEach(tempuser=>users.push(tempuser.email))
+    }
+    return {...transaction, users}
   } catch (err) {
     throw TypeError(err)
   }
@@ -18,6 +24,8 @@ export const getTransactionById = async (req: Request): Promise<Transaction> => 
 export const getAllTransaction = async (): Promise<Transaction[]> => {
   try {
     const transactions = await transactionRepository.getAllTransaction()
+    const users = await userRepository.getAllUser()
+
     return transactions
   } catch (err) {
     throw TypeError(err)
@@ -39,22 +47,20 @@ export const createTransaction = async (req: Request): Promise<Transaction> => {
     transaction.verified = false
     transaction.users = users
     const newTransaction = await transactionRepository.createTransaction(transaction)
-    const tempusers: any = []
+    const tempusers: Array<string> = []
     usersEmail.forEach(async (email: string) => {
       let user = new User()
       user = await userRepository.getUserByEmail(email)
       if (user) {
         await userRepository.updateUser(user.id, { ...user, transaction: newTransaction })
       } else {
-        const tempuser = await tempUserRepository.createTempUser({ email, uniqueIdentifier })
-        tempusers.push(tempuser)
+        await tempUserRepository.createTempUser({ email, uniqueIdentifier })
       }
     })
     const responsePayload: any = { ...newTransaction }
     tempusers.forEach((tempuser: any) => {
-      responsePayload.users.push(tempuser.email)
+      responsePayload.users.push(tempuser)
     })
-    console.log(responsePayload)
     return responsePayload
   } catch (err) {
     throw TypeError(err)

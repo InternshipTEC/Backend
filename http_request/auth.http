@@ -15,17 +15,17 @@ content-type: application/json
 }
 
 ### Valid signup request test
-POST https://api.tecinternship2021.com/auth/signup HTTP/1.1
+POST http://localhost:3000/auth/signup HTTP/1.1
 content-type: application/json
 
 {
 
-	"email": "testa@gmail.com",
-	"password": "a"
+	"email": "msulthanmazaya@gmail.com",
+	"password": "Patriot*100"
 }
 
 ### Valid login request test
-POST https://api.tecinternship2021.com/auth/login HTTP/1.1
+POST http://localhost:3000/auth/login HTTP/1.1
 content-type: application/json
 
 {
