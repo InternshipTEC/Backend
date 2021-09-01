@@ -6,6 +6,8 @@
 
 ### Local workflow
 
+*.swp
+
 src/database/migrations/
 
 ### Linux ###
