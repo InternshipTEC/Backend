@@ -3,12 +3,11 @@ import { Transaction } from './Transaction'
 import { IsEmail, IsNotEmpty } from 'class-validator'
 
 @Entity()
-@Unique(['nim', 'email'])
 export class User {
   @PrimaryGeneratedColumn('increment')
   id: string
 
-  @Column()
+  @Column({ unique: true })
   @IsEmail()
   email: string
 
