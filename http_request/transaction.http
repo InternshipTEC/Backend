@@ -1,5 +1,5 @@
 ### Get all transaction
-GET http://localhost:3000/transaction/a32032b4-4d83-4fe0-b538-d698b1f6cc28
+GET http://localhost:3000/transaction/417c5934-04e3-4233-af79-0049046c4a29
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXJpZmllZCI6ZmFsc2UsImFkbWluIjpmYWxzZSwibmFtZSI6bnVsbCwiZmFrdWx0YXMiOm51bGwsImVtYWlsIjoibXN1bHRoYW5tYXpheWFAZ21haWwuY29tIiwibmltIjpudWxsLCJpZCI6MSwiaWF0IjoxNjMwNDYzMDc5LCJleHAiOjE2MzA2MzU4Nzl9.BQbM2qCY_VoHOFX0SbbHtxNMgylnSrSTcqWNrsyMzTY
 
 ### Valid signup request test
@@ -17,7 +17,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXJpZmllZCI6ZmFsc
     "pemilikRekening":"Nana",
     "usersEmail":[
         "msulthanmazaya@gmail.com",
-        "satu@mail.com"
+        "satu@mail.com",
+        "dua@mail.com",
+        "tiga@mail.com",
+        "empat@mail.com"
     ]
 }
 

@@ -10,12 +10,10 @@ export const getTransactionById = async (req: Request): Promise<any> => {
   try {
     const transaction = await transactionRepository.getTransactionById(req.params.id)
     const registeredUsers = await userRepository.getUsersWithTransactionId(transaction.id)
-    let users : Array<string> = registeredUsers.map(user=>user.email)
-    if(registeredUsers.length === 1){
-      const tempusers = await tempUserRepository.getTempUserWithUniqueIdenfitier(registeredUsers[0].id)
-      tempusers.forEach(tempuser=>users.push(tempuser.email))
-    }
-    return {...transaction, users}
+    let user : Array<any> = registeredUsers.map(user=>user.email)
+    const tempusers = await tempUserRepository.getTempUserWithUniqueIdenfitier(transaction.uniqueIdentifier)
+    tempusers.forEach(tempuser=>user.push(tempuser.email))
+    return {...transaction, user}
   } catch (err) {
     throw TypeError(err)
   }
@@ -24,8 +22,6 @@ export const getTransactionById = async (req: Request): Promise<any> => {
 export const getAllTransaction = async (): Promise<Transaction[]> => {
   try {
     const transactions = await transactionRepository.getAllTransaction()
-    const users = await userRepository.getAllUser()
-
     return transactions
   } catch (err) {
     throw TypeError(err)
