@@ -39,16 +39,23 @@ export const createTransaction = async (req: Request): Promise<Transaction> => {
     transaction.verified = false
     transaction.users = users
     const newTransaction = await transactionRepository.createTransaction(transaction)
+    const tempusers: any = []
     usersEmail.forEach(async (email: string) => {
       let user = new User()
       user = await userRepository.getUserByEmail(email)
       if (user) {
         await userRepository.updateUser(user.id, { ...user, transaction: newTransaction })
       } else {
-        await tempUserRepository.createTempUser({ email, uniqueIdentifier })
+        const tempuser = await tempUserRepository.createTempUser({ email, uniqueIdentifier })
+        tempusers.push(tempuser)
       }
     })
-    return newTransaction
+    const responsePayload: any = { ...newTransaction }
+    tempusers.forEach((tempuser: any) => {
+      responsePayload.users.push(tempuser.email)
+    })
+    console.log(responsePayload)
+    return responsePayload
   } catch (err) {
     throw TypeError(err)
   }
