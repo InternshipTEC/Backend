@@ -1,0 +1,15 @@
+###
+POST http://localhost:3000/event HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXJpZmllZCI6dHJ1ZSwiYWRtaW4iOnRydWUsImlkIjoxLCJlbWFpbCI6Im1zdWx0aGFubWF6YXlhQGdtYWlsLmNvbSIsIm5pbSI6bnVsbCwibmFtZSI6bnVsbCwiZmFrdWx0YXMiOm51bGwsInRyYW5zYWN0aW9uIjp0cnVlLCJpYXQiOjE2MzA3MjQwNTQsImV4cCI6MTYzMDg5Njg1NH0.JZd9fll6HGymQdGkzN9MjNz4IiAS4_M8a-FkASqhYlw 
+
+{
+	"name":"test event",
+	"url":"test.com",
+	"absenStartsAt":"10/10/2002",
+	"absenEndedAt":"10/11/2002"
+}
+
+### Get filtered events
+GET http://localhost:3000/event/occuring HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXJpZmllZCI6dHJ1ZSwiYWRtaW4iOnRydWUsImlkIjoxLCJlbWFpbCI6Im1zdWx0aGFubWF6YXlhQGdtYWlsLmNvbSIsIm5pbSI6bnVsbCwibmFtZSI6bnVsbCwiZmFrdWx0YXMiOm51bGwsInRyYW5zYWN0aW9uIjp0cnVlLCJpYXQiOjE2MzA3MjQwNTQsImV4cCI6MTYzMDg5Njg1NH0.JZd9fll6HGymQdGkzN9MjNz4IiAS4_M8a-FkASqhYlw 

@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique, ManyToOne, JoinTable } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, Unique, ManyToOne, JoinTable, ManyToMany, OneToMany } from 'typeorm'
 import { Transaction } from './Transaction'
 import { IsEmail, IsNotEmpty } from 'class-validator'
+import { Absen } from './Absen'
 
 @Entity()
 export class User {
@@ -36,6 +37,12 @@ export class User {
   )
   @JoinTable()
   transaction: Transaction
+
+  @OneToMany(
+    () => Absen,
+    absen => absen.user,
+  )
+  public absen!: Absen[]
 
   @Column({ default: false })
   admin: boolean = false

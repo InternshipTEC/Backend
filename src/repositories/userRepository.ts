@@ -21,12 +21,12 @@ const getAllUser = async (): Promise<User[]> => {
   }
 }
 
-export const getUsersWithTransactionId = async (transactionId:string) => {
+export const getUsersWithTransactionId = async (transactionId: string) => {
   try {
     const user = await getRepository(User)
-                        .createQueryBuilder()
-                        .where('transaction_id = :transactionId', {transactionId})
-                        .getMany()
+      .createQueryBuilder()
+      .where('transaction_id = :transactionId', { transactionId })
+      .getMany()
     return user
   } catch (err) {
     throw TypeError(err)

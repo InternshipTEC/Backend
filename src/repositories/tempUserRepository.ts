@@ -13,12 +13,12 @@ export const createTempUser = async ({ email, uniqueIdentifier }: any) => {
   }
 }
 
-export const getTempUserWithUniqueIdenfitier = async (uniqueId:string) => {
+export const getTempUserWithUniqueIdenfitier = async (uniqueId: string) => {
   try {
     const tempuser = await getRepository(TempUser)
-                        .createQueryBuilder()
-                        .where('unique_identifier = :uniqueId', {uniqueId})
-                        .getMany()
+      .createQueryBuilder()
+      .where('unique_identifier = :uniqueId', { uniqueId })
+      .getMany()
     return tempuser
   } catch (err) {
     throw TypeError(err)
