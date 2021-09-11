@@ -10,10 +10,10 @@ export const getTransactionById = async (req: Request): Promise<any> => {
   try {
     const transaction = await transactionRepository.getTransactionById(req.params.id)
     const registeredUsers = await userRepository.getUsersWithTransactionId(transaction.id)
-    let user : Array<any> = registeredUsers.map(user=>user.email)
+    const user: any[] = registeredUsers.map((userDetail: any) => userDetail.email)
     const tempusers = await tempUserRepository.getTempUserWithUniqueIdenfitier(transaction.uniqueIdentifier)
-    tempusers.forEach(tempuser=>user.push(tempuser.email))
-    return {...transaction, user}
+    tempusers.forEach((tempuser: any) => user.push(tempuser.email))
+    return { ...transaction, user }
   } catch (err) {
     throw TypeError(err)
   }
@@ -43,7 +43,7 @@ export const createTransaction = async (req: Request): Promise<Transaction> => {
     transaction.verified = false
     transaction.users = users
     const newTransaction = await transactionRepository.createTransaction(transaction)
-    const tempusers: Array<string> = []
+    const tempusers: string[] = []
     usersEmail.forEach(async (email: string) => {
       let user = new User()
       user = await userRepository.getUserByEmail(email)
