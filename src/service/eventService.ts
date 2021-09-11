@@ -23,16 +23,16 @@ export const getAllOccuringEvent = async (): Promise<Event[]> => {
   }
 }
 
-export const getAllEvent = async (req:Request): Promise<any[]> => {
-  try { 
-    let events : any[]
-    if(req.query.user_id){
+export const getAllEvent = async (req: Request): Promise<any[]> => {
+  try {
+    let events: any[]
+    if (req.query.user_id) {
       events = await eventRepository.getAllEventByUser(req.query.user_id.toString())
-      events = events.map(event=>{
-        const selectedEvent = {...event, absen:!!event.absen_absen_id}
-        delete selectedEvent.absen_absen_id;
-        delete selectedEvent.absen_user_id;
-        delete selectedEvent.absen_event_id;
+      events = events.map(event => {
+        const selectedEvent = { ...event, absen: !!event.absen_absen_id }
+        delete selectedEvent.absen_absen_id
+        delete selectedEvent.absen_user_id
+        delete selectedEvent.absen_event_id
         return selectedEvent
       })
     } else {
