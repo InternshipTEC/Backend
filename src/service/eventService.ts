@@ -23,10 +23,22 @@ export const getAllOccuringEvent = async (): Promise<Event[]> => {
   }
 }
 
-export const getAllEvent = async (): Promise<Event[]> => {
-  try {
-    const transactions = await eventRepository.getAllEvent()
-    return transactions
+export const getAllEvent = async (req:Request): Promise<any[]> => {
+  try { 
+    let events : any[]
+    if(req.query.user_id){
+      events = await eventRepository.getAllEventByUser(req.query.user_id.toString())
+      events = events.map(event=>{
+        const selectedEvent = {...event, absen:!!event.absen_absen_id}
+        delete selectedEvent.absen_absen_id;
+        delete selectedEvent.absen_user_id;
+        delete selectedEvent.absen_event_id;
+        return selectedEvent
+      })
+    } else {
+      events = await eventRepository.getAllEvent()
+    }
+    return events
   } catch (err) {
     throw TypeError(err)
   }

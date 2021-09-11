@@ -25,7 +25,7 @@ content-type: application/json
 }
 
 ### Valid login request test
-POST http://localhost:3000/auth/login HTTP/1.1
+POST http://localhost:3000/auth/login/?user_id=1 HTTP/1.1
 content-type: application/json
 
 {
