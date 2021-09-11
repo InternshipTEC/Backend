@@ -24,4 +24,3 @@ export class Tugas {
   )
   public hasilTugas!: HasilTugas[]
 }
-

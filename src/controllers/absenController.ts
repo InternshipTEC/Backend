@@ -106,4 +106,3 @@ export const deleteAbsen = async (req: Request, res: Response) => {
     })
   }
 }
-

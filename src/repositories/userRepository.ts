@@ -5,6 +5,7 @@ import { validate } from 'class-validator'
 const getUserById = async (id: string): Promise<any> => {
   try {
     const user = await getRepository(User).findOne({ id }, { relations: ['transaction'] })
+    console.log(user)
     delete user.password
     return { ...user, transaction: !!user.transaction }
   } catch (err) {
@@ -35,9 +36,10 @@ export const getUsersWithTransactionId = async (transactionId: string) => {
 
 const getUserByEmail = async (email: string): Promise<any> => {
   try {
-    const user = await getRepository(User).findOne({ email }, { relations: ['transaction'] })
+    const user = await getRepository(User).findOne({ email })
+    console.log(user)
     if (user) {
-      return { ...user, transaction: !!user.transaction }
+      return { ...user, transaction: true }
     }
     return user
   } catch (err) {

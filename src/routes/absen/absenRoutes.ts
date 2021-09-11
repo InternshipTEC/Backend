@@ -15,4 +15,3 @@ router.put('/:id', verifyAdmin, absenController.updateAbsen)
 router.delete('/:id', verifyAdmin, absenController.deleteAbsen)
 
 export { router }
-

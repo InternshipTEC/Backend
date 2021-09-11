@@ -16,9 +16,7 @@ export const getAllOccuringEvent = async (): Promise<Event[]> => {
   try {
     const transactions = await eventRepository.getAllEvent()
     const currentTime = new Date()
-    const filteredTransactions = transactions.filter(
-	transaction=>(transaction.absenEndedAt > currentTime && transaction.absenStartsAt < currentTime)
-	)
+    const filteredTransactions = transactions.filter(transaction => transaction.absenEndedAt > currentTime && transaction.absenStartsAt < currentTime)
     return filteredTransactions
   } catch (err) {
     throw TypeError(err)

@@ -74,4 +74,3 @@ export const deleteAbsen = async (req: Request): Promise<DeleteResult> => {
     throw TypeError(err)
   }
 }
-

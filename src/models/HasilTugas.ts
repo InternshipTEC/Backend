@@ -28,4 +28,3 @@ export class HasilTugas {
   )
   public user!: User
 }
-
