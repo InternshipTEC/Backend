@@ -10,6 +10,18 @@ export const getEventById = async (id: string): Promise<Event> => {
   }
 }
 
+export const getAllEventByUser = async (userId:string): Promise<any[]> => {
+  try {
+    const allEvent = await getRepository(Event)
+    .createQueryBuilder("event")
+    .leftJoinAndSelect('event.absen', 'absen', 'absen.user_id = :userId', {userId})
+    .getRawMany()
+    return allEvent
+  } catch (err) {
+    throw TypeError(err)
+  }
+}
+
 export const getAllEvent = async (): Promise<Event[]> => {
   try {
     const allEvent = await getRepository(Event).find()

@@ -18,7 +18,7 @@ export const getEvent = async (req: Request, res: Response) => {
 
 export const getAllEvent = async (req: Request, res: Response) => {
   try {
-    const events = await eventService.getAllEvent()
+    const events = await eventService.getAllEvent(req)
     return res
       .status(200)
       .set('Access-Control-Expose-Headers', 'Content-Range')
