@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import * as userService from '../service/userService'
 
-const getUser = async (req: Request, res: Response) => {
+export const getUser = async (req: Request, res: Response) => {
   try {
     const user = await userService.getUserById(req)
     return res.status(200).json({
@@ -16,7 +16,7 @@ const getUser = async (req: Request, res: Response) => {
   }
 }
 
-const getAllUser = async (req: Request, res: Response) => {
+export const getAllUser = async (req: Request, res: Response) => {
   try {
     const users = await userService.getAllUser()
     return res
@@ -32,7 +32,7 @@ const getAllUser = async (req: Request, res: Response) => {
   }
 }
 
-const createUser = async (req: Request, res: Response) => {
+export const createUser = async (req: Request, res: Response) => {
   try {
     const user = await userService.createUser(req)
     return res.status(200).json({
@@ -47,7 +47,7 @@ const createUser = async (req: Request, res: Response) => {
   }
 }
 
-const updateUser = async (req: Request, res: Response) => {
+export const updateUser = async (req: Request, res: Response) => {
   try {
     const user = await userService.updateUser(req)
     return res.status(200).json({
@@ -62,7 +62,7 @@ const updateUser = async (req: Request, res: Response) => {
   }
 }
 
-const deleteUser = async (req: Request, res: Response) => {
+export const deleteUser = async (req: Request, res: Response) => {
   try {
     const user = await userService.deleteUser(req)
     return res.status(200).json({
@@ -77,4 +77,3 @@ const deleteUser = async (req: Request, res: Response) => {
   }
 }
 
-export default { getUser, createUser, getAllUser, updateUser, deleteUser }
