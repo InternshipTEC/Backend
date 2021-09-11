@@ -1,27 +1,31 @@
 import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
-import { Event } from './Event'
 import { User } from './User'
+import { Tugas } from './Tugas'
 
 @Entity()
-export class Absen {
+export class HasilTugas {
   @PrimaryGeneratedColumn()
-  public absenId!: string
+  public hasilTugasId!: string
 
   @Column()
   public userId!: string
 
   @Column()
-  public eventId!: string
+  public tugasId!: string
+
+  @Column()
+  public linkHasil!: string
 
   @ManyToOne(
-    () => Event,
-    event => event.absen,
+    () => Tugas,
+    tugas => tugas.hasilTugas,
   )
-  public event!: Event
+  public tugas!: Tugas
 
   @ManyToOne(
     () => User,
-    user => user.absen,
+    user => user.hasilTugas,
   )
   public user!: User
 }
+

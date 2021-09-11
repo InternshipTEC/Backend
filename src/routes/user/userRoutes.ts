@@ -1,11 +1,14 @@
 import express from 'express'
-import userController from '../../controllers/userController'
+import * as userController from '../../controllers/userController'
+import * as absenContoller from '../../controllers/absenController'
 import { postCheck } from '../../validation/userRoutesValidation'
 import { verifyAdmin } from '../../middleware/token'
 
 const router = express.Router()
 
 router.get('/:id', userController.getUser)
+
+router.get('/:id/absen', absenContoller.getAbsenByUserId)
 
 router.get('/', userController.getAllUser)
 

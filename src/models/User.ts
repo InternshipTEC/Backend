@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, Unique, ManyToOne, JoinTable, M
 import { Transaction } from './Transaction'
 import { IsEmail, IsNotEmpty } from 'class-validator'
 import { Absen } from './Absen'
+import { HasilTugas } from './HasilTugas'
 
 @Entity()
 export class User {
@@ -43,6 +44,12 @@ export class User {
     absen => absen.user,
   )
   public absen!: Absen[]
+
+  @OneToMany(
+    () => HasilTugas,
+    hasilTugas => hasilTugas.user,
+  )
+  public hasilTugas!: HasilTugas[]
 
   @Column({ default: false })
   admin: boolean = false
