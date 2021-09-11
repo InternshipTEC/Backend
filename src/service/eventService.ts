@@ -33,11 +33,11 @@ export const getAllEvent = async (): Promise<Event[]> => {
 }
 
 export const createEvent = async (req: Request): Promise<Event> => {
-  const { name, url, absenStartsAt, absenEndedAt } = req.body
+  const { name, description, absenStartsAt, absenEndedAt } = req.body
   try {
     const event = new Event()
     event.name = name
-    event.url = url
+    event.description = description
     event.absenStartsAt = new Date(absenStartsAt)
     event.absenEndedAt = new Date(absenEndedAt)
     const newEvent = await eventRepository.createEvent(event)
