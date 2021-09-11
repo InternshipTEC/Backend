@@ -1,7 +1,8 @@
-import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Entity, Column, ManyToOne, PrimaryGeneratedColumn, Unique } from 'typeorm'
 import { Event } from './Event'
 import { User } from './User'
 
+@Unique(['userId','eventId'])
 @Entity()
 export class Absen {
   @PrimaryGeneratedColumn()
