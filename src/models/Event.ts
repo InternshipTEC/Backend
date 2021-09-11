@@ -10,7 +10,7 @@ export class Event {
   name: string
 
   @Column()
-  url: string
+  description: string
 
   @Column()
   absenStartsAt: Date
