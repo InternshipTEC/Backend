@@ -23,7 +23,7 @@ export const getAllAbsenByUserId = async (userId: string): Promise<any> => {
   try {
     const [absen, count] = await getRepository(Absen).findAndCount({ userId })
     return [absen, count]
-  } catch(err) {
+  } catch (err) {
     throw err
   }
 }

@@ -2,7 +2,7 @@ import { Entity, Column, ManyToOne, PrimaryGeneratedColumn, Unique } from 'typeo
 import { Event } from './Event'
 import { User } from './User'
 
-@Unique(['userId','eventId'])
+@Unique(['userId', 'eventId'])
 @Entity()
 export class Absen {
   @PrimaryGeneratedColumn()

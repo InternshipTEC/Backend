@@ -28,14 +28,16 @@ export const getAllEvent = async (req: Request): Promise<any[]> => {
     let events: any[]
     if (req.query.user_id) {
       events = await eventRepository.getAllEventByUser(req.query.user_id.toString())
-      events = events.map(event=>{
-        const selectedEvent = {...event, absen:!!event.absen_absen_id}
-        delete selectedEvent.absen_absen_id;
-        delete selectedEvent.absen_user_id;
-        delete selectedEvent.absen_event_id;
-        if(new Date() < new Date(event.event_absen_starts_at) || new Date() > new Date(event.event_absen_ended_at)){{
-          selectedEvent.absen = true;
-        }}
+      events = events.map(event => {
+        const selectedEvent = { ...event, absen: !!event.absen_absen_id }
+        delete selectedEvent.absen_absen_id
+        delete selectedEvent.absen_user_id
+        delete selectedEvent.absen_event_id
+        if (new Date() < new Date(event.event_absen_starts_at) || new Date() > new Date(event.event_absen_ended_at)) {
+          {
+            selectedEvent.absen = true
+          }
+        }
         return selectedEvent
       })
     } else {

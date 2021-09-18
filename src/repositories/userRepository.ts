@@ -16,9 +16,9 @@ const getUserById = async (id: string): Promise<any> => {
 
 const getAllUser = async (): Promise<User[]> => {
   try {
-    let allUser = await getManager()
-      .createQueryBuilder(User,'user')
-      .loadRelationCountAndMap("user.absenPercentage", 'user.absen')
+    const allUser = await getManager()
+      .createQueryBuilder(User, 'user')
+      .loadRelationCountAndMap('user.absenPercentage', 'user.absen')
       .getMany()
     return allUser
   } catch (err) {
