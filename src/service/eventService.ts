@@ -5,8 +5,8 @@ import * as eventRepository from '../repositories/eventRepository'
 
 export const getEventById = async (req: Request): Promise<any> => {
   try {
-    const transaction = await eventRepository.getEventById(req.params.id)
-    return transaction
+    const event = await eventRepository.getEventById(req.params.id)
+    return event
   } catch (err) {
     throw TypeError(err)
   }
@@ -14,12 +14,12 @@ export const getEventById = async (req: Request): Promise<any> => {
 
 export const getAllOccuringEvent = async (): Promise<Event[]> => {
   try {
-    const transactions = await eventRepository.getAllEvent()
+    const [events, _] = await eventRepository.getAllEvent()
     const currentTime = new Date()
-    const filteredTransactions = transactions.filter(
-	transaction=>(transaction.absenEndedAt > currentTime && transaction.absenStartsAt < currentTime)
+    const filteredEvent = events.filter(
+	event=>(event.absenEndedAt > currentTime && event.absenStartsAt < currentTime)
 	)
-    return filteredTransactions
+    return filteredEvent
   } catch (err) {
     throw TypeError(err)
   }
@@ -41,7 +41,8 @@ export const getAllEvent = async (req:Request): Promise<any[]> => {
         return selectedEvent
       })
     } else {
-      events = await eventRepository.getAllEvent()
+      let _;
+      [events, _] = await eventRepository.getAllEvent()
     }
     return events
   } catch (err) {

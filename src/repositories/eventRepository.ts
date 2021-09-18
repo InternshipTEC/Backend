@@ -22,10 +22,10 @@ export const getAllEventByUser = async (userId:string): Promise<any[]> => {
   }
 }
 
-export const getAllEvent = async (): Promise<Event[]> => {
+export const getAllEvent = async (): Promise<[Event[], number]> => {
   try {
-    const allEvent = await getRepository(Event).find()
-    return allEvent
+    const [allEvent, count] = await getRepository(Event).findAndCount()
+    return [allEvent, count]
   } catch (err) {
     throw TypeError(err)
   }
