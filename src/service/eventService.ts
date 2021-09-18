@@ -16,9 +16,7 @@ export const getAllOccuringEvent = async (): Promise<Event[]> => {
   try {
     const [events, _] = await eventRepository.getAllEvent()
     const currentTime = new Date()
-    const filteredEvent = events.filter(
-	event=>(event.absenEndedAt > currentTime && event.absenStartsAt < currentTime)
-	)
+    const filteredEvent = events.filter(event => event.absenEndedAt > currentTime && event.absenStartsAt < currentTime)
     return filteredEvent
   } catch (err) {
     throw TypeError(err)
@@ -43,8 +41,8 @@ export const getAllEvent = async (req: Request): Promise<any[]> => {
         return selectedEvent
       })
     } else {
-      let _;
-      [events, _] = await eventRepository.getAllEvent()
+      let _
+      ;[events, _] = await eventRepository.getAllEvent()
     }
     return events
   } catch (err) {

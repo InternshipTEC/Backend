@@ -1,12 +1,12 @@
 import { Request, Response } from 'express'
-import * as tugasController from '../service/eventService'
+import * as tugasController from '../service/tugasService'
 
-export const getEvent = async (req: Request, res: Response) => {
+export const getTugas = async (req: Request, res: Response) => {
   try {
-    const event = await tugasController.getEventById(req)
+    const tugas = await tugasController.getTugasById(req)
     return res.status(200).json({
-      msg: 'get event success',
-      data: event,
+      msg: 'get tugas success',
+      data: tugas,
     })
   } catch (err) {
     return res.status(400).json({
@@ -16,14 +16,14 @@ export const getEvent = async (req: Request, res: Response) => {
   }
 }
 
-export const getAllEvent = async (req: Request, res: Response) => {
+export const getAllTugas = async (req: Request, res: Response) => {
   try {
-    const events = await tugasController.getAllEvent(req)
+    const tugas = await tugasController.getAllTugas(req)
     return res
       .status(200)
       .set('Access-Control-Expose-Headers', 'Content-Range')
-      .set('Content-Range', `posts 0-10/${events.length}`)
-      .send(events)
+      .set('Content-Range', `posts 0-10/${tugas.length}`)
+      .send(tugas)
   } catch (err) {
     return res.status(400).json({
       msg: err.toString(),
@@ -32,27 +32,12 @@ export const getAllEvent = async (req: Request, res: Response) => {
   }
 }
 
-export const getAllOccuringEvent = async (req: Request, res: Response) => {
+export const getAllOccuringTugas = async (req: Request, res: Response) => {
   try {
-    const events = await tugasController.getAllOccuringEvent()
+    const tugas = await tugasController.getAllOccuringTugas()
     return res.status(200).json({
-      msg: 'get events success',
-      data: events,
-    })
-  } catch (err) {
-    return res.status(400).json({
-      msg: err.toString(),
-      data: {},
-    })
-  }
-}
-
-export const createEvent = async (req: Request, res: Response) => {
-  try {
-    const event = await tugasController.createEvent(req)
-    return res.status(200).json({
-      msg: 'create event success',
-      data: event,
+      msg: 'get tugas success',
+      data: tugas,
     })
   } catch (err) {
     return res.status(400).json({
@@ -62,12 +47,12 @@ export const createEvent = async (req: Request, res: Response) => {
   }
 }
 
-export const updateEvent = async (req: Request, res: Response) => {
+export const createTugas = async (req: Request, res: Response) => {
   try {
-    const event = await tugasController.updateEvent(req)
+    const tugas = await tugasController.createTugas(req)
     return res.status(200).json({
-      msg: 'update event success',
-      data: event,
+      msg: 'create tugas success',
+      data: tugas,
     })
   } catch (err) {
     return res.status(400).json({
@@ -77,12 +62,27 @@ export const updateEvent = async (req: Request, res: Response) => {
   }
 }
 
-export const deleteEvent = async (req: Request, res: Response) => {
+export const updateTugas = async (req: Request, res: Response) => {
   try {
-    const event = await tugasController.deleteEvent(req)
+    const tugas = await tugasController.updateTugas(req)
     return res.status(200).json({
-      msg: 'delete event success',
-      data: event,
+      msg: 'update tugas success',
+      data: tugas,
+    })
+  } catch (err) {
+    return res.status(400).json({
+      msg: err.toString(),
+      data: {},
+    })
+  }
+}
+
+export const deleteTugas = async (req: Request, res: Response) => {
+  try {
+    const tugas = await tugasController.deleteTugas(req)
+    return res.status(200).json({
+      msg: 'delete tugas success',
+      data: tugas,
     })
   } catch (err) {
     return res.status(400).json({
