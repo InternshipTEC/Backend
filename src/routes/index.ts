@@ -14,7 +14,7 @@ router.use('/auth', authRoutes)
 router.use('/email', verifyToken, emailRouter)
 router.use('/event', verifyToken, eventRoutes)
 router.use('/absen', verifyToken, absenRoutes)
-router.use('/users', verifyToken, userRoutes)
+router.use('/users', userRoutes)
 router.use('/tugas', verifyToken, tugasRoutes)
 router.use('/transaction', verifyToken, transactionRoutes)
 
