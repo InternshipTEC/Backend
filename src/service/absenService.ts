@@ -8,7 +8,7 @@ import * as userRepository from '../repositories/userRepository'
 
 export const getAbsenById = async (req: Request): Promise<any> => {
   try {
-    const absen = await absenRepository.getAbsenByUserId(req.params.id)
+    const absen = await absenRepository.getOneAbsenByUserId(req.params.id)
     return absen
   } catch (err) {
     throw TypeError(err)
@@ -17,7 +17,7 @@ export const getAbsenById = async (req: Request): Promise<any> => {
 
 export const getAbsenByUserId = async (req: Request): Promise<any> => {
   try {
-    const absen = await absenRepository.getAbsenByUserId(req.params.id)
+    const absen = await absenRepository.getOneAbsenByUserId(req.params.id)
     return absen
   } catch (err) {
     throw TypeError(err)

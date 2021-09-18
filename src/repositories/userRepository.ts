@@ -1,6 +1,7 @@
 import { getConnection, getManager, getRepository } from 'typeorm'
 import { User } from '../models/User'
 import { validate } from 'class-validator'
+import { Absen } from '../models/Absen'
 
 const getUserById = async (id: string): Promise<any> => {
   try {
@@ -14,7 +15,10 @@ const getUserById = async (id: string): Promise<any> => {
 
 const getAllUser = async (): Promise<User[]> => {
   try {
-    const allUser = await getRepository(User).find()
+    let allUser = await getManager()
+      .createQueryBuilder(User,'user')
+      .loadRelationCountAndMap("user.absenPercentage", 'user.absen')
+      .getMany()
     return allUser
   } catch (err) {
     throw TypeError(err)

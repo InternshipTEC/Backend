@@ -10,12 +10,21 @@ export const getAbsenById = async (absenId: string): Promise<Absen> => {
   }
 }
 
-export const getAbsenByUserId = async (userId: string): Promise<Absen> => {
+export const getOneAbsenByUserId = async (userId: string): Promise<Absen> => {
   try {
     const absen = await getRepository(Absen).findOne({ userId })
     return absen
   } catch (err) {
     throw TypeError(err)
+  }
+}
+
+export const getAllAbsenByUserId = async (userId: string): Promise<any> => {
+  try {
+    const [absen, count] = await getRepository(Absen).findAndCount({ userId })
+    return [absen, count]
+  } catch(err) {
+    throw err
   }
 }
 
@@ -28,10 +37,10 @@ export const getAbsenByEventId = async (eventId: string): Promise<Absen> => {
   }
 }
 
-export const getAllAbsen = async (): Promise<Absen[]> => {
+export const getAllAbsen = async (): Promise<any> => {
   try {
-    const allAbsen = await getRepository(Absen).find()
-    return allAbsen
+    const [allAbsen, count] = await getRepository(Absen).findAndCount()
+    return [allAbsen, count]
   } catch (err) {
     throw TypeError(err)
   }
