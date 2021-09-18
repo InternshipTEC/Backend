@@ -1,5 +1,6 @@
 import * as userRepository from '../repositories/userRepository'
 import * as absenRepository from '../repositories/absenRepository'
+import * as eventRepository from '../repositories/eventRepository'
 import * as bcrypt from 'bcrypt'
 import { User } from '../models/User'
 import { DeleteResult } from 'typeorm'
@@ -26,8 +27,8 @@ export const getUserById = async (req: Request): Promise<User> => {
 export const getAllUser = async (): Promise<User[]> => {
   try {
     let users = await userRepository.getAllUser()
-    const [_, count] = await absenRepository.getAllAbsen()
-    users = users.map((user: any) => ({ ...user, absenPercentage: (user.absenPercentage / count) * 100 }))
+    const [_, count]= await eventRepository.getAllEvent()
+    users = users.map((user:any)=>({...user, absenPercentage:user.absenPercentage/count*100}))
     return users
   } catch (err) {
     throw TypeError(err)
