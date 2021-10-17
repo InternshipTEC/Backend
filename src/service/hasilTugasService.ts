@@ -5,7 +5,7 @@ import * as hasilTugasRepository from '../repositories/hasilTugasRepository'
 import * as tugasRepository from '../repositories/tugasRepository'
 import * as userRepository from '../repositories/userRepository'
 
-export const getAbsenById = async (req: Request): Promise<any> => {
+export const getHasilTugasById = async (req: Request): Promise<any> => {
   try {
     const hasilTugas = await hasilTugasRepository.getOneHasilTugasByUserId(req.params.id)
     return hasilTugas
@@ -14,7 +14,7 @@ export const getAbsenById = async (req: Request): Promise<any> => {
   }
 }
 
-export const getAbsenByUserId = async (req: Request): Promise<any> => {
+export const getHasilTugasByUserId = async (req: Request): Promise<any> => {
   try {
     const hasilTugas = await hasilTugasRepository.getOneHasilTugasByUserId(req.params.id)
     return hasilTugas
@@ -23,7 +23,7 @@ export const getAbsenByUserId = async (req: Request): Promise<any> => {
   }
 }
 
-export const getAbsenByEventId = async (req: Request): Promise<any> => {
+export const getHasilTugasByTugasId = async (req: Request): Promise<any> => {
   try {
     const hasilTugas = await hasilTugasRepository.getHasilTugasByTugasId(req.params.id)
     return hasilTugas
@@ -32,7 +32,7 @@ export const getAbsenByEventId = async (req: Request): Promise<any> => {
   }
 }
 
-export const getAllAbsen = async (): Promise<HasilTugas[]> => {
+export const getAllHasilTugas = async (): Promise<HasilTugas[]> => {
   try {
     const hasilTugas = await hasilTugasRepository.getAllHasilTugas()
     return hasilTugas
@@ -41,7 +41,7 @@ export const getAllAbsen = async (): Promise<HasilTugas[]> => {
   }
 }
 
-export const createAbsen = async (req: Request): Promise<HasilTugas> => {
+export const createHasilTugas = async (req: Request): Promise<HasilTugas> => {
   const { userId, tugasId, linkHasil } = req.body
   try {
     const hasilTugas = new HasilTugas()
@@ -57,7 +57,7 @@ export const createAbsen = async (req: Request): Promise<HasilTugas> => {
   }
 }
 
-export const updateAbsen = async (req: Request): Promise<HasilTugas> => {
+export const updateHasilTugas = async (req: Request): Promise<HasilTugas> => {
   try {
     const hasilTugas = await hasilTugasRepository.updateTugas(req.params.id, req.body)
     return hasilTugas
@@ -66,7 +66,7 @@ export const updateAbsen = async (req: Request): Promise<HasilTugas> => {
   }
 }
 
-export const deleteAbsen = async (req: Request): Promise<DeleteResult> => {
+export const deleteHasilTugas = async (req: Request): Promise<DeleteResult> => {
   try {
     const hasilTugas = await hasilTugasRepository.deleteTugas(req.params.id)
     return hasilTugas

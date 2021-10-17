@@ -10,7 +10,7 @@ export class Tugas {
   name: string
 
   @Column()
-  deskripsi: string
+  iframeForm: string
 
   @Column()
   startsAt: Date

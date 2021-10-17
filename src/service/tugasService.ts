@@ -17,6 +17,7 @@ export const getAllOccuringTugas = async (): Promise<Tugas[]> => {
     const [tugas, _] = await tugasRepository.getAllTugas()
     const currentTime = new Date()
     const filteredTugas = tugas.filter(singleTugas => singleTugas.endedAt > currentTime && singleTugas.startsAt < currentTime)
+    console.log(filteredTugas)
     return filteredTugas
   } catch (err) {
     throw TypeError(err)
@@ -52,11 +53,11 @@ export const getAllTugas = async (req: Request): Promise<any[]> => {
 }
 
 export const createTugas = async (req: Request): Promise<Tugas> => {
-  const { name, description, startsAt, endedAt } = req.body
+  const { name, iframeForm, startsAt, endedAt } = req.body
   try {
     const tugas = new Tugas()
     tugas.name = name
-    tugas.deskripsi = description
+    tugas.iframeForm = iframeForm
     tugas.startsAt = new Date(startsAt)
     tugas.endedAt = new Date(endedAt)
     const newTugas = await tugasRepository.createTugas(tugas)

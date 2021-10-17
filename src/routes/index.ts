@@ -8,6 +8,7 @@ import { router as userRoutes } from './user/userRoutes'
 import { router as absenRoutes } from './absen/absenRoutes'
 import { router as tugasRoutes } from './tugas/tugasRoutes'
 import { router as hasilTugasRoutes } from './hasilTugas/hasilTugasRoutes'
+import { router as materiRoutes } from './materi/materiRoutes'
 
 const router = express.Router()
 
@@ -19,5 +20,6 @@ router.use('/users', userRoutes)
 router.use('/hasilTugas', verifyToken, hasilTugasRoutes)
 router.use('/tugas', verifyToken, tugasRoutes)
 router.use('/transaction', verifyToken, transactionRoutes)
+router.use('/materi', verifyToken, materiRoutes)
 
 export { router }

@@ -1,0 +1,15 @@
+POST http://localhost:3000/materi HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXJpZmllZCI6dHJ1ZSwiYWRtaW4iOnRydWUsImlkIjoxLCJlbWFpbCI6Im1zdWx0aGFubWF6YXlhQGdtYWlsLmNvbSIsIm5pbSI6bnVsbCwibmFtZSI6Im1hemF5YSIsImZha3VsdGFzIjpudWxsLCJ0cmFuc2FjdGlvbiI6dHJ1ZSwiaWF0IjoxNjM0NDA0Mzc3LCJleHAiOjE2MzQ1NzcxNzd9.MikxfPNncrmcGJ88SuULNAgt18GSOdbHLsC-N3Hsnkg
+
+{
+	"judul":"test judul kedua",
+	"link":"fsadfsdfsa",
+	"deskripsi":"mfasdfmsdfkmsdlkfsdfasjkm"
+}
+
+###
+
+GET http://localhost:3000/materi HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXJpZmllZCI6dHJ1ZSwiYWRtaW4iOnRydWUsImlkIjoxLCJlbWFpbCI6Im1zdWx0aGFubWF6YXlhQGdtYWlsLmNvbSIsIm5pbSI6bnVsbCwibmFtZSI6Im1hemF5YSIsImZha3VsdGFzIjpudWxsLCJ0cmFuc2FjdGlvbiI6dHJ1ZSwiaWF0IjoxNjM0NDEwMDkzLCJleHAiOjE2MzQ1ODI4OTN9.9RyEMlZxHIxBfOvB2-3h02QNZr3EUWXjv_FCqRflkro
