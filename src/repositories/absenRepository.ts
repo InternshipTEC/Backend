@@ -77,7 +77,7 @@ export const deleteAbsen = async (id: string): Promise<DeleteResult> => {
       .createQueryBuilder()
       .delete()
       .from(Absen)
-      .where('id = :id', { id })
+      .where('absenId = :id', { id })
       .execute()
     return deleteResult
   } catch (err) {
