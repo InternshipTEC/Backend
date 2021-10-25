@@ -1,8 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique, ManyToOne, JoinTable, ManyToMany, OneToMany } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, Unique, ManyToOne, JoinTable, ManyToMany, OneToMany, OneToOne, JoinColumn } from 'typeorm'
 import { Transaction } from './Transaction'
 import { IsEmail, IsNotEmpty } from 'class-validator'
 import { Absen } from './Absen'
 import { HasilTugas } from './HasilTugas'
+import { FypProfile } from './FypProfile'
 
 @Entity()
 export class User {
@@ -53,4 +54,8 @@ export class User {
 
   @Column({ default: false })
   admin: boolean = false
+
+  @OneToOne(() => FypProfile, fypProfile => fypProfile.user, { cascade: true })
+  @JoinColumn()
+  fypProfile: FypProfile;
 }

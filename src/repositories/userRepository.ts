@@ -6,9 +6,18 @@ import { Absen } from '../models/Absen'
 const getUserById = async (id: string): Promise<any> => {
   try {
     const user = await getRepository(User).findOne({ id }, { relations: ['transaction'] })
-    console.log(user)
     delete user.password
-    return { ...user, transaction: !!user.transaction }
+    return user
+  } catch (err) {
+    throw TypeError(err)
+  }
+}
+
+const getUserWithFypProfile = async (id: string): Promise<any> => {
+  try {
+    const user = await getRepository(User).findOne({ id }, { relations: ['fypProfile'] })
+    delete user.password
+    return user
   } catch (err) {
     throw TypeError(err)
   }
@@ -38,12 +47,11 @@ export const getUsersWithTransactionId = async (transactionId: string) => {
   }
 }
 
-const getUserByEmail = async (email: string): Promise<any> => {
+const getUserByEmail = async (email: string): Promise<User> => {
   try {
     const user = await getRepository(User).findOne({ email })
-    console.log(user)
     if (user) {
-      return { ...user, transaction: true }
+      return user
     }
     return user
   } catch (err) {
@@ -95,4 +103,4 @@ const deleteUser = async (id: string) => {
   }
 }
 
-export { getUserByEmail, getUserById, getAllUser, createUser, updateUser, deleteUser }
+export { getUserByEmail, getUserById, getAllUser, createUser, updateUser, deleteUser, getUserWithFypProfile }

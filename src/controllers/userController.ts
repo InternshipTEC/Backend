@@ -16,6 +16,21 @@ export const getUser = async (req: Request, res: Response) => {
   }
 }
 
+export const getUserWithFypProfile = async (req: Request, res: Response) => {
+  try {
+    const user = await userService.getUserWithFypProfile(req)
+    return res.status(200).json({
+      msg: 'get user success',
+      data: user,
+    })
+  } catch (err) {
+    return res.status(400).json({
+      msg: err.toString(),
+      data: {},
+    })
+  }
+}
+
 export const getAllUser = async (req: Request, res: Response) => {
   try {
     const users = await userService.getAllUser()
@@ -37,6 +52,21 @@ export const createUser = async (req: Request, res: Response) => {
     const user = await userService.createUser(req)
     return res.status(200).json({
       msg: 'create user success',
+      data: user,
+    })
+  } catch (err) {
+    return res.status(400).json({
+      msg: err.toString(),
+      data: {},
+    })
+  }
+}
+
+export const updateUserFypProfile = async (req: Request, res: Response) => {
+  try {
+    const user = await userService.updateUserFypProfile(req)
+    return res.status(200).json({
+      msg: 'update user success',
       data: user,
     })
   } catch (err) {

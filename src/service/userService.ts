@@ -1,10 +1,11 @@
 import * as userRepository from '../repositories/userRepository'
-import * as absenRepository from '../repositories/absenRepository'
+import * as fypProfileRepository from '../repositories/fypProfileRepository'
 import * as eventRepository from '../repositories/eventRepository'
 import * as bcrypt from 'bcrypt'
 import { User } from '../models/User'
 import { DeleteResult } from 'typeorm'
 import { Request } from 'express'
+import { FypProfile, toEnumUserRole } from '../models/FypProfile'
 
 export const getUserByEmail = async (req: Request): Promise<User> => {
   try {
@@ -18,6 +19,15 @@ export const getUserByEmail = async (req: Request): Promise<User> => {
 export const getUserById = async (req: Request): Promise<User> => {
   try {
     const user = await userRepository.getUserById(req.params.id)
+    return user
+  } catch (err) {
+    throw TypeError(err)
+  }
+}
+
+export const getUserWithFypProfile = async (req: Request): Promise<User> => {
+  try {
+    const user = await userRepository.getUserWithFypProfile(req.params.id)
     return user
   } catch (err) {
     throw TypeError(err)
@@ -53,6 +63,7 @@ export const createUser = async (req: Request): Promise<User> => {
   }
 }
 
+// without any instanciation of any other class
 export const updateUser = async (req: Request): Promise<User> => {
   try {
     let user
@@ -64,6 +75,25 @@ export const updateUser = async (req: Request): Promise<User> => {
     throw TypeError(err)
   }
 }
+
+export const updateUserFypProfile = async (req: Request): Promise<User> => {
+  const { role, desc, photoUrl } = req.body
+  try {
+    let fypProfile = new FypProfile();
+    fypProfile.role = toEnumUserRole(role)
+    fypProfile.photoUrl = photoUrl
+    fypProfile.desc = desc
+    await fypProfileRepository.createFypProfile(fypProfile)
+    let user = await userRepository.getUserById(req.params.id);
+    user.fypProfile = fypProfile
+    const newUser = await userRepository.updateUser(req.params.id, user)
+    return newUser
+  } catch (err) {
+    throw TypeError(err)
+  }
+}
+
+
 
 export const deleteUser = async (req: Request): Promise<DeleteResult> => {
   try {
