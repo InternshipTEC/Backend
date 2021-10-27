@@ -55,7 +55,11 @@ export class User {
   @Column({ default: false })
   admin: boolean = false
 
-  @OneToOne(() => FypProfile, fypProfile => fypProfile.user, { cascade: true })
+  @OneToOne(
+    () => FypProfile,
+    fypProfile => fypProfile.user,
+    { cascade: true },
+  )
   @JoinColumn()
-  fypProfile: FypProfile;
+  fypProfile: FypProfile
 }

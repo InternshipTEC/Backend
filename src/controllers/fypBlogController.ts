@@ -31,8 +31,6 @@ export const getFypBlogByRole = async (req: Request, res: Response) => {
   }
 }
 
-
-
 export const getAllFypBlog = async (req: Request, res: Response) => {
   try {
     const fypBlog = await fypBlogService.getAllFypBlog()

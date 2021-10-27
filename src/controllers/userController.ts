@@ -47,6 +47,18 @@ export const getAllUser = async (req: Request, res: Response) => {
   }
 }
 
+export const getAllUserWithFypProfile = async (req: Request, res: Response) => {
+  try {
+    const users = await userService.getAllUserWithFypProfile()
+    return res.status(200).send(users)
+  } catch (err) {
+    return res.status(400).json({
+      msg: err.toString(),
+      data: {},
+    })
+  }
+}
+
 export const createUser = async (req: Request, res: Response) => {
   try {
     const user = await userService.createUser(req)

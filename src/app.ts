@@ -5,10 +5,12 @@ import dotenv from 'dotenv'
 import express from 'express'
 import helmet from 'helmet'
 import { router } from './routes/index'
+import http from 'http'
 
 dotenv.config()
 
 const app = express()
+
 app.use(cors())
 app.use(bodyParser.json())
 app.use(helmet())
@@ -16,4 +18,4 @@ app.use(cookieParser())
 
 app.use(`/`, router)
 
-export default app
+export default server

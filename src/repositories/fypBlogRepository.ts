@@ -3,7 +3,7 @@ import { DeleteResult, getConnection, getManager, getRepository } from 'typeorm'
 import { UserRole } from '../models/FypProfile'
 
 export const getFypBlogById = async (id: string): Promise<FypBlog> => {
-  const intId = parseInt(id)
+  const intId = Number(id)
   try {
     const fypBlog = await getRepository(FypBlog).findOne({ id: intId })
     return fypBlog

@@ -46,7 +46,7 @@ export const getAbsenByEventId = async (req: Request, res: Response) => {
   }
 }
 
-export const getAllAbsen = async (req: Request, res: Response) => {
+export const getAllAbsen = async (_: Request, res: Response) => {
   try {
     const absens = await absenService.getAllAbsen()
     return res

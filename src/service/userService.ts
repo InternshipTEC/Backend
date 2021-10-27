@@ -45,6 +45,15 @@ export const getAllUser = async (): Promise<User[]> => {
   }
 }
 
+export const getAllUserWithFypProfile = async (): Promise<User[]> => {
+  try {
+    const users = await userRepository.getAllUserWithFypProfile()
+    return users
+  } catch (err) {
+    throw TypeError(err)
+  }
+}
+
 export const createUser = async (req: Request): Promise<User> => {
   const { nim, name, password, email, fakultas } = req.body
   try {
@@ -79,12 +88,12 @@ export const updateUser = async (req: Request): Promise<User> => {
 export const updateUserFypProfile = async (req: Request): Promise<User> => {
   const { role, desc, photoUrl } = req.body
   try {
-    let fypProfile = new FypProfile();
+    const fypProfile = new FypProfile()
     fypProfile.role = toEnumUserRole(role)
     fypProfile.photoUrl = photoUrl
     fypProfile.desc = desc
     await fypProfileRepository.createFypProfile(fypProfile)
-    let user = await userRepository.getUserById(req.params.id);
+    const user = await userRepository.getUserById(req.params.id)
     user.fypProfile = fypProfile
     const newUser = await userRepository.updateUser(req.params.id, user)
     return newUser
@@ -92,8 +101,6 @@ export const updateUserFypProfile = async (req: Request): Promise<User> => {
     throw TypeError(err)
   }
 }
-
-
 
 export const deleteUser = async (req: Request): Promise<DeleteResult> => {
   try {

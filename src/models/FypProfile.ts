@@ -1,48 +1,50 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToOne } from 'typeorm'
-import { User } from './User';
+import { User } from './User'
 
 export enum UserRole {
-  HACKER = "hacker",
-  HIPSTER = "hipter",
-  HUSTLER = "hustler"
+  HACKER = 'hacker',
+  HIPSTER = 'hipter',
+  HUSTLER = 'hustler',
 }
 
 @Entity()
 export class FypProfile {
-
   @PrimaryGeneratedColumn()
-  public id: number;
+  public id: number
 
   @Column({
-    type: "enum",
+    type: 'enum',
     enum: UserRole,
   })
-  public role!: UserRole;
+  public role!: UserRole
 
-  @Column("longtext")
-  public desc!: string;
+  @Column('longtext')
+  public desc!: string
 
   @Column()
-  public photoUrl!: string;
+  public photoUrl!: string
 
-  @OneToOne(type => User, user => user.fypProfile)
-  user: User;
+  @OneToOne(
+    type => User,
+    user => user.fypProfile,
+  )
+  user: User
 }
 
 export const toEnumUserRole = (userRole: string): UserRole => {
-  let enumResult;
+  let enumResult
   switch (userRole) {
     case UserRole.HACKER.valueOf():
       enumResult = UserRole.HACKER
-      break;
+      break
     case UserRole.HIPSTER.valueOf():
       enumResult = UserRole.HIPSTER
-      break;
+      break
     case UserRole.HUSTLER.valueOf():
       enumResult = UserRole.HUSTLER
-      break;
+      break
     default:
-      break;
+      break
   }
-  return enumResult;
+  return enumResult
 }

@@ -36,12 +36,11 @@ export const getAbsenByEventId = async (req: Request): Promise<any> => {
 export const getAllAbsen = async (): Promise<Absen[]> => {
   try {
     const absen = await absenRepository.getAllAbsen()
-    const absen_alter = absen.map((singleAbsen: any) => ({
+    const absenAlter = absen.map((singleAbsen: any) => ({
       id: singleAbsen.absenId,
       user: userRepository.getUserById(singleAbsen.userId),
-      event: eventRepository.getEventById(singleAbsen.eventId)
+      event: eventRepository.getEventById(singleAbsen.eventId),
     }))
-    console.log(absen_alter)
     return absen
   } catch (err) {
     throw TypeError(err)

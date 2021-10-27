@@ -23,6 +23,15 @@ const getUserWithFypProfile = async (id: string): Promise<any> => {
   }
 }
 
+const getAllUserWithFypProfile = async (): Promise<User[]> => {
+  try {
+    const allUser = await getRepository(User).find({ relations: ['fypProfile'] })
+    return allUser
+  } catch (err) {
+    throw TypeError(err)
+  }
+}
+
 const getAllUser = async (): Promise<User[]> => {
   try {
     const allUser = await getManager()
@@ -103,4 +112,4 @@ const deleteUser = async (id: string) => {
   }
 }
 
-export { getUserByEmail, getUserById, getAllUser, createUser, updateUser, deleteUser, getUserWithFypProfile }
+export { getUserByEmail, getUserById, getAllUser, createUser, updateUser, deleteUser, getUserWithFypProfile, getAllUserWithFypProfile }
