@@ -3,7 +3,7 @@ import { User } from './User'
 
 export enum UserRole {
   HACKER = 'hacker',
-  HIPSTER = 'hipter',
+  HIPSTER = 'hipster',
   HUSTLER = 'hustler',
 }
 
