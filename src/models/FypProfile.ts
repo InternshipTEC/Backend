@@ -34,13 +34,13 @@ export class FypProfile {
 export const toEnumUserRole = (userRole: string): UserRole => {
   let enumResult
   switch (userRole) {
-    case UserRole.HACKER.valueOf():
+    case "hacker":
       enumResult = UserRole.HACKER
       break
-    case UserRole.HIPSTER.valueOf():
+    case "hipster":
       enumResult = UserRole.HIPSTER
       break
-    case UserRole.HUSTLER.valueOf():
+    case "hustler":
       enumResult = UserRole.HUSTLER
       break
     default:

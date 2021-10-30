@@ -5,7 +5,6 @@ import dotenv from 'dotenv'
 import express from 'express'
 import helmet from 'helmet'
 import { router } from './routes/index'
-import http from 'http'
 
 dotenv.config()
 
@@ -18,4 +17,4 @@ app.use(cookieParser())
 
 app.use(`/`, router)
 
-export default server
+export default app

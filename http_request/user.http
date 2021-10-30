@@ -7,7 +7,7 @@ GET http://localhost:3000/users HTTP/1.1
 ### Valid create user request 
 POST http://localhost:3000/users HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXJpZmllZCI6dHJ1ZSwiYWRtaW4iOnRydWUsImlkIjoxOSwiZW1haWwiOiJtc3VsdGhhbm1hemF5YUBnbWFpbC5jb20iLCJuaW0iOiIxMzMyMDAyOCIsIm5hbWUiOiJNdWhhbW1hZCBTdWx0aGFuIE1hemF5YSIsImlhdCI6MTYyOTgwMTc0NSwiZXhwIjoxNjI5OTc0NTQ1fQ.AQJ0cVTDSFgR4nAAtsWcci4gOSgG7jNqMSexaRcU-ro
+Authorization: Bearer 
 
 {
 	"name" : "Jhonson",
@@ -17,11 +17,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXJpZmllZCI6dHJ1Z
 }
 
 ### Valid update user request
-PUT http://localhost:3000/users/86a9ebc4-3eb8-465d-a9a7-2d47ff43cd4e HTTP/1.1
+PUT https://api.tecinternship2021.com/users/fyp/86a9ebc4-3eb8-465d-a9a7-2d47ff43cd4e HTTP/1.1
 content-type: application/json
 
 {
-	"password": "newpassword"
+	"role": "hustler",
+	"desc":"we",
+	"photo_url":"yes.com"
 }
 
 ### Delete Request

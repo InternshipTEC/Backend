@@ -15,13 +15,14 @@ content-type: application/json
 }
 
 ### Valid signup request test
-POST http://localhost:3000/auth/signup HTTP/1.1
+PUT http://localhost:3000/users/fyp/1 HTTP/1.1
 content-type: application/json
 
 {
 
-	"email": "msulthanmazaya@gmail.com",
-	"password": "Patriot*100"
+	"role": "hipster",
+	"desc": "webdev112sdfasdf233",
+	"photoUrl":"dsfasdfsa.com"
 }
 
 ### Valid login request test
