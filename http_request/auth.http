@@ -15,14 +15,12 @@ content-type: application/json
 }
 
 ### Valid signup request test
-PUT http://localhost:3000/users/fyp/1 HTTP/1.1
+POST https://api.tecinternship2021.com/auth/signup HTTP/1.1
 content-type: application/json
 
 {
-
-	"role": "hipster",
-	"desc": "webdev112sdfasdf233",
-	"photoUrl":"dsfasdfsa.com"
+	"email": "web.dev.internship@gmail.com",
+	"password": "webdev112233"
 }
 
 ### Valid login request test

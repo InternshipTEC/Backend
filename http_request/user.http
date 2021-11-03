@@ -23,7 +23,7 @@ content-type: application/json
 {
 	"role": "hustler",
 	"desc":"we",
-	"photo_url":"yes.com"
+	"photoUrl":"yes.com"
 }
 
 ### Delete Request
