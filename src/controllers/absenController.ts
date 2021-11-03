@@ -6,7 +6,7 @@ export const getAbsen = async (req: Request, res: Response) => {
     const absen = await absenService.getAbsenById(req)
     return res.status(200).json({
       msg: 'get absen success',
-      data: absen,
+      data: absen[0],
     })
   } catch (err) {
     return res.status(400).json({
