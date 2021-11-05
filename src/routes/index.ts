@@ -8,6 +8,7 @@ import { router as userRoutes } from './user/userRoutes'
 import { router as absenRoutes } from './absen/absenRoutes'
 import { router as tugasRoutes } from './tugas/tugasRoutes'
 import { router as fypBlogRoutes } from './fypBlog/fypBlogRoutes'
+import { router as fypProfileRoutes } from './fypProfile/fypProfileRoutes'
 import { router as hasilTugasRoutes } from './hasilTugas/hasilTugasRoutes'
 import { router as materiRoutes } from './materi/materiRoutes'
 
@@ -19,6 +20,7 @@ router.use('/event', verifyToken, eventRoutes)
 router.use('/absen', absenRoutes)
 router.use('/users', userRoutes)
 router.use('/fyp-blog', verifyToken, fypBlogRoutes)
+router.use('/fyp-profile', verifyToken, fypProfileRoutes)
 router.use('/hasilTugas', verifyToken, hasilTugasRoutes)
 router.use('/tugas', verifyToken, tugasRoutes)
 router.use('/transaction', verifyToken, transactionRoutes)
